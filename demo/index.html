@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>datetime-input demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../datetime-input.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        .result {
+          margin: 0.5em 0;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Create a date-input</h3>
+      <demo-snippet>
+        <template>
+          <dom-bind>
+            <template is="dom-bind">
+              <datetime-input datetime="{{datetime}}"></datetime-input>
+              <div class="vertical-section-container result">
+                <span>[[datetime]]</span>
+              </div>
+            </template>
+          </dom-bind>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>Presetting date</h3>
+      <demo-snippet>
+        <template>
+          <dom-bind>
+            <template is="dom-bind">
+              <date-input date="2025-02-01" datetime="{{datetime}}" time="[[time]]"></date-input><br>
+              <time-input hour="11" time="{{time}}"></time-input>
+              <div class="vertical-section-container result">
+                <div><code>datetime</code>: <b>[[datetime]]</b></div>
+              </div>
+            </template>
+          </dom-bind>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>Using min and max attributes</h3>
+      <demo-snippet>
+        <template>
+          <dom-bind>
+            <template is="dom-bind">
+              <date-input min="2018-02-01" max="2018-02-28" datetime="{{datetime}}"></date-input>
+              <div class="vertical-section-container result">
+                <div><code>datetime</code>: <b>[[datetime]]</b></div>
+              </div>
+            </template>
+          </dom-bind>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

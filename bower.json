@@ -1,0 +1,34 @@
+{
+  "name": "datetime-input",
+  "authors": [
+    "Johannes Brautzsch <fooloomanzoo>"
+  ],
+  "description": "An input for date and time",
+  "homepage": "https://github.com/fooloomanzoo/datetime-input/",
+  "keywords": [
+    "webcomponents",
+    "polymer",
+    "datetime",
+    "date",
+    "time",
+    "range",
+    "input"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fooloomanzoo/datetime-input.git"
+  },
+  "licence": "https://github.com/fooloomanzoo/datetime-input/raw/master/LICENSE.txt",
+  "dependencies": {
+    "polymer": "Polymer/polymer#2",
+    "number-input": "fooloomanzoo/number-input#2",
+    "property-mixins": "fooloomanzoo/property-mixins#2",
+    "input-picker-pattern": "fooloomanzoo/input-picker-pattern#2"
+  },
+  "devDependencies": {
+    "webcomponentsjs": "webcomponents/webcomponentsjs",
+    "iron-component-page": "PolymerElements/iron-component-page",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers"
+  }
+}

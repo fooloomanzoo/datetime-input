@@ -1,0 +1,34 @@
+{
+  "name": "@fooloomanzoo/datetime-input",
+  "version": "2.0.0",
+  "description": "an input for date and time",
+  "main": [
+    "datetime-input.html",
+    "date-input.html",
+    "time-input.html",
+    "datetime-shared-style.html"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "postinstall": "bower install --save-dev",
+    "prepublish": "npm run build && git add . && git commit -m \"publish new version\" && git push && npm version patch",
+    "gh-pages": "git checkout gh-pages && git pull && bower update -f && git add . && git commit -m \"update\" && git push && git checkout master",
+    "build": "git pull && bower update && polymer analyze > analysis.json",
+    "prestart": "polymer analyze > analysis.json",
+    "start": "polymer serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "date",
+    "time",
+    "datetime",
+    "input",
+    "polymer",
+    "webcomponents",
+    "range"
+  ],
+  "author": "fooloomanzoo",
+  "license": "MIT"
+}
