@@ -1377,7 +1377,7 @@
       "staticMethods": [],
       "demos": [
         {
-          "url": "demo/date-picker.html",
+          "url": "demo/index.html",
           "description": ""
         }
       ],
@@ -3137,7 +3137,7 @@
       "staticMethods": [],
       "demos": [
         {
-          "url": "demo/time-picker.html",
+          "url": "demo/index.html",
           "description": ""
         }
       ],

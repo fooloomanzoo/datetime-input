@@ -9,7 +9,7 @@ _[Demo](https://fooloomanzoo.github.io/datetime-input/components/datetime-input/
 
 An input for date and time.
 
-If you are looking for a datetime-picker, please have a look at [<datetime-picker>](https://github.com/fooloomanzoo/datetime-picker).
+If you are looking for a picker for date and time, please have a look at [datetime-picker](https://github.com/fooloomanzoo/datetime-picker).
 
 ### Example
 
@@ -18,25 +18,29 @@ If you are looking for a datetime-picker, please have a look at [<datetime-picke
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-
-    <custom-style>
-      <style is="custom-style">
-        html {
-          font-family: 'Roboto', 'Noto', 'Source Sans Pro', sans-serif;
-        }
-      </style>
-    </custom-style>
     <link rel="import" href="datetime-input.html">
 
-    <next-code-block></next-code-block>
+    <dom-bind>
+      <template is="dom-bind">
+        <custom-style>
+          <style is="custom-style">
+            html {
+              font-family: 'Roboto', 'Noto', 'Source Sans Pro', sans-serif;
+            }
+          </style>
+        </custom-style>
+
+        <next-code-block></next-code-block>
+      </template>
+    </dom-bind>
   </template>
 </custom-element-demo>
 ```
 -->
 ```html
-<datetime-input datetime="{{datetime}}" date="{{date}}" time="{{time}}"></datetime-input><br>
-<date-input date="{{date}}"></date-input><br>
-<time-input time="{{time}}"></time-input>
+<datetime-input datetime="{{datetime}}"></datetime-input><br>
+<date-input datetime="{{datetime}}"></date-input><br>
+<time-input datetime="{{datetime}}"></time-input>
 <p>
   <code>datetime</code>: <b>[[datetime]]</b>
 </p>
