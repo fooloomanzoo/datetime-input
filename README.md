@@ -9,6 +9,8 @@ _[Demo](https://fooloomanzoo.github.io/datetime-input/components/datetime-input/
 
 An input for date and time.
 
+If you are looking for a datetime-picker, please have a look at [<datetime-picker>](https://github.com/fooloomanzoo/datetime-picker).
+
 ### Example
 
 <!--
