@@ -4943,7 +4943,7 @@
       "staticMethods": [],
       "demos": [
         {
-          "url": "demo/datetime-picker.html",
+          "url": "demo/index.html",
           "description": ""
         }
       ],
@@ -7187,7 +7187,7 @@
       "staticMethods": [],
       "demos": [
         {
-          "url": "demo/date-picker.html",
+          "url": "demo/index.html",
           "description": ""
         }
       ],
