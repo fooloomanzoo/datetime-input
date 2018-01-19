@@ -2,12 +2,7 @@
   "name": "@fooloomanzoo/datetime-input",
   "version": "2.0.3",
   "description": "an input for date and time",
-  "main": [
-    "datetime-input.html",
-    "date-input.html",
-    "time-input.html",
-    "datetime-shared-style.html"
-  ],
+  "main": "index.html",
   "directories": {
     "test": "test"
   },
