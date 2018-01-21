@@ -1,8 +1,6 @@
 <link rel="import" href="../property-mixins/datetime-mixin.html">
 <link rel="import" href="../input-picker-pattern/form-element-mixin.html">
 
-<link rel="import" href="datetime-shared-style.html">
-
 <script>
   /**
    * Mixin to extend an element for picking date or time to locale formating and hiding certain datetime-properties
@@ -36,7 +34,7 @@
       }
 
       static get customStyleToInclude() {
-        return 'datetime-shared-style';
+        return '';
       }
 
       static get customStyleContent() {
@@ -47,7 +45,18 @@
             display: -ms-inline-flexbox;
             display: inline-flex;
             align-items: baseline;
+            outline: none;
             padding: 0.1em 0.2em;
+            --input-focus-background: var(--primary-color, rgba(0,0,0,0.2));
+            --input-style: {
+              border-radius: 2px;
+              padding: 0.2em 0.1em;
+              cursor: pointer;
+              transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
+            };
+          }
+          [hidden] {
+            display: none !important;
           }
         `;
       }
