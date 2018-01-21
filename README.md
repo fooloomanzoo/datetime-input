@@ -38,9 +38,9 @@ If you are looking for a picker for date and time, please have a look at [dateti
 ```
 -->
 ```html
-<datetime-input datetime="{{datetime}}"></datetime-input><br>
-<date-input datetime="{{datetime}}"></date-input><br>
-<time-input datetime="{{datetime}}"></time-input>
+<datetime-input datetime="{{datetime}}" date="{{date}}" time="{{time}}"></datetime-input><br>
+<date-input date="{{date}}"></date-input><br>
+<time-input time="{{time}}"></time-input>
 <p>
   <code>datetime</code>: <b>[[datetime]]</b>
 </p>

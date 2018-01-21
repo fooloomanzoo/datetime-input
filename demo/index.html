@@ -27,10 +27,12 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <datetime-input datetime="{{datetime}}"></datetime-input>
-              <div class="vertical-section-container result">
-                <span>[[datetime]]</span>
-              </div>
+              <datetime-input datetime="{{datetime}}" date="{{date}}" time="{{time}}"></datetime-input><br>
+              <date-input date="{{date}}"></date-input><br>
+              <time-input time="{{time}}"></time-input>
+              <p>
+                <code>datetime</code>: <b>[[datetime]]</b>
+              </p>
             </template>
           </dom-bind>
         </template>
