@@ -16,8 +16,8 @@
 
       static get inputTemplate() {
         return `
-          ${super.inputTemplate === undefined ? '' : (super.inputTemplate + '<span style="order:7;padding-left:0.2ch;"></span>')}
-          <div hidden$="[[_hideHours]]" style="order:7;">
+          ${super.inputTemplate || ''}
+          <div hidden$="[[_hideHours]]" class="hours" style="order:7;">
             <number-input hidden$="[[hour12]]" index="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></number-input>
             <number-input hidden$="[[!hour12]]" index="7" min="1" max="12" pad-length="2" value="{{hours12}}" placeholder="00"></number-input>
           </div>
@@ -42,10 +42,13 @@
 
       static get customStyleContent() {
         return `
-          ${super.customStyleContent}
+          ${super.customStyleContent || ''}
           :host > div {
             display: inline-flex;
             align-items: center;
+          }
+          number-input ~ .hours {
+            margin-left: 0.2ch;
           }
           .single-switch {
             align-self: stretch;
