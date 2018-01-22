@@ -37,6 +37,11 @@
             <span hidden$="[[!isAm]]">[[_am]]</span>
             <span hidden$="[[isAm]]">[[_pm]]</span>
           </div>
+          <div hidden$="[[withTimezone]]" style="order:12;">
+            <number-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00"></number-input>
+            <span>[[_localTimeSeparator]]</span>
+            <number-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></number-input>
+          </div>
         `;
       }
 
@@ -48,7 +53,7 @@
             align-items: center;
           }
           number-input ~ .hours {
-            margin-left: 0.167em;
+            margin-left: 0.2ch;
           }
           .single-switch {
             align-self: stretch;
@@ -68,6 +73,18 @@
           clamp: {
             type: String,
             value: 'milliseconds'
+          },
+
+          withTimezone: {
+            type: Boolean
+          },
+
+          _timeZoneHours: {
+            type: Number
+          },
+
+          _timeZoneMinutes: {
+            type: Number
           },
 
           _hideHours: {
@@ -92,8 +109,35 @@
         }
       }
 
+      static get observers() {
+        return [
+          '_offsetMinutesChanged(_offsetMinutes)',
+          '_timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) '
+        ]
+      }
+
       _switchAm() {
         this.isAm = !this.isAm;
+      }
+
+      _offsetMinutesChanged(offsetMinutes) {
+        if (offsetMinutes === undefined) {
+          return;
+        }
+        this.setProperties({
+          _timeZoneHours: -Math.floor(offsetMinutes) / 60,
+          _timeZoneMinutes: Math.abs(offsetMinutes) % 60
+        });
+      }
+
+      _timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) {
+        if (_timeZoneHours === undefined || _timeZoneMinutes === undefined) {
+          return;
+        }
+        const timezoneOffset = this._computeTimezoneOffset(-(_timeZoneHours*60 + _timeZoneMinutes));
+        if (timezoneOffset) {
+          this.timezoneOffset = timezoneOffset;
+        }
       }
     }
   }
