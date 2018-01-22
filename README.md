@@ -38,12 +38,14 @@ If you are looking for a picker for date and time, please have a look at [dateti
 ```
 -->
 ```html
-<datetime-input datetime="{{datetime}}" date="{{date}}" time="{{time}}"></datetime-input><br>
-<date-input date="{{date}}"></date-input><br>
-<time-input time="{{time}}"></time-input>
-<p>
-  <code>datetime</code>: <b>[[datetime]]</b>
-</p>
+  <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
+  <datetime-input value="{{value}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}"></datetime-input><br>
+  <date-input date="{{date}}" with-timezone="{{withTimezone}}"></date-input><br>
+  <time-input time="{{time}}" with-timezone="{{withTimezone}}"></time-input>
+  <p>
+    <code>datetime:</code>&#32;<b>[[datetime]]</b><br>
+    <code>value:</code>&#32;<b>[[value]]</b>
+  </p>
 ```
 
 ### Installation
