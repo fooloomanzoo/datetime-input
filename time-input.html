@@ -37,7 +37,7 @@
             <span hidden$="[[!isAm]]">[[_am]]</span>
             <span hidden$="[[isAm]]">[[_pm]]</span>
           </div>
-          <div hidden$="[[withTimezone]]" style="order:12;">
+          <div hidden$="[[!withTimezone]]" style="order:12;">
             <number-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00"></number-input>
             <span>[[_localTimeSeparator]]</span>
             <number-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></number-input>
