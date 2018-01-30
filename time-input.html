@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../number-input/number-input.html">
+<link rel="import" href="../number-input/integer-input.html">
 
 <link rel="import" href="datetime-input-mixin.html">
 
@@ -9,6 +9,7 @@
    * Mixin to extend an element to a time input
    *
    * @demo demo/index.html
+   * @demo demo/form.html Form Demo
    **/
   const TimeInputPattern = (superClass) => { // eslint-disable-line no-unused-vars
 
@@ -18,29 +19,29 @@
         return `
           ${super.inputTemplate || ''}
           <div hidden$="[[_hideHours]]" class="hours" style="order:7;">
-            <number-input hidden$="[[hour12]]" index="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></number-input>
-            <number-input hidden$="[[!hour12]]" index="7" min="1" max="12" pad-length="2" value="{{hours12}}" placeholder="00"></number-input>
+            <integer-input hidden$="[[hour12]]" index="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></integer-input>
+            <integer-input hidden$="[[!hour12]]" index="7" min="1" max="12" pad-length="2" value="{{hours12}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideMinutes]]" style="order:8;">
             <span>[[_localTimeSeparator]]</span>
-            <number-input index="9" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minutes}}" placeholder="00"></number-input>
+            <integer-input index="9" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minutes}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideSeconds]]" style="order:9;">
             <span>[[_localTimeSeparator]]</span>
-            <number-input index="11" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{seconds}}" placeholder="00"></number-input>
+            <integer-input index="11" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{seconds}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideMilliseconds]]" style="order:10;">
             <span>[[_localDecimalSeparator]]</span>
-            <number-input index="13" pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{milliseconds}}" placeholder="000"></number-input>
+            <integer-input index="13" pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{milliseconds}}" placeholder="000"></integer-input>
           </div>
           <div class="single-switch" hidden$="[[!hour12]]" style="order:11;" on-mouseup="_switchAm">
             <span hidden$="[[!isAm]]">[[_am]]</span>
             <span hidden$="[[isAm]]">[[_pm]]</span>
           </div>
           <div hidden$="[[!withTimezone]]" style="order:12;">
-            <number-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00"></number-input>
+            <integer-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00"></integer-input>
             <span>[[_localTimeSeparator]]</span>
-            <number-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></number-input>
+            <integer-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></integer-input>
           </div>
         `;
       }
@@ -52,7 +53,7 @@
             display: inline-flex;
             align-items: center;
           }
-          number-input ~ .hours {
+          integer-input ~ .hours {
             margin-left: 0.167em;
           }
           .single-switch {
@@ -169,6 +170,7 @@
      *  @appliesMixin DatetimeInputMixin
      *
      * @demo demo/index.html
+     * @demo demo/form.html Form Demo
      **/
     class TimeInput extends TimeInputPattern(DatetimeInputMixin(Polymer.Element)) { // eslint-disable-line no-undef
 
