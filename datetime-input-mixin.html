@@ -47,17 +47,21 @@
             align-items: baseline;
             outline: none;
             padding: 0.1em 0.2em;
+            border-radius: 3px;
             --input-focus-background: var(--primary-color, rgba(0,0,0,0.2));
             --input-style: {
               border-radius: 2px;
-              padding: 0.2em 0.1em;
+              padding: 0.15em;
               cursor: pointer;
               transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
             };
+            --number-input-placeholder: {
+              color: rgba(0,0,0,0.334);
+            };
             --input-invalid: {
-              border-color: var(--input-invalid-color);
-              border-bottom-width: thin;
-              border-bottom-style: solid;
+              border-width: thin;
+              border-style: dotted;
+              border-color: var(--input-invalid-color, red);
             };
           }
           [hidden] {

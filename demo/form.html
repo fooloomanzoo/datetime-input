@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>text-input in iron-form demo</title>
+    <title>datetime-input in iron-Form</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
+    <link rel="import" href="../../polymer/polymer.html">
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../../iron-form/iron-form.html">
@@ -17,27 +18,28 @@
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-        datetime-input {
-          margin-bottom: 8px;
+        input {
+          margin-bottom: 4px;
           margin-left: 8px;
-          --text-input: {
+        }
+        time-input,
+        date-input,
+        datetime-input {
+          margin-bottom: 4px;
+          margin-left: 8px;
+          --input-style: {
             color: #111;
-            padding: 0.25em;
+            padding: 4px;
             border-radius: 2px;
-            border-color: #ddd;
+            border-color: rgba(0,0,0,0.2);
             border-width: thin;
             border-style: dotted;
             transition: background-color 150ms ease-in-out;
           };
-          --text-input-focus: {
-            border-color: #555;
+          --input-focus: {
+            border-color: rgba(0,0,0,0.5);
             border-style: solid;
             background: rgba(0, 0, 0, 0.15);
-          };
-          --text-input-invalid: {
-            background: rgba(255, 0, 0, 0.15);
-            border-color: #999;
-            border-style: dashed;
           };
         }
         iron-form {
@@ -45,41 +47,58 @@
           padding: 20px;
         }
         .output {
+          color: #333;
           margin-top: 20px;
+          padding: 6px;
           word-wrap: break-word;
           font-family: monospace;
+          background: rgba(0, 0, 0, 0.05);
+          border-color: #555;
+          border-width: thin;
+          border-style: dashed;
         }
       </style>
     </custom-style>
   </head>
   <body>
+
     <div class="vertical-section-container centered">
-      <h3>text-input in <code>iron-form</code></h3>
+      <h3>datetime-input in <code>iron-form</code></h3>
       <demo-snippet>
         <template>
-          <label>
-            <input type="checkbox" checked onchange="form1.allowRedirect = !this.checked;">Prevent automatic form redirection
-          </label>
-          <br><br>
+          <dom-bind>
+            <template>
+              <label>
+                <input type="checkbox" checked onchange="form1.allowRedirect = !this.checked;">Prevent automatic form redirection
+              </label>
+              <br><br>
 
-          <iron-form id="form1">
-            <form action="/foo" method="get">
-              name: <input name="name" required value="Batman"/><br>
-              job: <input name="job" required value="Hero"/><br>
-              first day: <datetime-input name="start" required max="{{end}}" value="{{start}}"></datetime-input><br>
-              retired: <datetime-input name="end" min="{{start}}" value="{{end}}"></datetime-input><br>
-              <button onclick="form1.submit()">Submit</button>
-              <button onclick="form1.validate()">Validate</button>
-            </form>
-            <br>
-            <div class="output"></div>
-          </iron-form>
-          <script>
-            form1.addEventListener('iron-form-submit', function(event) {
-              this.querySelector('.output').innerHTML = JSON.stringify(event.detail);
-            });
-          </script>
+              <iron-form id="form1">
+                <form action="/foo" method="get">
+                  name: <input name="name" required value="Batman"/><br>
+                  job: <input name="job" required value="Hero"/><br>
+                  <br>
+                  first day: <date-input name="start" required max="{{end}}" value="{{start}}"></date-input><br>
+                  expected retirement: <date-input name="end" min="{{start}}" value="{{end}}"></date-input><br>
+                  <br>
+                  last job: <datetime-input name="lastjob" min="[[start]]" max="[[end]]" value="{{lastjob}}"></datetime-input><br>
+                  return: <time-input name="return" min="[[lastjob]]" max="[[end]]" value="{{return}}"></time-input><br>
+                  <br>
+                  <button onclick="form1.submit()">Submit</button>
+                  <button onclick="form1.validate()">Validate</button>
+                </form>
+                <div class="output"></div>
+              </iron-form>
+              <script>
+                form1.addEventListener('iron-form-submit', function(event) {
+                  this.querySelector('.output').innerHTML = JSON.stringify(event.detail);
+                });
+              </script>
+            </template>
+          </dom-bind>
         </template>
       </demo-snippet>
+    </div>
+
   </body>
 </html>

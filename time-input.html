@@ -9,7 +9,7 @@
    * Mixin to extend an element to a time input
    *
    * @demo demo/index.html
-   * @demo demo/form.html Form Demo
+   * @demo demo/form.html Form
    **/
   const TimeInputPattern = (superClass) => { // eslint-disable-line no-unused-vars
 
@@ -39,7 +39,7 @@
             <span hidden$="[[isAm]]">[[_pm]]</span>
           </div>
           <div hidden$="[[!withTimezone]]" style="order:12;">
-            <integer-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00"></integer-input>
+            <integer-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00" min="-12" max="14"></integer-input>
             <span>[[_localTimeSeparator]]</span>
             <integer-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></integer-input>
           </div>
@@ -113,7 +113,6 @@
 
       static get observers() {
         return [
-          '_offsetMinutesChanged(_offsetMinutes)',
           '_timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) '
         ]
       }
@@ -122,23 +121,30 @@
         this.isAm = !this.isAm;
       }
 
-      _offsetMinutesChanged(offsetMinutes) {
+      offsetMinutesChanged(offsetMinutes) {
         if (offsetMinutes === undefined) {
           return;
         }
+
+        super.offsetMinutesChanged(offsetMinutes);
         this.setProperties({
-          _timeZoneHours: -Math.floor(offsetMinutes) / 60,
+          _timeZoneHours: Math.floor(-offsetMinutes / 60),
           _timeZoneMinutes: Math.abs(offsetMinutes) % 60
         });
+
       }
 
       _timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) {
         if (_timeZoneHours === undefined || _timeZoneMinutes === undefined) {
           return;
         }
-        const timezoneOffset = this._computeTimezoneOffset(-(_timeZoneHours*60 + _timeZoneMinutes));
-        if (timezoneOffset) {
-          this.timezoneOffset = timezoneOffset;
+        if (!this.__updatingValues) {
+          this.__updatingValues = true;
+          this.offsetMinutes = -(_timeZoneHours * 60 + _timeZoneMinutes);
+          if (this.value !== undefined) {
+            this._setDate(new Date(this.value));
+          }
+          this.__updatingValues = false;
         }
       }
     }
@@ -170,7 +176,7 @@
      *  @appliesMixin DatetimeInputMixin
      *
      * @demo demo/index.html
-     * @demo demo/form.html Form Demo
+     * @demo demo/form.html Form
      **/
     class TimeInput extends TimeInputPattern(DatetimeInputMixin(Polymer.Element)) { // eslint-disable-line no-undef
 

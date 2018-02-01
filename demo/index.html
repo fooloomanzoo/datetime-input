@@ -21,18 +21,20 @@
     </custom-style>
   </head>
   <body>
-    <div class="vertical-section-container centered">
+    <!-- <div class="vertical-section-container centered">
       <h3>Create a date-input</h3>
       <demo-snippet>
         <template>
           <dom-bind>
             <template is="dom-bind">
               <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
-              <datetime-input value="{{value}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}"></datetime-input><br>
-              <date-input date="{{date}}" with-timezone="{{withTimezone}}"></date-input><br>
-              <time-input time="{{time}}" with-timezone="{{withTimezone}}"></time-input>
+              <datetime-input value="{{value}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone-offset="{{timezoneOffset}}"></datetime-input><br>
+              <date-input date="{{date}}" timezone-offset="{{timezoneOffset}}"></date-input><br>
+              <time-input value="{{value}}" with-timezone="{{withTimezone}}"></time-input>
               <p>
                 <code>datetime:</code>&#32;<b>[[datetime]]</b><br>
+                <code>date:</code>&#32;<b>[[date]]</b><br>
+                <code>time:</code>&#32;<b>[[time]]</b><br>
                 <code>value:</code>&#32;<b>[[value]]</b>
               </p>
             </template>
@@ -47,16 +49,17 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <date-input date="2025-02-01" datetime="{{datetime}}" time="[[time]]"></date-input><br>
-              <time-input hour="11" time="{{time}}"></time-input>
+              <date-input year="2025" month="02" day="01" date="{{date}}"></date-input><br>
+              <time-input hours="11" time="{{time}}"></time-input>
               <div class="vertical-section-container result">
-                <div><code>datetime</code>: <b>[[datetime]]</b></div>
+                <div><code>date</code>: <b>[[date]]</b></div>
+                <div><code>time</code>: <b>[[time]]</b></div>
               </div>
             </template>
           </dom-bind>
         </template>
       </demo-snippet>
-    </div>
+    </div> -->
 
     <div class="vertical-section-container centered">
       <h3>Using min and max attributes</h3>
@@ -64,9 +67,10 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <date-input min="2018-02-01" max="2018-02-28" datetime="{{datetime}}"></date-input>
+              <datetime-input min="2018-02-01" max="2018-05-28" value="{{value}}" datetime="{{datetime}}" with-timezone></datetime-input>
               <div class="vertical-section-container result">
                 <div><code>datetime</code>: <b>[[datetime]]</b></div>
+                <div><code>value</code>: <b>[[value]]</b></div>
               </div>
             </template>
           </dom-bind>
