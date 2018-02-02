@@ -138,14 +138,7 @@
         if (_timeZoneHours === undefined || _timeZoneMinutes === undefined) {
           return;
         }
-        if (!this.__updatingValues) {
-          this.__updatingValues = true;
-          this.offsetMinutes = -(_timeZoneHours * 60 + _timeZoneMinutes);
-          if (this.value !== undefined) {
-            this._setDate(new Date(this.value));
-          }
-          this.__updatingValues = false;
-        }
+        this.offsetMinutes = -(_timeZoneHours * 60 + _timeZoneMinutes);
       }
     }
   }
