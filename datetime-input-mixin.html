@@ -89,6 +89,10 @@
         this._removeKeyListener();
       }
 
+      _computeInvalid(required, value) {
+        return Boolean(this.required && isNaN(this.value));
+      }
+
       _addKeyListener() {
         if (super._addKeyListener) {
           super._addKeyListener();

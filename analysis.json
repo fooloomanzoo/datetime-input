@@ -891,7 +891,7 @@
               "column": 6
             },
             "end": {
-              "line": 359,
+              "line": 358,
               "column": 7
             }
           },
@@ -917,9 +917,6 @@
             },
             {
               "name": "milliseconds"
-            },
-            {
-              "name": "offsetMinutes"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -931,11 +928,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 361,
+              "line": 360,
               "column": 6
             },
             "end": {
-              "line": 366,
+              "line": 365,
               "column": 7
             }
           },
@@ -946,9 +943,6 @@
             },
             {
               "name": "time"
-            },
-            {
-              "name": "timezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -960,11 +954,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 368,
+              "line": 367,
               "column": 6
             },
             "end": {
-              "line": 395,
+              "line": 394,
               "column": 7
             }
           },
@@ -983,11 +977,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 397,
+              "line": 396,
               "column": 6
             },
             "end": {
-              "line": 404,
+              "line": 403,
               "column": 7
             }
           },
@@ -1006,11 +1000,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 410,
+              "line": 409,
               "column": 6
             },
             "end": {
-              "line": 467,
+              "line": 466,
               "column": 7
             }
           },
@@ -1031,11 +1025,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 469,
+              "line": 468,
               "column": 6
             },
             "end": {
-              "line": 486,
+              "line": 485,
               "column": 7
             }
           },
@@ -1057,11 +1051,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 488,
+              "line": 487,
               "column": 6
             },
             "end": {
-              "line": 494,
+              "line": 493,
               "column": 7
             }
           },
@@ -1083,11 +1077,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 496,
+              "line": 495,
               "column": 6
             },
             "end": {
-              "line": 521,
+              "line": 520,
               "column": 7
             }
           },
@@ -1106,11 +1100,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 523,
+              "line": 522,
               "column": 6
             },
             "end": {
-              "line": 540,
+              "line": 539,
               "column": 7
             }
           },
@@ -1129,11 +1123,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 542,
+              "line": 541,
               "column": 6
             },
             "end": {
-              "line": 559,
+              "line": 558,
               "column": 7
             }
           },
@@ -1152,11 +1146,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 561,
+              "line": 560,
               "column": 6
             },
             "end": {
-              "line": 569,
+              "line": 568,
               "column": 7
             }
           },
@@ -1175,11 +1169,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 571,
+              "line": 570,
               "column": 6
             },
             "end": {
-              "line": 573,
+              "line": 572,
               "column": 7
             }
           },
@@ -1198,11 +1192,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 575,
+              "line": 574,
               "column": 6
             },
             "end": {
-              "line": 577,
+              "line": 576,
               "column": 7
             }
           },
@@ -1221,11 +1215,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 579,
+              "line": 578,
               "column": 6
             },
             "end": {
-              "line": 582,
+              "line": 581,
               "column": 7
             }
           },
@@ -1244,11 +1238,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 584,
+              "line": 583,
               "column": 6
             },
             "end": {
-              "line": 586,
+              "line": 585,
               "column": 7
             }
           },
@@ -1267,11 +1261,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 588,
+              "line": 587,
               "column": 6
             },
             "end": {
-              "line": 596,
+              "line": 595,
               "column": 7
             }
           },
@@ -1290,11 +1284,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 604,
+              "line": 603,
               "column": 6
             },
             "end": {
-              "line": 609,
+              "line": 608,
               "column": 7
             }
           },
@@ -1324,11 +1318,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 611,
+              "line": 610,
               "column": 6
             },
             "end": {
-              "line": 692,
+              "line": 691,
               "column": 7
             }
           },
@@ -1347,11 +1341,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 694,
+              "line": 693,
               "column": 6
             },
             "end": {
-              "line": 708,
+              "line": 707,
               "column": 7
             }
           },
@@ -1373,11 +1367,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 710,
+              "line": 709,
               "column": 6
             },
             "end": {
-              "line": 718,
+              "line": 717,
               "column": 7
             }
           },
@@ -1396,11 +1390,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 720,
+              "line": 719,
               "column": 6
             },
             "end": {
-              "line": 729,
+              "line": 728,
               "column": 7
             }
           },
@@ -1419,11 +1413,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 731,
+              "line": 730,
               "column": 6
             },
             "end": {
-              "line": 739,
+              "line": 738,
               "column": 7
             }
           },
@@ -1442,11 +1436,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 741,
+              "line": 740,
               "column": 6
             },
             "end": {
-              "line": 749,
+              "line": 748,
               "column": 7
             }
           },
@@ -2969,7 +2963,7 @@
               "column": 6
             },
             "end": {
-              "line": 359,
+              "line": 358,
               "column": 7
             }
           },
@@ -2995,9 +2989,6 @@
             },
             {
               "name": "milliseconds"
-            },
-            {
-              "name": "offsetMinutes"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -3009,11 +3000,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 361,
+              "line": 360,
               "column": 6
             },
             "end": {
-              "line": 366,
+              "line": 365,
               "column": 7
             }
           },
@@ -3024,9 +3015,6 @@
             },
             {
               "name": "time"
-            },
-            {
-              "name": "timezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -3038,11 +3026,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 368,
+              "line": 367,
               "column": 6
             },
             "end": {
-              "line": 395,
+              "line": 394,
               "column": 7
             }
           },
@@ -3061,11 +3049,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 397,
+              "line": 396,
               "column": 6
             },
             "end": {
-              "line": 404,
+              "line": 403,
               "column": 7
             }
           },
@@ -3084,11 +3072,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 410,
+              "line": 409,
               "column": 6
             },
             "end": {
-              "line": 467,
+              "line": 466,
               "column": 7
             }
           },
@@ -3109,11 +3097,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 469,
+              "line": 468,
               "column": 6
             },
             "end": {
-              "line": 486,
+              "line": 485,
               "column": 7
             }
           },
@@ -3135,11 +3123,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 488,
+              "line": 487,
               "column": 6
             },
             "end": {
-              "line": 494,
+              "line": 493,
               "column": 7
             }
           },
@@ -3161,11 +3149,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 496,
+              "line": 495,
               "column": 6
             },
             "end": {
-              "line": 521,
+              "line": 520,
               "column": 7
             }
           },
@@ -3184,11 +3172,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 523,
+              "line": 522,
               "column": 6
             },
             "end": {
-              "line": 540,
+              "line": 539,
               "column": 7
             }
           },
@@ -3207,11 +3195,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 542,
+              "line": 541,
               "column": 6
             },
             "end": {
-              "line": 559,
+              "line": 558,
               "column": 7
             }
           },
@@ -3230,11 +3218,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 561,
+              "line": 560,
               "column": 6
             },
             "end": {
-              "line": 569,
+              "line": 568,
               "column": 7
             }
           },
@@ -3253,11 +3241,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 571,
+              "line": 570,
               "column": 6
             },
             "end": {
-              "line": 573,
+              "line": 572,
               "column": 7
             }
           },
@@ -3276,11 +3264,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 575,
+              "line": 574,
               "column": 6
             },
             "end": {
-              "line": 577,
+              "line": 576,
               "column": 7
             }
           },
@@ -3299,11 +3287,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 579,
+              "line": 578,
               "column": 6
             },
             "end": {
-              "line": 582,
+              "line": 581,
               "column": 7
             }
           },
@@ -3322,11 +3310,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 584,
+              "line": 583,
               "column": 6
             },
             "end": {
-              "line": 586,
+              "line": 585,
               "column": 7
             }
           },
@@ -3345,11 +3333,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 588,
+              "line": 587,
               "column": 6
             },
             "end": {
-              "line": 596,
+              "line": 595,
               "column": 7
             }
           },
@@ -3368,11 +3356,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 604,
+              "line": 603,
               "column": 6
             },
             "end": {
-              "line": 609,
+              "line": 608,
               "column": 7
             }
           },
@@ -3402,11 +3390,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 611,
+              "line": 610,
               "column": 6
             },
             "end": {
-              "line": 692,
+              "line": 691,
               "column": 7
             }
           },
@@ -3425,11 +3413,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 694,
+              "line": 693,
               "column": 6
             },
             "end": {
-              "line": 708,
+              "line": 707,
               "column": 7
             }
           },
@@ -3451,11 +3439,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 710,
+              "line": 709,
               "column": 6
             },
             "end": {
-              "line": 718,
+              "line": 717,
               "column": 7
             }
           },
@@ -3474,11 +3462,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 720,
+              "line": 719,
               "column": 6
             },
             "end": {
-              "line": 729,
+              "line": 728,
               "column": 7
             }
           },
@@ -3497,11 +3485,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 731,
+              "line": 730,
               "column": 6
             },
             "end": {
-              "line": 739,
+              "line": 738,
               "column": 7
             }
           },
@@ -3520,11 +3508,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 741,
+              "line": 740,
               "column": 6
             },
             "end": {
-              "line": 749,
+              "line": 748,
               "column": 7
             }
           },
@@ -5093,7 +5081,7 @@
               "column": 6
             },
             "end": {
-              "line": 359,
+              "line": 358,
               "column": 7
             }
           },
@@ -5119,9 +5107,6 @@
             },
             {
               "name": "milliseconds"
-            },
-            {
-              "name": "offsetMinutes"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -5133,11 +5118,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 361,
+              "line": 360,
               "column": 6
             },
             "end": {
-              "line": 366,
+              "line": 365,
               "column": 7
             }
           },
@@ -5148,9 +5133,6 @@
             },
             {
               "name": "time"
-            },
-            {
-              "name": "timezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -5162,11 +5144,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 368,
+              "line": 367,
               "column": 6
             },
             "end": {
-              "line": 395,
+              "line": 394,
               "column": 7
             }
           },
@@ -5185,11 +5167,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 397,
+              "line": 396,
               "column": 6
             },
             "end": {
-              "line": 404,
+              "line": 403,
               "column": 7
             }
           },
@@ -5208,11 +5190,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 410,
+              "line": 409,
               "column": 6
             },
             "end": {
-              "line": 467,
+              "line": 466,
               "column": 7
             }
           },
@@ -5233,11 +5215,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 469,
+              "line": 468,
               "column": 6
             },
             "end": {
-              "line": 486,
+              "line": 485,
               "column": 7
             }
           },
@@ -5259,11 +5241,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 488,
+              "line": 487,
               "column": 6
             },
             "end": {
-              "line": 494,
+              "line": 493,
               "column": 7
             }
           },
@@ -5285,11 +5267,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 496,
+              "line": 495,
               "column": 6
             },
             "end": {
-              "line": 521,
+              "line": 520,
               "column": 7
             }
           },
@@ -5308,11 +5290,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 523,
+              "line": 522,
               "column": 6
             },
             "end": {
-              "line": 540,
+              "line": 539,
               "column": 7
             }
           },
@@ -5331,11 +5313,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 542,
+              "line": 541,
               "column": 6
             },
             "end": {
-              "line": 559,
+              "line": 558,
               "column": 7
             }
           },
@@ -5354,11 +5336,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 561,
+              "line": 560,
               "column": 6
             },
             "end": {
-              "line": 569,
+              "line": 568,
               "column": 7
             }
           },
@@ -5377,11 +5359,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 571,
+              "line": 570,
               "column": 6
             },
             "end": {
-              "line": 573,
+              "line": 572,
               "column": 7
             }
           },
@@ -5400,11 +5382,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 575,
+              "line": 574,
               "column": 6
             },
             "end": {
-              "line": 577,
+              "line": 576,
               "column": 7
             }
           },
@@ -5423,11 +5405,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 579,
+              "line": 578,
               "column": 6
             },
             "end": {
-              "line": 582,
+              "line": 581,
               "column": 7
             }
           },
@@ -5446,11 +5428,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 584,
+              "line": 583,
               "column": 6
             },
             "end": {
-              "line": 586,
+              "line": 585,
               "column": 7
             }
           },
@@ -5469,11 +5451,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 588,
+              "line": 587,
               "column": 6
             },
             "end": {
-              "line": 596,
+              "line": 595,
               "column": 7
             }
           },
@@ -5492,11 +5474,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 604,
+              "line": 603,
               "column": 6
             },
             "end": {
-              "line": 609,
+              "line": 608,
               "column": 7
             }
           },
@@ -5526,11 +5508,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 611,
+              "line": 610,
               "column": 6
             },
             "end": {
-              "line": 692,
+              "line": 691,
               "column": 7
             }
           },
@@ -5549,11 +5531,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 694,
+              "line": 693,
               "column": 6
             },
             "end": {
-              "line": 708,
+              "line": 707,
               "column": 7
             }
           },
@@ -5575,11 +5557,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 710,
+              "line": 709,
               "column": 6
             },
             "end": {
-              "line": 718,
+              "line": 717,
               "column": 7
             }
           },
@@ -5598,11 +5580,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 720,
+              "line": 719,
               "column": 6
             },
             "end": {
-              "line": 729,
+              "line": 728,
               "column": 7
             }
           },
@@ -5621,11 +5603,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 731,
+              "line": 730,
               "column": 6
             },
             "end": {
-              "line": 739,
+              "line": 738,
               "column": 7
             }
           },
@@ -5644,11 +5626,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 741,
+              "line": 740,
               "column": 6
             },
             "end": {
-              "line": 749,
+              "line": 748,
               "column": 7
             }
           },
@@ -7174,7 +7156,7 @@
               "column": 6
             },
             "end": {
-              "line": 359,
+              "line": 358,
               "column": 7
             }
           },
@@ -7200,9 +7182,6 @@
             },
             {
               "name": "milliseconds"
-            },
-            {
-              "name": "offsetMinutes"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -7214,11 +7193,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 361,
+              "line": 360,
               "column": 6
             },
             "end": {
-              "line": 366,
+              "line": 365,
               "column": 7
             }
           },
@@ -7229,9 +7208,6 @@
             },
             {
               "name": "time"
-            },
-            {
-              "name": "timezoneOffset"
             }
           ],
           "inheritedFrom": "DatetimeMixin"
@@ -7243,11 +7219,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 368,
+              "line": 367,
               "column": 6
             },
             "end": {
-              "line": 395,
+              "line": 394,
               "column": 7
             }
           },
@@ -7266,11 +7242,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 397,
+              "line": 396,
               "column": 6
             },
             "end": {
-              "line": 404,
+              "line": 403,
               "column": 7
             }
           },
@@ -7289,11 +7265,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 410,
+              "line": 409,
               "column": 6
             },
             "end": {
-              "line": 467,
+              "line": 466,
               "column": 7
             }
           },
@@ -7314,11 +7290,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 469,
+              "line": 468,
               "column": 6
             },
             "end": {
-              "line": 486,
+              "line": 485,
               "column": 7
             }
           },
@@ -7340,11 +7316,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 488,
+              "line": 487,
               "column": 6
             },
             "end": {
-              "line": 494,
+              "line": 493,
               "column": 7
             }
           },
@@ -7366,11 +7342,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 496,
+              "line": 495,
               "column": 6
             },
             "end": {
-              "line": 521,
+              "line": 520,
               "column": 7
             }
           },
@@ -7389,11 +7365,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 523,
+              "line": 522,
               "column": 6
             },
             "end": {
-              "line": 540,
+              "line": 539,
               "column": 7
             }
           },
@@ -7412,11 +7388,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 542,
+              "line": 541,
               "column": 6
             },
             "end": {
-              "line": 559,
+              "line": 558,
               "column": 7
             }
           },
@@ -7435,11 +7411,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 561,
+              "line": 560,
               "column": 6
             },
             "end": {
-              "line": 569,
+              "line": 568,
               "column": 7
             }
           },
@@ -7458,11 +7434,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 571,
+              "line": 570,
               "column": 6
             },
             "end": {
-              "line": 573,
+              "line": 572,
               "column": 7
             }
           },
@@ -7481,11 +7457,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 575,
+              "line": 574,
               "column": 6
             },
             "end": {
-              "line": 577,
+              "line": 576,
               "column": 7
             }
           },
@@ -7504,11 +7480,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 579,
+              "line": 578,
               "column": 6
             },
             "end": {
-              "line": 582,
+              "line": 581,
               "column": 7
             }
           },
@@ -7527,11 +7503,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 584,
+              "line": 583,
               "column": 6
             },
             "end": {
-              "line": 586,
+              "line": 585,
               "column": 7
             }
           },
@@ -7550,11 +7526,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 588,
+              "line": 587,
               "column": 6
             },
             "end": {
-              "line": 596,
+              "line": 595,
               "column": 7
             }
           },
@@ -7573,11 +7549,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 604,
+              "line": 603,
               "column": 6
             },
             "end": {
-              "line": 609,
+              "line": 608,
               "column": 7
             }
           },
@@ -7607,11 +7583,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 611,
+              "line": 610,
               "column": 6
             },
             "end": {
-              "line": 692,
+              "line": 691,
               "column": 7
             }
           },
@@ -7630,11 +7606,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 694,
+              "line": 693,
               "column": 6
             },
             "end": {
-              "line": 708,
+              "line": 707,
               "column": 7
             }
           },
@@ -7656,11 +7632,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 710,
+              "line": 709,
               "column": 6
             },
             "end": {
-              "line": 718,
+              "line": 717,
               "column": 7
             }
           },
@@ -7679,11 +7655,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 720,
+              "line": 719,
               "column": 6
             },
             "end": {
-              "line": 729,
+              "line": 728,
               "column": 7
             }
           },
@@ -7702,11 +7678,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 731,
+              "line": 730,
               "column": 6
             },
             "end": {
-              "line": 739,
+              "line": 738,
               "column": 7
             }
           },
@@ -7725,11 +7701,11 @@
           "sourceRange": {
             "file": "bower_components\\property-mixins\\datetime-mixin.html",
             "start": {
-              "line": 741,
+              "line": 740,
               "column": 6
             },
             "end": {
-              "line": 749,
+              "line": 748,
               "column": 7
             }
           },
