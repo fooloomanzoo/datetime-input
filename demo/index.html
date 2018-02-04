@@ -21,7 +21,7 @@
     </custom-style>
   </head>
   <body>
-    <!-- <div class="vertical-section-container centered">
+    <div class="vertical-section-container centered">
       <h3>Create a date-input</h3>
       <demo-snippet>
         <template>
@@ -29,8 +29,8 @@
             <template is="dom-bind">
               <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
               <datetime-input value="{{value}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone-offset="{{timezoneOffset}}"></datetime-input><br>
-              <date-input date="{{date}}" timezone-offset="{{timezoneOffset}}"></date-input><br>
-              <time-input value="{{value}}" with-timezone="{{withTimezone}}"></time-input>
+              <date-input date="{{date}}" timezone-offset="[[timezoneOffset]]"></date-input><br>
+              <time-input time="{{time}}" timezone-offset="[[timezoneOffset]]" with-timezone="{{withTimezone}}"></time-input>
               <p>
                 <code>datetime:</code>&#32;<b>[[datetime]]</b><br>
                 <code>date:</code>&#32;<b>[[date]]</b><br>
@@ -49,9 +49,10 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <date-input year="2025" month="02" day="01" date="{{date}}"></date-input><br>
+              <date-input datetime="2025-02-01T00:00" date="{{date}}"></date-input><br>
               <time-input hours="11" time="{{time}}"></time-input>
               <div class="vertical-section-container result">
+                <div><code>datetime</code>: <b>[[datetime]]</b></div>
                 <div><code>date</code>: <b>[[date]]</b></div>
                 <div><code>time</code>: <b>[[time]]</b></div>
               </div>
@@ -59,7 +60,7 @@
           </dom-bind>
         </template>
       </demo-snippet>
-    </div> -->
+    </div>
 
     <div class="vertical-section-container centered">
       <h3>Using min and max attributes</h3>

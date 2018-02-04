@@ -39,11 +39,13 @@ If you are looking for a picker for date and time, please have a look at [dateti
 -->
 ```html
   <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
-  <datetime-input value="{{value}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}"></datetime-input><br>
-  <date-input date="{{date}}" with-timezone="{{withTimezone}}"></date-input><br>
-  <time-input time="{{time}}" with-timezone="{{withTimezone}}"></time-input>
+  <datetime-input value="{{value}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone-offset="{{timezoneOffset}}"></datetime-input><br>
+  <date-input date="{{date}}" timezone-offset="[[timezoneOffset]]"></date-input><br>
+  <time-input time="{{time}}" timezone-offset="[[timezoneOffset]]" with-timezone="{{withTimezone}}"></time-input>
   <p>
     <code>datetime:</code>&#32;<b>[[datetime]]</b><br>
+    <code>date:</code>&#32;<b>[[date]]</b><br>
+    <code>time:</code>&#32;<b>[[time]]</b><br>
     <code>value:</code>&#32;<b>[[value]]</b>
   </p>
 ```
