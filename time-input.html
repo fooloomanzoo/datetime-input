@@ -39,7 +39,7 @@
             <span hidden$="[[isAm]]">[[_pm]]</span>
           </div>
           <div hidden$="[[!withTimezone]]" style="order:12;">
-            <integer-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00" min="-12" max="14"></integer-input>
+            <integer-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00" min="-23" max="23"></integer-input>
             <span>[[_localTimeSeparator]]</span>
             <integer-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></integer-input>
           </div>
@@ -81,14 +81,6 @@
             value: false
           },
 
-          _timeZoneHours: {
-            type: Number
-          },
-
-          _timeZoneMinutes: {
-            type: Number
-          },
-
           _hideHours: {
             type: Boolean,
             computed: '_ifClamped(clamp, "hours")'
@@ -111,34 +103,8 @@
         }
       }
 
-      static get observers() {
-        return [
-          '_timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) '
-        ]
-      }
-
       _switchAm() {
         this.isAm = !this.isAm;
-      }
-
-      offsetMinutesChanged(offsetMinutes) {
-        if (offsetMinutes === undefined) {
-          return;
-        }
-
-        super.offsetMinutesChanged(offsetMinutes);
-        this.setProperties({
-          _timeZoneHours: Math.floor(-offsetMinutes / 60),
-          _timeZoneMinutes: Math.abs(offsetMinutes) % 60
-        });
-
-      }
-
-      _timeZoneHoursMinutesChanged(_timeZoneHours, _timeZoneMinutes) {
-        if (_timeZoneHours === undefined || _timeZoneMinutes === undefined) {
-          return;
-        }
-        this.offsetMinutes = -(_timeZoneHours * 60 + _timeZoneMinutes);
       }
     }
   }
