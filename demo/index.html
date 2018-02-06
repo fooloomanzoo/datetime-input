@@ -28,9 +28,9 @@
           <dom-bind>
             <template is="dom-bind">
               <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
-              <datetime-input value="{{value}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone-offset="{{timezoneOffset}}"></datetime-input><br>
-              <date-input date="{{date}}" timezone-offset="[[timezoneOffset]]"></date-input><br>
-              <time-input time="{{time}}" timezone-offset="[[timezoneOffset]]" with-timezone="{{withTimezone}}"></time-input>
+              <datetime-input value="{{value}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone="{{timezone}}"></datetime-input><br>
+              <date-input date="{{date}}" timezone="[[timezone]]"></date-input><br>
+              <time-input time="{{time}}" timezone="[[timezone]]" with-timezone="{{withTimezone}}"></time-input>
               <p>
                 <code>datetime:</code>&#32;<b>[[datetime]]</b><br>
                 <code>date:</code>&#32;<b>[[date]]</b><br>
