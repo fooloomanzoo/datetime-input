@@ -50,10 +50,69 @@ If you are looking for a picker for date and time, please have a look at [dateti
   </p>
 ```
 
+#### Use locale date formats
+The properties `date`, `time`, `datetime` are always in **iso8061** but the visualization will be localized. By default your locale date format from `window.navigator.language` will be used, but you can select another *locale*:
+
+<!--
+```
+<custom-element-demo height="300">
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="import" href="overlay-datetime-input.html">
+    <style>
+      html {
+        font-family: 'Roboto', sans-serif;
+      }
+    </style>
+    <dom-bind>
+      <template is="dom-bind">
+        <next-code-block></next-code-block>
+      </template>
+    </dom-bind>
+  </template>
+</custom-element-demo>
+```
+-->
+
+```html
+<p>
+  locale:
+  <select value="{{locale::change}}">
+    <option value=""></option>
+    <option value="en">english</option>
+    <option value="fr">français</option>
+    <option value="de">deutsch</option>
+    <option value="es">español</option>
+    <option value="it">italiano</option>
+    <option value="ru">русский</option>
+    <option value="ja">日本語</option>
+    <option value="zh">中文</option>
+  </select>
+</p>
+
+<p>
+  <datetime-input locale="{{locale}}" datetime="{{datetime}}" ></datetime-input>
+</p>
+
+<p>datetime: [[datetime]]</p>
+```
+
 ### Installation
 ```
 bower install --save fooloomanzoo/datetime-input
 ```
+or
+```
+npm install --save @fooloomanzoo/datetime-input
+```
+
+### Update
+to last version
+```
+bower update -f
+```
+
 
 ### License
 [MIT](https://github.com/fooloomanzoo/datetime-input/blob/master/LICENSE.txt)
