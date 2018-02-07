@@ -89,10 +89,12 @@ The properties `date`, `time`, `datetime` are always in **iso8061** but the visu
     <option value="ja">日本語</option>
     <option value="zh">中文</option>
   </select>
+  <br><br>
+  <input type="checkbox" checked="{{hour12::change}}">hour12 format
 </p>
 
 <p>
-  <datetime-input locale="{{locale}}" datetime="{{datetime}}" ></datetime-input>
+  <datetime-input locale="{{locale}}" datetime="{{datetime}}" hour12="[[hour12]]"></datetime-input>
 </p>
 
 <p>datetime: [[datetime]]</p>
