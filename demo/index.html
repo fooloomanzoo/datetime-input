@@ -28,9 +28,21 @@
           <dom-bind>
             <template is="dom-bind">
               <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
-              <datetime-input value="{{value}}" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone="{{timezone}}"></datetime-input><br>
-              <date-input date="{{date}}" timezone="[[timezone]]"></date-input><br>
-              <time-input time="{{time}}" timezone="[[timezone]]" with-timezone="{{withTimezone}}"></time-input>
+              <input type="checkbox" checked="{{hour12::change}}">hour12 format<br><br>
+              locale: <input list="locales" value="{{locale::change}}">
+              <datalist id="locales">
+                <option value="en">english</option>
+                <option value="fr">français</option>
+                <option value="de">deutsch</option>
+                <option value="es">español</option>
+                <option value="it">italiano</option>
+                <option value="ru">русский</option>
+                <option value="ja">日本語</option>
+                <option value="zh">中文</option>
+              </datalist><br><br>
+              <datetime-input value="{{value}}" locale="{{locale}}" datetime="{{datetime}}" hour12="{{hour12}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone="{{timezone}}"></datetime-input><br>
+              <date-input date="{{date}}" locale="[[locale]]" timezone="[[timezone]]"></date-input><br>
+              <time-input time="{{time}}" locale="[[locale]]" hour12="{{hour12}}" timezone="[[timezone]]" with-timezone="{{withTimezone}}"></time-input>
               <p>
                 <code>datetime:</code>&#32;<b>[[datetime]]</b><br>
                 <code>date:</code>&#32;<b>[[date]]</b><br>

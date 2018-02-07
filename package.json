@@ -1,6 +1,6 @@
 {
   "name": "@fooloomanzoo/datetime-input",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "an input for date and time",
   "main": "index.html",
   "directories": {

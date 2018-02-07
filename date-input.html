@@ -20,11 +20,11 @@
 
       static get inputTemplate() {
         return `
-            <integer-input style$="order:[[_orderDate.year]];" index$="[[_orderDate.year]]" invalid$="[[invalid]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
+            <integer-input id="year" style$="order:[[_orderDate.year]];" index$="[[_orderDate.year]]" invalid$="[[invalid]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
             <span style$="order:[[_orderDate.separatorYearMonth]];" hidden$="[[_hideMonth]]">[[_localDateSeparator]]</span>
-            <integer-input style$="order:[[_orderDate.month]];" index$="[[_orderDate.month]]" hidden$="[[_hideMonth]]"  invalid$="[[invalid]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
+            <integer-input id="month" style$="order:[[_orderDate.month]];" index$="[[_orderDate.month]]" hidden$="[[_hideMonth]]" invalid$="[[invalid]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
             <span style$="order:[[_orderDate.separatorMonthDay]];" hidden$="[[_hideDay]]">[[_localDateSeparator]]</span>
-            <integer-input style$="order:[[_orderDate.day]];" index$="[[_orderDate.day]]" hidden$="[[_hideDay]]" invalid$="[[invalid]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
+            <integer-input id="day" style$="order:[[_orderDate.day]];" index$="[[_orderDate.day]]" hidden$="[[_hideDay]]" invalid$="[[invalid]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
             ${super.inputTemplate || ''}
           `;
       }
@@ -50,6 +50,14 @@
             computed: '_ifClamped(clamp, "day")'
           }
         }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        const d = new Date();
+        this.$.year.startAt = d.getFullYear();
+        this.$.month.startAt = d.getMonth() + 1;
+        this.$.day.startAt = d.getDate();
       }
     }
   }
