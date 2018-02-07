@@ -59,7 +59,7 @@ The properties `date`, `time`, `datetime` are always in **iso8061** but the visu
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="import" href="overlay-datetime-input.html">
+    <link rel="import" href="datetime-input.html">
     <style>
       html {
         font-family: 'Roboto', sans-serif;
