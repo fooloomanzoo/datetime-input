@@ -90,7 +90,7 @@
       }
 
       _computeInvalid(required, value) {
-        return Boolean(this.required && isNaN(this.value));
+        return this.required && isNaN(this.value);
       }
 
       _addKeyListener() {
