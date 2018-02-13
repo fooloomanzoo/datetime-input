@@ -17,8 +17,8 @@
    * `--input-color` | text-color of the inputs | ``
    * `--input-background` | text-color of the inputs | ``
    * `--input-focus-color` | color of the focussed or hovered inputs | ``
-   * `--input-focus-background` | background-color of the focussed or hovered inputs | `--primary-color, rgba(0,0,0,0.2)
-   * `--input-style` | Mixin applied to the inputs | {border-radius: 2px;padding: 0.2em 0.1em;cursor: pointer; transition: background-color 150ms cubic-bezier(0.6, 1, 0.2, 1);
+   * `--input-focus-background` | background of the focussed or hovered inputs | `--primary-color, rgba(0,0,0,0.2)
+   * `--input-style` | Mixin applied to the inputs | {border-radius: 2px;padding: 0.2em 0.1em;cursor: pointer; transition: background 150ms cubic-bezier(0.6, 1, 0.2, 1);
    * `--input-focus` | Mixin applied to the focussed or hovered inputs | {}
    * `--input-invalid-color` | border-color of invalid inputs | red
    * `--input-invalid-color` |  Mixin applied to invalid inputs | {}
@@ -33,7 +33,7 @@
    *  @demo demo/index.html
    * @demo demo/form.html in a form
    **/
-    class DatetimeInput extends TimeInputPattern(DateInputPattern(DatetimeInputMixin(Polymer.Element))) { // eslint-disable-line no-undef
+    class DatetimeInput extends DateInputPattern(TimeInputPattern(DatetimeInputMixin(Polymer.Element))) { // eslint-disable-line no-undef
 
       static get properties() {
         return {
@@ -53,20 +53,6 @@
         return 'datetime-input';
       }
 
-      // _dateTimeChanged(date, time) {
-      //   if (this.__updatingTimezoneOffset) {
-      //     return;
-      //   }
-      //   if (date === undefined || time === undefined || this.timezone === undefined) {
-      //     if (this.value !== undefined) {
-      //       this._setDate(new Date(this.value));
-      //     } else if (this.default !== undefined) {
-      //       this._setDate(new Date(this.default));
-      //     }
-      //     return;
-      //   }
-      //   this.datetime = date + 'T' + time + (this.timezone || 'Z');
-      // }
     }
     window.customElements.define(DatetimeInput.is, DatetimeInput);
   </script>
