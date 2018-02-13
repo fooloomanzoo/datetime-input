@@ -17,14 +17,13 @@
 
       static get inputTemplate() {
         return `
-          ${super.inputTemplate || ''}
           <div hidden$="[[_hideHours]]" class="hours" style="order:7;">
-            <integer-input hidden$="[[hour12]]" index="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></integer-input>
+            <integer-input id="hour" hidden$="[[hour12]]" index="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></integer-input>
             <integer-input hidden$="[[!hour12]]" index="7" min="1" max="12" pad-length="2" value="{{hours12}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideMinutes]]" style="order:8;">
             <span>[[_localTimeSeparator]]</span>
-            <integer-input index="9" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minutes}}" placeholder="00"></integer-input>
+            <integer-input id="minute" index="9" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minutes}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideSeconds]]" style="order:9;">
             <span>[[_localTimeSeparator]]</span>
@@ -43,6 +42,7 @@
             <span>[[_localTimeSeparator]]</span>
             <integer-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></integer-input>
           </div>
+          ${super.inputTemplate || ''}
         `;
       }
 
@@ -69,11 +69,10 @@
         return {
           /**
            * Clamp timetime to a property
-           * possible values:'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds'
+           * possible values: 'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds' or ''
            */
           clamp: {
-            type: String,
-            value: 'milliseconds'
+            type: String
           },
 
           withTimezone: {
@@ -101,6 +100,19 @@
             computed: '_ifClamped(clamp, "milliseconds")'
           }
         }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        let d;
+        if (this.default) {
+          d = new Date(this.default);
+        }
+        if (isNaN(d)) {
+          d = new Date();
+        }
+        this.$.hour.startAt = d.getHours();
+        this.$.minute.startAt = d.getMinutes();
       }
 
       _switchAm() {

@@ -44,11 +44,16 @@
             display: -webkit-inline-flex;
             display: -ms-inline-flexbox;
             display: inline-flex;
+            position: relative;
             align-items: baseline;
             outline: none;
             padding: 0.1em 0.2em;
             border-radius: 3px;
-            --input-focus-background: var(--primary-color, rgba(0,0,0,0.2));
+            --input-focus: {v
+              outline: none;
+              color: var(--input-focus-color, inherit);
+              background: var(--input-focus-background, rgba(0,0,0,0.1));
+            };
             --input-style: {
               border-radius: 2px;
               padding: 0.15em;
@@ -64,6 +69,27 @@
               border-color: var(--input-invalid-color, red);
             };
           }
+          .icon.reset {
+            padding: 2px;
+            height: 12px;
+            width: 12px;
+            position: absolute;
+            top: 50%; right: 0;
+            border-radius: 50%;
+            transform: translate(100%, -50%);
+            opacity: 0.5;
+            display: none;
+          }
+          .icon.reset:focus,
+          .icon.reset:hover {
+            opacity: 1;
+            @apply --input-focus;
+          }
+          :host(:focus) .icon.reset,
+          :host(:focus-within) .icon.reset,
+          :host(:hover) .icon.reset {
+            display: unset;
+          }
           [hidden] {
             display: none !important;
           }
@@ -75,7 +101,26 @@
        * @type {string}
        */
       static get inputTemplate() {
-        return '';
+        return '<svg class="icon button reset" hidden$="[[_valueIsUndefined]]" viewBox="0 0 24 24" on-click="_resetDate"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg>';
+      }
+
+      static get properties() {
+        return {
+
+          /**
+           * The value of the selected local date
+           */
+          value: {
+            type: Number,
+            notify: true
+          },
+
+          _valueIsUndefined: {
+            type: Boolean,
+            computed: '_computeValueIsUndefined(value)'
+          }
+
+        }
       }
 
       connectedCallback() {
@@ -90,7 +135,7 @@
       }
 
       _computeInvalid(required, value) {
-        return this.required && isNaN(this.value);
+        return required && isNaN(value);
       }
 
       _addKeyListener() {
@@ -156,6 +201,7 @@
           }
           return false;
         });
+
         if (focusable && focusable.length) {
           focusable.sort( (a, b) => {
             return +a.getAttribute('index') > +b.getAttribute('index')
@@ -183,6 +229,11 @@
           }
         }
       }
+
+      _computeValueIsUndefined(value) {
+        return value === undefined;
+      }
+
     }
   }
 </script>

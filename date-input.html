@@ -54,11 +54,18 @@
 
       connectedCallback() {
         super.connectedCallback();
-        const d = new Date();
+        let d;
+        if (this.default) {
+          d = new Date(this.default);
+        }
+        if (isNaN(d)) {
+          d = new Date();
+        }
         this.$.year.startAt = d.getFullYear();
         this.$.month.startAt = d.getMonth() + 1;
         this.$.day.startAt = d.getDate();
       }
+
     }
   }
 </script>
@@ -96,6 +103,21 @@
 
       static get is() {
         return 'date-input';
+      }
+      
+      _dateTimeChanged(date) {
+        if (this.__updatingTimezoneOffset) {
+          return;
+        }
+        if (date === undefined || this.timezone === undefined) {
+          if (this.value !== undefined) {
+            this._setDate(new Date(this.value));
+          } else if (this.default !== undefined) {
+            this._setDate(new Date(this.default));
+          }
+          return;
+        }
+        this.datetime = date + 'T00:00' + (this.timezone || 'Z');
       }
     }
     window.customElements.define(DateInput.is, DateInput);

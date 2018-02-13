@@ -35,9 +35,38 @@
    **/
     class DatetimeInput extends TimeInputPattern(DateInputPattern(DatetimeInputMixin(Polymer.Element))) { // eslint-disable-line no-undef
 
+      static get properties() {
+        return {
+          /**
+           * Clamp datetime to a property
+           * possible values: 'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds' or ''
+           */
+          clamp: {
+            type: String,
+            value: 'milliseconds'
+          }
+
+        }
+      }
+
       static get is() {
         return 'datetime-input';
       }
+
+      // _dateTimeChanged(date, time) {
+      //   if (this.__updatingTimezoneOffset) {
+      //     return;
+      //   }
+      //   if (date === undefined || time === undefined || this.timezone === undefined) {
+      //     if (this.value !== undefined) {
+      //       this._setDate(new Date(this.value));
+      //     } else if (this.default !== undefined) {
+      //       this._setDate(new Date(this.default));
+      //     }
+      //     return;
+      //   }
+      //   this.datetime = date + 'T' + time + (this.timezone || 'Z');
+      // }
     }
     window.customElements.define(DatetimeInput.is, DatetimeInput);
   </script>
