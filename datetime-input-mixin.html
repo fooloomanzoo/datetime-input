@@ -101,23 +101,15 @@
        * @type {string}
        */
       static get inputTemplate() {
-        return '<svg class="icon button reset" hidden$="[[_valueIsUndefined]]" viewBox="0 0 24 24" on-click="_resetDate"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg>';
+        return '<svg class="icon button reset" hidden$="[[_hideResetButton]]" viewBox="0 0 24 24" on-click="_resetDate"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg>';
       }
 
       static get properties() {
         return {
 
-          /**
-           * The value of the selected local date
-           */
-          value: {
-            type: Number,
-            notify: true
-          },
-
-          _valueIsUndefined: {
+          _hideResetButton: {
             type: Boolean,
-            computed: '_computeValueIsUndefined(value)'
+            computed: '_computeHideResetButton(value, default)'
           }
 
         }
@@ -230,8 +222,8 @@
         }
       }
 
-      _computeValueIsUndefined(value) {
-        return value === undefined;
+      _computeHideResetButton(value, def) {
+        return value === undefined || (def !== undefined && !isNaN(this._fromDatetime(def)));
       }
 
     }
