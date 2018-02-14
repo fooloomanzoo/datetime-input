@@ -43,6 +43,9 @@
         return `
           ${super.customStyleToInclude || ''}
           :host {
+            display: -webkit-inline-flex;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
             outline: none;
           }
           #input {

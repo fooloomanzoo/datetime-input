@@ -18,6 +18,9 @@
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
+        time-input,
+        date-input,
+        datetime-input,
         input {
           margin-bottom: 4px;
           margin-left: 8px;
@@ -29,8 +32,8 @@
           margin-left: 8px;
           --input-style: {
             color: #111;
-            padding: 4px;
-            border-radius: 2px;
+            padding: 2px;
+            border-radius: 4px;
             border-color: rgba(0,0,0,0.2);
             border-width: thin;
             border-style: dotted;
@@ -38,7 +41,6 @@
           };
           --input-focus: {
             border-color: rgba(0,0,0,0.5);
-            border-style: solid;
             background: rgba(0, 0, 0, 0.15);
           };
         }
@@ -77,13 +79,12 @@
                 <form action="/foo" method="get">
                   name: <input name="name" required value="Batman"/><br>
                   job: <input name="job" required value="Hero"/><br>
-                  <br>
+                  <p>
                   first day: <date-input name="start" required max="{{end}}" value="{{start}}"></date-input><br>
                   expected retirement: <date-input name="end" min="{{start}}" value="{{end}}"></date-input><br>
-                  <br>
                   last job: <datetime-input name="lastjob" min="[[start]]" max="[[end]]" value="{{lastjob}}"></datetime-input><br>
                   return: <time-input name="return" min="[[lastjob]]" max="[[end]]" value="{{return}}"></time-input><br>
-                  <br>
+                </p>
                   <button onclick="form1.submit()">Submit</button>
                   <button onclick="form1.validate()">Validate</button>
                 </form>
