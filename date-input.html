@@ -20,13 +20,13 @@
 
       static get inputTemplate() {
         return `
-            <integer-input id="year" style$="order:[[_orderDate.year]];" index$="[[_orderDate.year]]" invalid$="[[invalid]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
-            <span style$="order:[[_orderDate.separatorYearMonth]];" hidden$="[[_hideMonth]]">[[_localDateSeparator]]</span>
-            <integer-input id="month" style$="order:[[_orderDate.month]];" index$="[[_orderDate.month]]" hidden$="[[_hideMonth]]" invalid$="[[invalid]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
-            <span style$="order:[[_orderDate.separatorMonthDay]];" hidden$="[[_hideDay]]">[[_localDateSeparator]]</span>
-            <integer-input id="day" style$="order:[[_orderDate.day]];" index$="[[_orderDate.day]]" hidden$="[[_hideDay]]" invalid$="[[invalid]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
-            ${super.inputTemplate || ''}
-          `;
+          <integer-input id="year" style$="order:[[_orderDate.year]];" index$="[[_orderDate.year]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
+          <span style$="order:[[_orderDate.separatorYearMonth]];" hidden$="[[_hideMonth]]">[[_localDateSeparator]]</span>
+          <integer-input id="month" style$="order:[[_orderDate.month]];" index$="[[_orderDate.month]]" hidden$="[[_hideMonth]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
+          <span style$="order:[[_orderDate.separatorMonthDay]];" hidden$="[[_hideDay]]">[[_localDateSeparator]]</span>
+          <integer-input id="day" style$="order:[[_orderDate.day]];" index$="[[_orderDate.day]]" hidden$="[[_hideDay]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
+          ${super.inputTemplate || ''}
+        `;
       }
 
       static get properties() {
@@ -105,20 +105,21 @@
         return 'date-input';
       }
 
-      _dateTimeChanged(date) {
+      _dateTimeChanged(date, time) {
         if (this.__updatingTimezoneOffset) {
           return;
         }
         if (date === undefined) {
-          if (this.value !== undefined) {
-            this._setDate(new Date(this.value));
-          } else if (this.default !== undefined) {
+          if (this.default !== undefined) {
             this._setDate(new Date(this.default));
+          } else {
+            this._resetDate();
           }
           return;
         }
-        this.datetime = date + 'T00:00' + (this.timezone || 'Z');
+        this.datetime = date + 'T' + (time || '00:00') + (this.timezone || 'Z');
       }
+
     }
     window.customElements.define(DateInput.is, DateInput);
   </script>
