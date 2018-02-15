@@ -33,10 +33,12 @@
             <span>[[_localDecimalSeparator]]</span>
             <integer-input index="13" pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{milliseconds}}" placeholder="000"></integer-input>
           </div>
-          <div class="single-switch" hidden$="[[!hour12]]" style="order:11;" on-mouseup="_switchAm">
-            <span hidden$="[[!isAm]]">[[_am]]</span>
-            <span hidden$="[[isAm]]">[[_pm]]</span>
-          </div>
+          <template is="dom-if" if="[[hour12]]">
+            <div class="hour12-switch" hidden$="[[!_valueIsSet]]" style="order:11;" on-mouseup="_switchAm">
+              <span hidden$="[[!isAm]]">[[_am]]</span>
+              <span hidden$="[[isAm]]">[[_pm]]</span>
+            </div>
+          </template>
           <div hidden$="[[!withTimezone]]" style="order:12;">
             <integer-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00" min="-23" max="23"></integer-input>
             <span>[[_localTimeSeparator]]</span>
@@ -56,11 +58,18 @@
           integer-input ~ .hours {
             margin-left: 0.167em;
           }
-          .single-switch {
+          .hour12-switch {
             align-self: stretch;
             cursor: pointer;
             font-size: 0.8em;
             margin: 0 0.2em;
+            @apply --input-style;
+            border-color: transparent;
+          }
+          .hour12-switch:hover,
+          .hour12-switch:focus {
+            @apply --input-focus;
+            border-color: transparent;
           }
         `
       }

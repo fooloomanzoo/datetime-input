@@ -30,6 +30,7 @@
         datetime-input {
           margin-bottom: 4px;
           margin-left: 8px;
+          --input-invalid-color: #ff8400;
           --input-style: {
             color: #111;
             padding: 2px;
@@ -72,6 +73,7 @@
             <template>
               <label>
                 <input type="checkbox" checked onchange="form1.allowRedirect = !this.checked;">Prevent automatic form redirection
+                <input type="checkbox" checked="{{hour12::change}}">hour12 format
               </label>
               <br><br>
 
@@ -80,10 +82,10 @@
                   name: <input name="name" required value="Batman"/><br>
                   job: <input name="job" required value="Hero"/><br>
                   <p>
-                  first day: <date-input name="start" required max="{{end}}" value="{{start}}"></date-input><br>
+                  first day (required): <date-input name="start" required max="{{end}}" value="{{start}}"></date-input><br>
                   expected retirement: <date-input name="end" min="{{start}}" value="{{end}}"></date-input><br>
-                  last job: <datetime-input name="lastjob" min="[[start]]" max="[[end]]" value="{{lastjob}}"></datetime-input><br>
-                  return: <time-input name="return" min="[[lastjob]]" max="[[end]]" value="{{return}}"></time-input><br>
+                  last job: <datetime-input name="lastjob" min="[[start]]" max="[[end]]" datetime="{{lastjob}}" hour12="[[hour12]]" with-timezone></datetime-input><br>
+                  return: <datetime-input name="return" min="[[lastjob]]" default="{{lastjob}}" max="[[end]]" hour12="[[hour12]]" with-timezone></datetime-input><br>
                 </p>
                   <button onclick="form1.submit()">Submit</button>
                   <button onclick="form1.validate()">Validate</button>
