@@ -907,11 +907,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 133,
+              "line": 138,
               "column": 10
             },
             "end": {
-              "line": 136,
+              "line": 141,
               "column": 11
             }
           },
@@ -930,11 +930,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 147,
+              "line": 153,
               "column": 6
             },
             "end": {
-              "line": 151,
+              "line": 156,
               "column": 7
             }
           },
@@ -1652,26 +1652,7 @@
           "inheritedFrom": "FormElementMixin"
         },
         {
-          "name": "disconnectedCallback",
-          "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 153,
-              "column": 6
-            },
-            "end": {
-              "line": 156,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_addKeyListener",
+          "name": "_computeValueIsSet",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -1681,96 +1662,7 @@
               "column": 6
             },
             "end": {
-              "line": 167,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_removeKeyListener",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 169,
-              "column": 6
-            },
-            "end": {
-              "line": 174,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_checkKeycode",
-          "description": "key press event handler",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 180,
-              "column": 6
-            },
-            "end": {
-              "line": 201,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "e",
-              "type": "[type]",
-              "description": "Event"
-            }
-          ],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_focusNumberInput",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 203,
-              "column": 6
-            },
-            "end": {
-              "line": 252,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "e"
-            },
-            {
-              "name": "step"
-            }
-          ],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_computeValueIsSet",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 254,
-              "column": 6
-            },
-            "end": {
-              "line": 256,
+              "line": 164,
               "column": 7
             }
           },
@@ -3116,11 +3008,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 133,
+              "line": 138,
               "column": 10
             },
             "end": {
-              "line": 136,
+              "line": 141,
               "column": 11
             }
           },
@@ -3848,25 +3740,6 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 147,
-              "column": 6
-            },
-            "end": {
-              "line": 151,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "disconnectedCallback",
-          "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
               "line": 153,
               "column": 6
             },
@@ -3880,7 +3753,7 @@
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
-          "name": "_addKeyListener",
+          "name": "_computeValueIsSet",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -3890,96 +3763,7 @@
               "column": 6
             },
             "end": {
-              "line": 167,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_removeKeyListener",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 169,
-              "column": 6
-            },
-            "end": {
-              "line": 174,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_checkKeycode",
-          "description": "key press event handler",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 180,
-              "column": 6
-            },
-            "end": {
-              "line": 201,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "e",
-              "type": "[type]",
-              "description": "Event"
-            }
-          ],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_focusNumberInput",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 203,
-              "column": 6
-            },
-            "end": {
-              "line": 252,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "e"
-            },
-            {
-              "name": "step"
-            }
-          ],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_computeValueIsSet",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 254,
-              "column": 6
-            },
-            "end": {
-              "line": 256,
+              "line": 164,
               "column": 7
             }
           },
@@ -5370,11 +5154,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 133,
+              "line": 138,
               "column": 10
             },
             "end": {
-              "line": 136,
+              "line": 141,
               "column": 11
             }
           },
@@ -5393,11 +5177,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 147,
+              "line": 153,
               "column": 6
             },
             "end": {
-              "line": 151,
+              "line": 156,
               "column": 7
             }
           },
@@ -6117,26 +5901,7 @@
           "inheritedFrom": "FormElementMixin"
         },
         {
-          "name": "disconnectedCallback",
-          "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 153,
-              "column": 6
-            },
-            "end": {
-              "line": 156,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_addKeyListener",
+          "name": "_computeValueIsSet",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -6146,96 +5911,7 @@
               "column": 6
             },
             "end": {
-              "line": 167,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_removeKeyListener",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 169,
-              "column": 6
-            },
-            "end": {
-              "line": 174,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_checkKeycode",
-          "description": "key press event handler",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 180,
-              "column": 6
-            },
-            "end": {
-              "line": 201,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "e",
-              "type": "[type]",
-              "description": "Event"
-            }
-          ],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_focusNumberInput",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 203,
-              "column": 6
-            },
-            "end": {
-              "line": 252,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "e"
-            },
-            {
-              "name": "step"
-            }
-          ],
-          "inheritedFrom": "DatetimeInputMixin"
-        },
-        {
-          "name": "_computeValueIsSet",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "datetime-input-mixin.html",
-            "start": {
-              "line": 254,
-              "column": 6
-            },
-            "end": {
-              "line": 256,
+              "line": 164,
               "column": 7
             }
           },
@@ -7581,11 +7257,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 133,
+              "line": 138,
               "column": 10
             },
             "end": {
-              "line": 136,
+              "line": 141,
               "column": 11
             }
           },
@@ -8311,23 +7987,6 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 147,
-              "column": 6
-            },
-            "end": {
-              "line": 151,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": []
-        },
-        {
-          "name": "disconnectedCallback",
-          "description": "",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
               "line": 153,
               "column": 6
             },
@@ -8340,7 +7999,7 @@
           "params": []
         },
         {
-          "name": "_addKeyListener",
+          "name": "_computeValueIsSet",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
@@ -8349,88 +8008,7 @@
               "column": 6
             },
             "end": {
-              "line": 167,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": []
-        },
-        {
-          "name": "_removeKeyListener",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 169,
-              "column": 6
-            },
-            "end": {
-              "line": 174,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": []
-        },
-        {
-          "name": "_checkKeycode",
-          "description": "key press event handler",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 180,
-              "column": 6
-            },
-            "end": {
-              "line": 201,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "e",
-              "type": "[type]",
-              "description": "Event"
-            }
-          ]
-        },
-        {
-          "name": "_focusNumberInput",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 203,
-              "column": 6
-            },
-            "end": {
-              "line": 252,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "e"
-            },
-            {
-              "name": "step"
-            }
-          ]
-        },
-        {
-          "name": "_computeValueIsSet",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 254,
-              "column": 6
-            },
-            "end": {
-              "line": 256,
+              "line": 164,
               "column": 7
             }
           },
@@ -8447,11 +8025,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 16,
+          "line": 17,
           "column": 2
         },
         "end": {
-          "line": 259,
+          "line": 167,
           "column": 3
         }
       },
@@ -8899,7 +8477,8 @@
       "slots": [],
       "mixins": [
         "DatetimeMixin",
-        "FormElementMixin"
+        "FormElementMixin",
+        "FocusableShadowDomMixin"
       ]
     },
     {

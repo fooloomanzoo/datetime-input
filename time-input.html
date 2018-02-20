@@ -18,20 +18,20 @@
       static get inputTemplate() {
         return `
           <div hidden$="[[_hideHours]]" class="hours" style="order:7;">
-            <integer-input id="hour" hidden$="[[hour12]]" index="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></integer-input>
-            <integer-input hidden$="[[!hour12]]" index="7" min="1" max="12" pad-length="2" value="{{hours12}}" placeholder="00"></integer-input>
+            <integer-input id="hour" hidden$="[[hour12]]" tabindex="7" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></integer-input>
+            <integer-input hidden$="[[!hour12]]" tabindex="7" min="1" max="12" pad-length="2" value="{{hours12}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideMinutes]]" style="order:8;">
             <span>[[_localTimeSeparator]]</span>
-            <integer-input id="minute" index="9" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minutes}}" placeholder="00"></integer-input>
+            <integer-input id="minute" tabindex="9" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minutes}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideSeconds]]" style="order:9;">
             <span>[[_localTimeSeparator]]</span>
-            <integer-input index="11" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{seconds}}" placeholder="00"></integer-input>
+            <integer-input tabindex="11" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{seconds}}" placeholder="00"></integer-input>
           </div>
           <div hidden$="[[_hideMilliseconds]]" style="order:10;">
             <span>[[_localDecimalSeparator]]</span>
-            <integer-input index="13" pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{milliseconds}}" placeholder="000"></integer-input>
+            <integer-input tabindex="13" pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{milliseconds}}" placeholder="000"></integer-input>
           </div>
           <template is="dom-if" if="[[hour12]]">
             <div class="hour12-switch" hidden$="[[!_valueIsSet]]" style="order:11;" on-mouseup="_switchAm">
@@ -40,9 +40,9 @@
             </div>
           </template>
           <div hidden$="[[!withTimezone]]" style="order:12;">
-            <integer-input index="13" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00" min="-23" max="23"></integer-input>
+            <integer-input tabindex="15" pad-length="2" always-sign step="1" value="{{_timeZoneHours}}" placeholder="+00" min="-23" max="23"></integer-input>
             <span>[[_localTimeSeparator]]</span>
-            <integer-input index="15" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></integer-input>
+            <integer-input tabindex="17" pad-length="2" min="0" max="45" step="15" value="{{_timeZoneMinutes}}" placeholder="00"></integer-input>
           </div>
           ${super.inputTemplate || ''}
         `;
