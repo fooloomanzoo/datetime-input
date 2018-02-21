@@ -100,21 +100,26 @@
               @apply --input-placeholder;
             };
           }
-          #input .icon.reset {
-            padding: 2px;
-            height: 12px;
-            width: 12px;
+          #input .reset {
+            display: inline-flex;
+            cursor: pointer;
+            box-sizing: border-box;
             align-self: center;
-            border-radius: 50%;
+            border-width: 0;
             order: 13;
             opacity: 0.5;
-            fill: currentColor;
+            color: var(--input-color, inherit);
+            background: transparent;
+            @apply --input-icon;
+            border-radius: 50%;
+            padding: 2px;
           }
-          #input .icon.reset:focus,
-          #input .icon.reset:hover {
+          #input .reset:focus,
+          #input .reset:hover {
             opacity: 1;
             @apply --input-focus;
             border-width: 0;
+            outline: none;
           }
           [hidden] {
             display: none !important;
@@ -130,7 +135,7 @@
        * @type {string}
        */
       static get inputTemplate() {
-        return '<svg class="icon button reset" invisible$="[[!_valueIsSet]]" viewBox="0 0 24 24" on-click="_resetDate"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg>';
+        return '<button class="icon reset" invisible$="[[!_valueIsSet]]" tabindex="0" on-click="_resetDate"><svg viewBox="0 0 24 24"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg></button>';
       }
 
       static get properties() {
@@ -150,17 +155,19 @@
         ]
       }
 
-      connectedCallback() {
-        super.connectedCallback();
-        this._ensureAttribute('tabindex', 0);
-      }
-
       _computeInvalid(required, value) {
         this.invalid = required && isNaN(value);
       }
 
       _computeValueIsSet(value) {
         this._valueIsSet = value !== undefined;
+      }
+
+      _computeTabindex(hidden, index) {
+        if (!hidden) {
+          return index || 0;
+        }
+        return -1;
       }
 
     }
