@@ -7,7 +7,6 @@
    *
    * @appliesMixin DatetimeMixin
    * @appliesMixin FormElementMixin
-   * @appliesMixin FocusableShadowDomMixin
    *
    * @mixinFunction
    * @polymer
@@ -15,7 +14,7 @@
    * @param {Object} superClass class to extend
    * @return {Object} extended class
    */
-  const DatetimeInputMixin = (superClass) => { // eslint-disable-line no-unused-vars
+  const DatetimeInputMixin = superClass => { // eslint-disable-line no-unused-vars
 
     return class extends DatetimeMixin(FormElementMixin(superClass)) { // eslint-disable-line no-undef
 
@@ -90,7 +89,7 @@
               border-radius: 2px;
               padding: 0.15em;
               cursor: pointer;
-              transition: background 200ms cubic-bezier(0.6, 1, 0.2, 1);
+              transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1);
               -webkit-background-clip: padding-box;
               background-clip: padding-box;
               @apply --input-style;
@@ -114,7 +113,7 @@
             opacity: 0.5;
             color: var(--input-color, inherit);
             background: transparent;
-            transition: background 200ms cubic-bezier(0.6, 1, 0.2, 1);
+            transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1);
             height: 12px;
             width: 12px;
             border-radius: 50%;
@@ -168,10 +167,6 @@
 
       _computeInvalid(required, value) {
         this.invalid = required && isNaN(value);
-      }
-
-      _computeValueIsSet(value) {
-        this._valueIsSet = value !== undefined;
       }
 
       _computeTabindex(hidden, index) {

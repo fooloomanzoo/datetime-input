@@ -34,7 +34,7 @@
             <integer-input tabindex="0" pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{milliseconds}}" placeholder="000"></integer-input>
           </div>
           <template is="dom-if" if="[[hour12]]">
-            <button class="hour12-switch" hidden$="[[!_valueIsSet]]" tabindex="0" style="order:11;" on-click="_switchAm">
+            <button class="hour12" hidden$="[[!_valueIsSet]]" tabindex="0" style="order:11;" on-click="_switchAm">
               <span hidden$="[[!isAm]]">[[_am]]</span>
               <span hidden$="[[isAm]]">[[_pm]]</span>
             </button>
@@ -58,7 +58,7 @@
           integer-input ~ .hours {
             margin-left: 0.167em;
           }
-          .hour12-switch {
+          .hour12 {
             -moz-appearance: none;
             -webkit-appearance: none;
             appearance: none;
@@ -71,8 +71,8 @@
             @apply --input-style;
             border-color: transparent;
           }
-          .hour12-switch:hover,
-          .hour12-switch:focus {
+          .hour12:hover,
+          .hour12:focus {
             @apply --input-focus;
             border-color: transparent;
           }
