@@ -1675,6 +1675,29 @@
           "inheritedFrom": "FormElementMixin"
         },
         {
+          "name": "_attachDom",
+          "description": "attach dom with `delegatesFocus: true` so that the element is also focussed while its's children are too, and to autofocus to first tabable",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components\\input-picker-pattern\\form-element-mixin.html",
+            "start": {
+              "line": 91,
+              "column": 6
+            },
+            "end": {
+              "line": 100,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "dom"
+            }
+          ],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
           "name": "_computeTabindex",
           "description": "",
           "privacy": "protected",
@@ -3799,6 +3822,29 @@
           },
           "metadata": {},
           "params": [],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "_attachDom",
+          "description": "attach dom with `delegatesFocus: true` so that the element is also focussed while its's children are too, and to autofocus to first tabable",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components\\input-picker-pattern\\form-element-mixin.html",
+            "start": {
+              "line": 91,
+              "column": 6
+            },
+            "end": {
+              "line": 100,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "dom"
+            }
+          ],
           "inheritedFrom": "FormElementMixin"
         },
         {
@@ -5976,6 +6022,29 @@
           "inheritedFrom": "FormElementMixin"
         },
         {
+          "name": "_attachDom",
+          "description": "attach dom with `delegatesFocus: true` so that the element is also focussed while its's children are too, and to autofocus to first tabable",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components\\input-picker-pattern\\form-element-mixin.html",
+            "start": {
+              "line": 91,
+              "column": 6
+            },
+            "end": {
+              "line": 100,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "dom"
+            }
+          ],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
           "name": "_computeTabindex",
           "description": "",
           "privacy": "protected",
@@ -8099,6 +8168,29 @@
           },
           "metadata": {},
           "params": [],
+          "inheritedFrom": "FormElementMixin"
+        },
+        {
+          "name": "_attachDom",
+          "description": "attach dom with `delegatesFocus: true` so that the element is also focussed while its's children are too, and to autofocus to first tabable",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components\\input-picker-pattern\\form-element-mixin.html",
+            "start": {
+              "line": 91,
+              "column": 6
+            },
+            "end": {
+              "line": 100,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "dom"
+            }
+          ],
           "inheritedFrom": "FormElementMixin"
         },
         {
