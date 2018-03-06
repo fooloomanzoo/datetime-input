@@ -17,19 +17,20 @@
 
       static get inputTemplate() {
         return `
-          <div hidden$="[[_hideHours]]" class="hours" style="order:7;">
+          <div hidden$="[[_partsHidden.hours]]" class="hours" style="order:7;">
             <integer-input id="hour" hidden$="[[hour12]]" min="0" max="23" pad-length="2" value="{{hours}}" placeholder="00"></integer-input>
             <integer-input hidden$="[[!hour12]]" min="1" max="12" pad-length="2" value="{{hours12}}" placeholder="00"></integer-input>
           </div>
-          <div hidden$="[[_hideMinutes]]" style="order:8;">
-            <span>[[_localTimeSeparator]]</span>
+          <div hidden$="[[_partsHidden.minutes]]" style="order:8;">
+            <span hidden$="[[_partsHidden.hours]]">[[_localTimeSeparator]]</span>
             <integer-input id="minute" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minutes}}" placeholder="00"></integer-input>
           </div>
-          <div hidden$="[[_hideSeconds]]" style="order:9;">
-            <span>[[_localTimeSeparator]]</span>
+          <div hidden$="[[_partsHidden.seconds]]" style="order:9;">
+            <span hidden$="[[_partsHidden.minutes]]">[[_localTimeSeparator]]</span>
             <integer-input pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{seconds}}" placeholder="00"></integer-input>
           </div>
-          <div hidden$="[[_hideMilliseconds]]" style="order:10;">
+          <div hidden$="[[_partsHidden.milliseconds]]" style="order:10;">
+            <span hidden$="[[_partsHidden.seconds]]">0</span>
             <span>[[_localDecimalSeparator]]</span>
             <integer-input pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{milliseconds}}" placeholder="000"></integer-input>
           </div>
@@ -86,32 +87,13 @@
            * possible values: 'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds' or ''
            */
           clamp: {
-            type: String
+            type: String,
+            observer: '_clampChanged'
           },
 
           withTimezone: {
             type: Boolean,
             value: false
-          },
-
-          _hideHours: {
-            type: Boolean,
-            computed: '_ifClamped(clamp, "hours")'
-          },
-
-          _hideMinutes: {
-            type: Boolean,
-            computed: '_ifClamped(clamp, "minutes")'
-          },
-
-          _hideSeconds: {
-            type: Boolean,
-            computed: '_ifClamped(clamp, "seconds")'
-          },
-
-          _hideMilliseconds: {
-            type: Boolean,
-            computed: '_ifClamped(clamp, "milliseconds")'
           }
         }
       }
