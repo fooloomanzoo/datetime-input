@@ -39,19 +39,19 @@
         return {
           /**
            * Clamp datetime to a property
-           * possible values: 'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds' or ''
+           * possible values: 'month', 'day', 'hour', 'minute', 'second', 'millisecond' or ''
            */
           clamp: {
             type: String,
-            value: 'milliseconds'
+            value: 'millisecond'
           }
-
         }
       }
 
       static get is() {
         return 'datetime-input';
       }
+
 
     }
     window.customElements.define(DatetimeInput.is, DatetimeInput);

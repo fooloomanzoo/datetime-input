@@ -20,11 +20,13 @@
 
       static get inputTemplate() {
         return `
-          <integer-input id="year" style$="order:[[_orderDate.year]];" tabindex$="[[_orderDate.year]]" hidden$="[[_partsHidden.year]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
-          <span style$="order:[[_orderDate.separatorYearMonth]];" hidden$="[[_or(_partsHidden.month, _partsHidden.year)]]">[[_localDateSeparator]]</span>
-          <integer-input id="month" style$="order:[[_orderDate.month]];" tabindex$="[[_orderDate.month]]" hidden$="[[_partsHidden.month]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
-          <span style$="order:[[_orderDate.separatorMonthDay]];" hidden$="[[_or(_partsHidden.month, _partsHidden.day)]]">[[_localDateSeparator]]</span>
-          <integer-input id="day" style$="order:[[_orderDate.day]];" tabindex$="[[_orderDate.day]]" hidden$="[[_partsHidden.day]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
+          <div style="order:[[_computePartOrder(dateOrder.dateFirst)]];">
+            <integer-input id="year" style="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[partsHidden.year]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
+            <span style="order:0;" hidden$="[[_edgeIsHidden(partsHidden, dateOrder)]]">[[dateSeparator]]</span>
+            <integer-input id="month" style="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[partsHidden.month]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
+            <span style="order:1;" hidden$="[[_edgeIsHidden(partsHidden, dateOrder, 'true')]]">[[dateSeparator]]</span>
+            <integer-input id="day" style="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[partsHidden.day]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
+          </div>
           ${super.inputTemplate || ''}
         `;
       }
@@ -33,11 +35,11 @@
         return {
           /**
            * Clamp datetime to a property
-           * possible values:'month', 'day', 'hours', 'minutes', 'seconds', 'milliseconds'
+           * possible values:'month', 'day', 'hour', 'minute', 'second', 'millisecond'
            */
           clamp: {
             type: String,
-            value: 'hours'
+            value: 'hour'
           }
         }
       }
@@ -56,8 +58,20 @@
         this.$.day.startAt = d.getDate();
       }
 
-      _or(a, b) {
-        return a || b;
+      _edgeIsHidden(partsHidden, dateOrder, direction) {
+        const parts = ['year', 'month', 'day'];
+        let part = parts[0];
+        let edge = dateOrder[part];
+        for (let i = 1; i < parts.length; i++) {
+          if (direction ? dateOrder[parts[i]] > edge : dateOrder[parts[i]] < edge) {
+            part = parts[i];
+            edge = dateOrder[i];
+          }
+        }
+        if (partsHidden[part]) {
+          return true;
+        }
+        return false;
       }
 
     }
