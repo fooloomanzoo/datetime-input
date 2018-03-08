@@ -22,9 +22,9 @@
         return `
           <div style="order:[[_computePartOrder(dateOrder.dateFirst)]];">
             <integer-input id="year" style="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[partsHidden.year]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
-            <span style="order:0;" hidden$="[[_edgeIsHidden(partsHidden, dateOrder)]]">[[dateSeparator]]</span>
+            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden, 'true')]]">[[dateSeparator]]</span>
             <integer-input id="month" style="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[partsHidden.month]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
-            <span style="order:1;" hidden$="[[_edgeIsHidden(partsHidden, dateOrder, 'true')]]">[[dateSeparator]]</span>
+            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden)]]">[[dateSeparator]]</span>
             <integer-input id="day" style="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[partsHidden.day]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
           </div>
           ${super.inputTemplate || ''}
@@ -58,20 +58,19 @@
         this.$.day.startAt = d.getDate();
       }
 
-      _edgeIsHidden(partsHidden, dateOrder, direction) {
-        const parts = ['year', 'month', 'day'];
-        let part = parts[0];
-        let edge = dateOrder[part];
-        for (let i = 1; i < parts.length; i++) {
-          if (direction ? dateOrder[parts[i]] > edge : dateOrder[parts[i]] < edge) {
-            part = parts[i];
-            edge = dateOrder[i];
-          }
-        }
-        if (partsHidden[part]) {
+      _edgeIsHidden(order, partsHidden, dir) {
+        let edge, edgePart;
+        let totalHidden = partsHidden.year + partsHidden.month + partsHidden.day;
+        if (totalHidden >= 2) {
           return true;
         }
-        return false;
+        for (let part in order) {
+          if (part in partsHidden && !(dir ? (edge < order[part]) : (edge > order[part]))) {
+            edge = order[part];
+            edgePart = part;
+          }
+        }
+        return partsHidden[edgePart];
       }
 
     }

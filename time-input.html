@@ -17,20 +17,20 @@
 
       static get inputTemplate() {
         return `
-          <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];">
+          <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];" hidden$="[[_ifClamped(clamp, 'hour')]]">
             <div hidden$="[[partsHidden.hour]]" class="hour">
-              <integer-input id="hour" hidden$="[[hour12Format]]" tabindex$="[[dateOrder.hour]]" min="0" max="23" pad-length="2" value="{{hour}}" placeholder="00"></integer-input>
-              <integer-input hidden$="[[!hour12Format]]" tabindex$="[[dateOrder.hour]]" min="1" max="12" pad-length="2" value="{{hour12}}" placeholder="00"></integer-input>
+              <integer-input id="hour" hidden$="[[hour12Format]]" min="0" max="23" pad-length="2" value="{{hour}}" placeholder="00"></integer-input>
+              <integer-input hidden$="[[!hour12Format]]" min="1" max="12" pad-length="2" value="{{hour12}}" placeholder="00"></integer-input>
             </div>
             <span hidden$="[[partsHidden.hour]]">[[timeSeparator]]</span>
-            <integer-input id="minute" hidden$="[[partsHidden.minute]]" tabindex$="[[dateOrder.minute]]" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minute}}" placeholder="00"></integer-input>
-            <span hidden$="[[partsHidden.minutes]]">[[timeSeparator]]</span>
-            <integer-input hidden$="[[partsHidden.second]]" tabindex$="[[dateOrder.second]]" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{second}}" placeholder="00"></integer-input>
+            <integer-input id="minute" hidden$="[[partsHidden.minute]]" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{minute}}" placeholder="00"></integer-input>
+            <span hidden$="[[partsHidden.minute]]">[[timeSeparator]]</span>
+            <integer-input hidden$="[[partsHidden.second]]" pad-length="2" min="0" max="59" disabled="[[disabled]]" value="{{second}}" placeholder="00"></integer-input>
             <template is="dom-if" if="[[partsHidden.second]]">
               <span hidden$="[[partsHidden.millisecond]]">0</span>
             </template>
             <span hidden$="[[partsHidden.millisecond]]">[[decimalSeparator]]</span>
-            <integer-input hidden$="[[partsHidden.millisecond]]" tabindex$="[[dateOrder.millisecond]]" pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{millisecond}}" placeholder="000"></integer-input>
+            <integer-input hidden$="[[partsHidden.millisecond]]" pad-length="3" min="0" max="999" disabled="[[disabled]]" value="{{millisecond}}" placeholder="000"></integer-input>
             <template is="dom-if" if="[[hour12Format]]">
               <button class="hour12" hidden$="[[!_valueIsSet]]" on-click="_switchAm">
                 <span hidden$="[[!isAm]]">[[amString]]</span>
