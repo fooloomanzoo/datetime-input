@@ -59,6 +59,9 @@
       }
 
       _edgeIsHidden(order, partsHidden, dir) {
+        if (order === undefined || partsHidden === undefined) {
+          return true; // hide if not fully initialized
+        }
         let edge, edgePart;
         let totalHidden = partsHidden.year + partsHidden.month + partsHidden.day;
         if (totalHidden >= 2) {
