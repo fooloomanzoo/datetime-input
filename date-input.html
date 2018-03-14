@@ -21,11 +21,11 @@
       static get inputTemplate() {
         return `
           <div style="order:[[_computePartOrder(dateOrder.dateFirst)]];">
-            <integer-input id="year" style="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[partsHidden.year]]" pad-length="4" placeholder="- - - -" disabled="[[disabled]]" value="{{year}}"></integer-input>
-            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden, 'true')]]">[[dateSeparator]]</span>
-            <integer-input id="month" style="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[partsHidden.month]]" pad-length="2" placeholder="- -" min="1" max="12" disabled="[[disabled]]" value="{{month}}"></integer-input>
-            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden)]]">[[dateSeparator]]</span>
-            <integer-input id="day" style="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[partsHidden.day]]" pad-length="2" placeholder="- -" min="1" max="[[_maxDayOfMonth]]" disabled="[[disabled]]" value="{{day}}"></integer-input>
+            <integer-input id="year" style="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[partsHidden.year]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]" value="{{year}}"></integer-input>
+            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden.year, partsHidden.month, partsHidden.day, 'true')]]">[[dateSeparator]]</span>
+            <integer-input id="month" style="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[partsHidden.month]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]" value="{{month}}"></integer-input>
+            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden.year, partsHidden.month, partsHidden.day)]]">[[dateSeparator]]</span>
+            <integer-input id="day" style="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[partsHidden.day]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]" value="{{day}}"></integer-input>
           </div>
           ${super.inputTemplate || ''}
         `;
@@ -58,22 +58,42 @@
         this.$.day.startAt = d.getDate();
       }
 
-      _edgeIsHidden(order, partsHidden, dir) {
-        if (order === undefined || partsHidden === undefined) {
+      _edgeIsHidden(order, yearHidden, monthHidden, dayHidden, leftToRight) {
+        if (order === undefined) {
           return true; // hide if not fully initialized
         }
-        let edge, edgePart;
-        let totalHidden = partsHidden.year + partsHidden.month + partsHidden.day;
-        if (totalHidden >= 2) {
-          return true;
+        if (yearHidden + monthHidden + dayHidden >= 2) {
+          return true; // more than two are hidden
         }
-        for (let part in order) {
-          if (part in partsHidden && !(dir ? (edge < order[part]) : (edge > order[part]))) {
-            edge = order[part];
-            edgePart = part;
+        if (leftToRight) {
+          if (order.year < order.month) {
+            if (order.year < order.day) {
+              return Boolean(yearHidden);
+            } else {
+              return Boolean(dayHidden);
+            }
+          } else {
+            if (order.month < order.day) {
+              return Boolean(monthHidden);
+            } else {
+              return Boolean(dayHidden);
+            }
+          }
+        } else {
+          if (order.year > order.month) {
+            if (order.year > order.day) {
+              return Boolean(yearHidden);
+            } else {
+              return Boolean(dayHidden);
+            }
+          } else {
+            if (order.month > order.day) {
+              return Boolean(monthHidden);
+            } else {
+              return Boolean(dayHidden);
+            }
           }
         }
-        return partsHidden[edgePart];
       }
 
     }

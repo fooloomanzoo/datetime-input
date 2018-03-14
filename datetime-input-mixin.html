@@ -78,15 +78,19 @@
               @apply --input-focus;
               border-color: transparent;
             };
+            --number-input-allign: start;
             --number-input: {
               border-radius: 0.1em;
-              padding: 0.15em;
+              padding: 0.1em;
               cursor: pointer;
               transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1);
               @apply --input-style;
               -webkit-background-clip: padding-box;
               background-clip: padding-box;
               border-color: transparent;
+            };
+            --number-input-disabled: {
+              opacity: 0.5;
             };
           }
           #input .reset {
@@ -121,6 +125,9 @@
             border-width: 0;
             outline: none;
           }
+          #input .reset:focus {
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.16);
+          }
           [hidden] {
             display: none !important;
           }
@@ -135,15 +142,68 @@
        * @type {string}
        */
       static get inputTemplate() {
-        return '<button class="icon reset" invisible$="[[!_valueIsSet]]" hidden$="[[disabled]]" on-click="_resetDate"><svg viewBox="0 0 24 24"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg></button>';
+        return '<button class="icon reset" invisible$="[[_resetButtonIsInvisible]]" hidden$="[[disabled]]" on-click="_resetDate"><svg viewBox="0 0 24 24"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg></button>';
       }
 
       static get properties() {
         return {
 
-          _valueIsSet: {
+          _resetButtonIsInvisible: {
             type: Boolean,
-            value: false
+            computed: '_computeResetButtonIsHidden(value, _defaultValue)'
+          },
+
+          _defaultValue: {
+            type: Number,
+            computed: '_computeDefaultValue(default)'
+          },
+
+          /**
+          * If set the step defines the step a date should be incremented (in seconds). The input for the most inferior standing that would create an integer step is used to increment the value.
+          * For example, if the `step` is:
+          *  + `0.05`: the millisecond-input will increment the value by 50 (50 milliseconds), the other inputs behaive as expected
+          *  + `1.05`: the millisecond-input will increment the value by 1050 (1 second and 50 millisecond), the other inputs behaive as expected
+          *  + `2`: the millisecond-input will be disabled, the second-input will increment the value by 2000 (2 seconds), the other inputs behaive as expected
+          *  + `180`: the millisecond-input and the second-input will be disabled, the minute-input will increment the value by 180000 (3 minutes), the other inputs behaive as expected
+          * If `step="0"` all inputs will be disabled, else if the step is below `0.001` the step will be set to `0.001`. The most supirior input that will become the given step is the day-input.
+           */
+          step: {
+            type: Number
+          },
+
+          /**
+           * date-parts that are hidden
+           * e.g. { year: true } would hide the input for year
+           */
+          partsHidden: {
+            type: Object,
+            value: function() {
+              return {
+                year: false,
+                month: false,
+                day: false,
+                hour: false,
+                minute: false,
+                second: false,
+                millisecond: false
+              };
+            }
+          },
+
+          /**
+           * date-parts that are disabled
+           */
+          partsDisabled: {
+            type: Object,
+            computed: '_computePartsDisabled(partsStep, disabled)'
+          },
+
+          /**
+           * the computed steps for the date-parts
+           */
+          partsStep: {
+            type: Object,
+            computed: '_computePartsStep(step)'
           }
 
         }
@@ -151,7 +211,7 @@
 
       static get observers() {
         return [
-          '_computeValueIsSet(value)'
+          '_computePartsHidden(clamp)'
         ]
       }
 
@@ -163,6 +223,156 @@
         return first ? 0 : 1;
       }
 
+      _computeDefaultValue(def) {
+        if (def !== undefined) {
+          const d = this._fromDatetime(def);
+          if (!isNaN(d)) {
+            return +d;
+          }
+        }
+      }
+
+      _computeResetButtonIsHidden(value, _defaultValue) {
+        return value === undefined || (_defaultValue === value);
+      }
+
+      _computePartsHidden(clamp) {
+        let step;
+        switch (clamp) {
+          case 'year':
+          case 'month':
+            this.set('partsHidden.month', true); // falls through
+          case 'day':
+            this.set('partsHidden.day', true);
+            step = 86400; // falls through
+          case 'hour':
+            this.set('partsHidden.hour', true);
+            step = 3600; // falls through
+          case 'minute':
+            this.set('partsHidden.minute', true);
+            step = 60; // falls through
+          case 'second':
+            this.set('partsHidden.second', true);
+            step = 1; // falls through
+          case 'millisecond':
+            this.set('partsHidden.millisecond', true);
+            step = 0.001; // falls through
+            break;
+          default:
+            this.set('partsHidden.month', false);
+            this.set('partsHidden.day', false);
+            this.set('partsHidden.hour', false);
+            this.set('partsHidden.minute', false);
+            this.set('partsHidden.second', false);
+            this.set('partsHidden.millisecond', false);
+        }
+        if (this.step === undefined) {
+          this.set('step', step);
+        }
+      }
+
+      /**
+       * compute the steps for the related inputs. The day-input is the highest modified input allthough if the step is higher than a day in seconds it might also change month- or year-inputs.
+       */
+      _computePartsStep(step) {
+        if (step === undefined) return;
+
+        if (step === 0) {
+          return {
+            day: 0,
+            hour: 0,
+            minute: 0,
+            second: 0,
+            millisecond: 0
+          };
+        } else if (step < 0.001) {
+          this.step = 0.001;
+          return {
+            day: 1,
+            hour: 1,
+            minute: 1,
+            second: 1,
+            millisecond: 0.001
+          };
+        }
+        step = +step.toFixed(3);
+
+        let partsStep = {
+          day: 1,
+          hour: 1,
+          minute: 1,
+          second: 1,
+          millisecond: 0.001
+        };
+
+        if (step % 86400 === 0) {
+          partsStep.day = step / 86400;
+          partsStep.hour = 0;
+          partsStep.minute = 0;
+          partsStep.second = 0;
+          partsStep.millisecond = 0;
+          if (this._ifClamped(this.clamp, 'day')) {
+            // reset `clamp` to next inferior standing if clamped
+            this.clamp = 'hour';
+          }
+        } else if (step % 3600 === 0) {
+          partsStep.hour = step / 3600;
+          partsStep.minute = 0;
+          partsStep.second = 0;
+          partsStep.millisecond = 0;
+          if (this._ifClamped(this.clamp, 'hour')) {
+            // reset `clamp` to next inferior standing if clamped
+            this.clamp = 'minute';
+          }
+        } else if (step % 60 === 0) {
+          partsStep.minute = step / 60;
+          partsStep.second = 0;
+          partsStep.millisecond = 0;
+          if (this._ifClamped(this.clamp, 'minute')) {
+            // reset `clamp` to next inferior standing if clamped
+            this.clamp = 'second';
+          }
+        } else if (step % 1 === 0) {
+          partsStep.second = step;
+          partsStep.millisecond = 0;
+          if (this._ifClamped(this.clamp, 'second')) {
+            // reset `clamp` to next inferior standing if clamped
+            this.clamp = 'millisecond';
+          }
+        } else {
+          partsStep.millisecond = step;
+          if (this._ifClamped(this.clamp, 'millisecond')) {
+            // reset `clamp` to next inferior standing if clamped
+            this.clamp = '';
+          }
+        }
+        return partsStep;
+      }
+
+      _computePartsDisabled(partsStep, disabled) {
+        if (!disabled && partsStep === undefined) return;
+
+        if (disabled) {
+          return {
+            year: true,
+            month: true,
+            day: true,
+            hour: true,
+            minute: true,
+            second: true,
+            millisecond: true
+          };
+        }
+        return {
+          year: !partsStep.day,
+          month: !partsStep.day,
+          day: !partsStep.day,
+          hour: !partsStep.hour,
+          minute: !partsStep.minute,
+          second: !partsStep.second,
+          millisecond: !partsStep.millisecond
+        };
+      }
     }
   }
 </script>

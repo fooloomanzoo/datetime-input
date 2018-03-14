@@ -11,6 +11,7 @@
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../datetime-input.html">
+    <link rel="import" href="../../number-input/number-input.html">
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -28,7 +29,8 @@
           <dom-bind>
             <template is="dom-bind">
               <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
-              <input type="checkbox" checked="{{hour12::change}}">hour12 format<br><br>
+              <input type="checkbox" checked="{{hour12Format::change}}">hour12 format<br><br>
+              step: <number-input no-clamp default="1" value="{{step}}"></number-input><br><br>
               locale: <input list="locales" value="{{locale::change}}">
               <datalist id="locales">
                 <option value="en">english</option>
@@ -40,9 +42,9 @@
                 <option value="ja">日本語</option>
                 <option value="zh">中文</option>
               </datalist><br><br>
-              <datetime-input value="{{value}}" locale="{{locale}}" datetime="{{datetime}}" hour12="{{hour12}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone="{{timezone}}"></datetime-input><br>
-              <date-input date="{{date}}" locale="[[locale]]" timezone="[[timezone]]"></date-input><br>
-              <time-input time="{{time}}" locale="[[locale]]" hour12="{{hour12}}" timezone="[[timezone]]" with-timezone="{{withTimezone}}"></time-input>
+              <datetime-input value="{{value}}" locale="{{locale}}" step="[[step]]" datetime="{{datetime}}" hour12-format="{{hour12Format}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone="{{timezone}}"></datetime-input><br>
+              <date-input date="{{date}}" locale="[[locale]]" step="[[step]]" timezone="[[timezone]]"></date-input><br>
+              <time-input time="{{time}}" locale="[[locale]]" step="[[step]]" hour12-format="{{hour12Format}}" timezone="[[timezone]]" with-timezone="{{withTimezone}}"></time-input>
               <p>
                 <code>datetime:</code>&#32;<b>[[datetime]]</b><br>
                 <code>date:</code>&#32;<b>[[date]]</b><br>
@@ -61,10 +63,9 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <date-input default="2025-02-01T00:00" date="{{date}}" value="{{value}}"></date-input><br>
-              <time-input hours="11" time="{{time}}"></time-input>
+              <date-input default="2025-02-01T00:00" date="{{date}}"></date-input><br>
+              <time-input hour="11" time="{{time}}"></time-input>
               <div class="vertical-section-container result">
-                <div><code>value</code>: <b>[[value]]</b></div>
                 <div><code>date</code>: <b>[[date]]</b></div>
                 <div><code>time</code>: <b>[[time]]</b></div>
               </div>
@@ -80,7 +81,7 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <datetime-input min="2025-02-01" max="2025-05-28T22:11:00+04:00" value="{{value}}" datetime="{{datetime}}" with-timezone></datetime-input>
+              <datetime-input min="2025-02-01" max="2035-05-28T22:11:00+04:00" value="{{value}}" datetime="{{datetime}}" with-timezone></datetime-input>
               <div class="vertical-section-container result">
                 <div><code>datetime</code>: <b>[[datetime]]</b></div>
                 <div><code>value</code>: <b>[[value]]</b></div>

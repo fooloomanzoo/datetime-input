@@ -3,12 +3,9 @@
   "version": "2.2.3",
   "description": "an input for date and time",
   "main": "index.html",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "postinstall": "bower install --save-dev",
-    "prepublish": "npm run build && git add . && git commit -m \"publish new version\" && git push && npm version patch",
+    "prepublish": "npm run build && git add . && git commit -m \"publish new version\" && npm version patch && git push",
     "gh-pages": "git checkout gh-pages && git pull && bower update -f && git add . && git commit -m \"update\" && git push && git checkout master",
     "build": "git pull && bower update && polymer analyze > analysis.json",
     "prestart": "polymer analyze > analysis.json",
@@ -25,5 +22,18 @@
     "range"
   ],
   "author": "fooloomanzoo",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@polymer/polymer": "^2",
+    "@fooloomanzoo/input-picker-pattern": "^2",
+    "@fooloomanzoo/number-input": "^2",
+    "@fooloomanzoo/property-mixins": "^2"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "*",
+    "@polymer/iron-component-page": "*",
+    "@polymer/iron-flex-layout": "*",
+    "@polymer/iron-demo-helpers": "*",
+    "@polymer/iron-form": "*"
+  }
 }
