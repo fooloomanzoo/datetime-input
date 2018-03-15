@@ -49,10 +49,13 @@
           :host([disabled]) {
             pointer-events: none;
           }
-          #input {
-            outline: none;
-            border-radius: 0.25em;
-            border: thin dotted transparent;
+          :host > #input {
+            color: var(--input-color, inherit);
+            background: var(--input-background, transparent);
+            border: var(--input-border, thin dotted transparent);
+            padding: var(--input-padding, 0.3em);
+            border-radius: var(--input-border-radius, 0.2em);
+            transition: var(--input-transition, background 250ms cubic-bezier(0.6, 1, 0.2, 1));
             @apply --input-style;
             display: inline-flex;
             align-items: baseline;
@@ -65,33 +68,18 @@
             align-items: baseline;
             padding: 0;
           }
-          :host([invalid]) #input {
-            border: thin dotted var(--input-invalid-color, red);
+          :host([invalid]) > #input {
+            color: var(--input-invalid-color, inherit);
+            background: var(--input-invalid-background, rgba(255,0,0,0.16));
+            border: var(--input-invalid-border, thin dotted rgba(255,0,0,0.5));
             @apply --input-invalid;
           }
           #input integer-input {
-            outline: none;
-            --number-input-focus: {
-              outline: none;
-              color: var(--input-focus-color, inherit);
-              background: var(--input-focus-background, rgba(0,0,0,0.1));
-              @apply --input-focus;
-              border-color: transparent;
-            };
-            --number-input-allign: start;
-            --number-input: {
-              border-radius: 0.1em;
-              padding: 0.1em;
-              cursor: pointer;
-              transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1);
-              @apply --input-style;
-              -webkit-background-clip: padding-box;
-              background-clip: padding-box;
-              border-color: transparent;
-            };
-            --number-input-disabled: {
-              opacity: 0.5;
-            };
+            @apply --input-style;
+            --input-color: currentColor;
+            --input-background: transparent;
+            --input-border: thin solid transparent;
+            --input-padding: 0.15em;
           }
           #input .reset {
             display: inline-flex;
@@ -101,11 +89,11 @@
             align-self: center;
             margin: 0 0.1em;
             cursor: pointer;
-            border-width: 0;
+            border: var(--input-focus-border, thin dotted transparent);
             box-sizing: content-box;
             order: 2;
             opacity: 0.5;
-            color: var(--input-color, inherit);
+            color: inherit;
             background: transparent;
             transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1), color 250ms cubic-bezier(0.6, 1, 0.2, 1);
             height: 1em;
@@ -121,12 +109,19 @@
           #input .reset:focus,
           #input .reset:hover {
             opacity: 1;
-            @apply --input-focus;
-            border-width: 0;
+            color: var(--input-focus-color, inherit);
+            background: var(--input-focus-background, rgba(0,0,0,0.16));
+            border: var(--input-focus-border, thin dotted currentColor);
             outline: none;
           }
-          #input .reset:focus {
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.16);
+          #input .reset::-moz-focusring {
+            border-width: 0;
+            color: transparent;
+            text-shadow: 0 0 0 var(--input-focus-color, #000);
+          }
+          #input .reset::-moz-focus-inner {
+            border-style: none;
+            padding: 0;
           }
           [hidden] {
             display: none !important;
@@ -150,7 +145,7 @@
 
           _resetButtonIsInvisible: {
             type: Boolean,
-            computed: '_computeResetButtonIsHidden(value, _defaultValue)'
+            computed: '_computeResetButtonIsHidden(_valueIsSet, _defaultValue)'
           },
 
           _defaultValue: {
@@ -232,8 +227,8 @@
         }
       }
 
-      _computeResetButtonIsHidden(value, _defaultValue) {
-        return value === undefined || (_defaultValue === value);
+      _computeResetButtonIsHidden(_valueIsSet, _defaultValue) {
+        return !_valueIsSet || (_defaultValue !== undefined && _defaultValue === this.value);
       }
 
       _computePartsHidden(clamp) {

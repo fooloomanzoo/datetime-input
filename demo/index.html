@@ -18,6 +18,9 @@
         .result {
           margin: 0.5em 0;
         }
+        .step {
+          --input-background: rgba(0,0,0,0.05);
+        }
       </style>
     </custom-style>
   </head>
@@ -30,7 +33,7 @@
             <template is="dom-bind">
               <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
               <input type="checkbox" checked="{{hour12Format::change}}">hour12 format<br><br>
-              step: <number-input no-clamp default="1" value="{{step}}"></number-input><br><br>
+              step: <number-input class="step" no-clamp default="1" minlength="2" value="{{step}}"></number-input><br><br>
               locale: <input list="locales" value="{{locale::change}}">
               <datalist id="locales">
                 <option value="en">english</option>

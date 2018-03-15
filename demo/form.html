@@ -30,20 +30,17 @@
         datetime-input {
           margin-bottom: 4px;
           margin-left: 8px;
-          --input-invalid-color: #ff8400;
-          --input-style: {
-            color: #111;
-            padding: 2px;
-            border-radius: 4px;
-            border-color: rgba(0,0,0,0.2);
-            border-width: thin;
-            border-style: dotted;
-            transition: background-color 150ms ease-in-out;
-          };
-          --input-focus: {
-            border-color: rgba(0,0,0,0.5);
-            background: rgba(0, 0, 0, 0.15);
-          };
+          --input-color: #f1f1f1;
+          --input-focus-color: #fff;
+          --input-focus-background: rgba(0,0,0,0.5);
+          --input-focus-border: thin dotted transparent;
+          --input-padding: 4px;
+          --input-border: thin solid transparent;
+          --input-border-radius: 4px;
+          --input-selection-color: #fff;
+          --input-selection-background: #000;
+          --input-transition: background-color 150ms ease-in-out;
+          --input-placeholder-color: #000;
         }
         iron-form {
           @apply --shadow-elevation-2dp;
@@ -59,6 +56,18 @@
           border-color: #555;
           border-width: thin;
           border-style: dashed;
+        }
+        [name="start"] {
+          --input-background: #7974e4;
+        }
+        [name="end"] {
+          --input-background: #3dde56;
+        }
+        [name="lastjob"] {
+          --input-background: #e09844;
+        }
+        [name="return"] {
+          --input-background: #e03ec6;
         }
       </style>
     </custom-style>
@@ -84,8 +93,8 @@
                   <p>
                   first day (required): <date-input name="start" required max="{{end}}" value="{{start}}"></date-input><br>
                   expected retirement: <date-input name="end" min="{{start}}" value="{{end}}"></date-input><br>
-                  last job: <datetime-input name="lastjob" min="[[start]]" max="[[end]]" datetime="{{lastjob}}" hour12="[[hour12]]" with-timezone></datetime-input><br>
-                  return: <datetime-input name="return" min="[[lastjob]]" default="{{lastjob}}" max="[[end]]" hour12="[[hour12]]" with-timezone></datetime-input><br>
+                  last job (required): <datetime-input name="lastjob" required min="[[start]]" max="[[end]]" datetime="{{lastjob}}" hour12="[[hour12]]"></datetime-input><br>
+                  return: <time-input name="return" min="[[lastjob]]" default="{{lastjob}}" max="[[end]]" hour12="[[hour12]]"></time-input><br>
                 </p>
                   <button onclick="form1.submit()">Submit</button>
                   <button onclick="form1.validate()">Validate</button>
