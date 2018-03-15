@@ -23,7 +23,7 @@
           <div style="order:[[_computePartOrder(dateOrder.dateFirst)]];" tabindex>
             <integer-input id="year" value="{{year}}" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[partsHidden.year]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
             <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden.year, partsHidden.month, partsHidden.day, 'true')]]">[[dateSeparator]]</span>
-            <integer-input id="month" value="{{month}}" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[partsHidden.month]]" no-clamp pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
+            <integer-input id="month" value="{{month}}" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[partsHidden.month]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
             <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, partsHidden.year, partsHidden.month, partsHidden.day)]]">[[dateSeparator]]</span>
             <integer-input id="day" value="{{day}}" style$="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[partsHidden.day]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
           </div>
@@ -39,7 +39,8 @@
            */
           clamp: {
             type: String,
-            value: 'hour'
+            value: 'hour',
+            notify: true
           }
         }
       }

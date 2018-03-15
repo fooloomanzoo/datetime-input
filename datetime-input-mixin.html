@@ -80,6 +80,7 @@
             --input-background: transparent;
             --input-border: thin solid transparent;
             --input-padding: 0.15em;
+            border-color: transparent;
           }
           #input .reset {
             display: inline-flex;
@@ -106,13 +107,17 @@
             width: 100%;
             fill: currentColor;
           }
-          #input .reset:focus,
+          #input .reset:focus {
+            color: var(--input-focus-background);
+            background: transparent;
+            border: thin solid currentColor;
+            outline: none;
+          }
           #input .reset:hover {
             opacity: 1;
             color: var(--input-focus-color, inherit);
             background: var(--input-focus-background, rgba(0,0,0,0.16));
             border: var(--input-focus-border, thin dotted currentColor);
-            outline: none;
           }
           #input .reset::-moz-focusring {
             border-width: 0;
@@ -145,7 +150,7 @@
 
           _resetButtonIsInvisible: {
             type: Boolean,
-            computed: '_computeResetButtonIsHidden(_valueIsSet, _defaultValue)'
+            computed: '_computeResetButtonIsHidden(_valueIsSet, _defaultValue, value)'
           },
 
           _defaultValue: {
@@ -155,34 +160,28 @@
 
           /**
           * If set the step defines the step a date should be incremented (in seconds). The input for the most inferior standing that would create an integer step is used to increment the value.
-          * For example, if the `step` is:
-          *  + `0.05`: the millisecond-input will increment the value by 50 (50 milliseconds), the other inputs behaive as expected
-          *  + `1.05`: the millisecond-input will increment the value by 1050 (1 second and 50 millisecond), the other inputs behaive as expected
-          *  + `2`: the millisecond-input will be disabled, the second-input will increment the value by 2000 (2 seconds), the other inputs behaive as expected
-          *  + `180`: the millisecond-input and the second-input will be disabled, the minute-input will increment the value by 180000 (3 minutes), the other inputs behaive as expected
-          * If `step="0"` all inputs will be disabled, else if the step is below `0.001` the step will be set to `0.001`. The most supirior input that will become the given step is the day-input.
+          * For example, if the **step** is:
+          *  + **0.05**: the millisecond-input will increment the value by 50 (50 milliseconds), the other inputs behaive as expected
+          *  + **1.05**: the millisecond-input will increment the value by 1050 (1 second and 50 millisecond), the other inputs behaive as expected
+          *  + **2**: the millisecond-input will be disabled, the second-input will increment the value by 2000 (2 seconds), the other inputs behaive as expected
+          *  + **180**: the millisecond-input and the second-input will be disabled, the minute-input will increment the value by 180000 (3 minutes), the other inputs behaive as expected
+          * If `step="0"` all inputs will be disabled, else if the step is below _0.001_ the step will be set to **0.001**. The most supirior input that will become the given step is the day-input.
            */
           step: {
-            type: Number
+            type: Number,
+            notify: true
           },
 
           /**
            * date-parts that are hidden
-           * e.g. { year: true } would hide the input for year
+           * e.g. '{ "year": true }' would hide the input for the year
            */
           partsHidden: {
             type: Object,
             value: function() {
-              return {
-                year: false,
-                month: false,
-                day: false,
-                hour: false,
-                minute: false,
-                second: false,
-                millisecond: false
-              };
-            }
+              return {};
+            },
+            notify: true
           },
 
           /**
@@ -190,7 +189,8 @@
            */
           partsDisabled: {
             type: Object,
-            computed: '_computePartsDisabled(partsStep, disabled)'
+            computed: '_computePartsDisabled(partsStep, disabled)',
+            notify: true
           },
 
           /**
@@ -198,7 +198,8 @@
            */
           partsStep: {
             type: Object,
-            computed: '_computePartsStep(step)'
+            computed: '_computePartsStep(step)',
+            notify: true
           }
 
         }
@@ -227,14 +228,15 @@
         }
       }
 
-      _computeResetButtonIsHidden(_valueIsSet, _defaultValue) {
-        return !_valueIsSet || (_defaultValue !== undefined && _defaultValue === this.value);
+      _computeResetButtonIsHidden(_valueIsSet, _defaultValue, value) {
+        return !_valueIsSet || (_defaultValue !== undefined && _defaultValue === value);
       }
 
       _computePartsHidden(clamp) {
         let step;
         switch (clamp) {
           case 'year':
+            this.set('partsHidden.year', true); // falls through
           case 'month':
             this.set('partsHidden.month', true); // falls through
           case 'day':
@@ -254,12 +256,26 @@
             step = 0.001; // falls through
             break;
           default:
-            this.set('partsHidden.month', false);
-            this.set('partsHidden.day', false);
-            this.set('partsHidden.hour', false);
-            this.set('partsHidden.minute', false);
-            this.set('partsHidden.second', false);
-            this.set('partsHidden.millisecond', false);
+            if (this.partsHidden.year === undefined)
+              this.set('partsHidden.year', false);
+
+            if (this.partsHidden.month === undefined)
+              this.set('partsHidden.month', false);
+
+            if (this.partsHidden.day === undefined)
+              this.set('partsHidden.day', false);
+
+            if (this.partsHidden.hour === undefined)
+              this.set('partsHidden.hour', false);
+
+            if (this.partsHidden.minute === undefined)
+              this.set('partsHidden.minute', false);
+
+            if (this.partsHidden.second === undefined)
+              this.set('partsHidden.second', false);
+
+            if (this.partsHidden.millisecond === undefined)
+              this.set('partsHidden.millisecond', false);
         }
         if (this.step === undefined) {
           this.set('step', step);
