@@ -66,8 +66,26 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <date-input default="2025-02-01T00:00" date="{{date}}"></date-input><br>
-              <time-input hour="11" time="{{time}}"></time-input>
+              <style>
+                date-input.preset {
+                  --input-color: #111;
+                  --input-background: #d1a861;
+                  --input-border-color: #825d1c;
+                  --inner-input-focus-color: #111;
+                  --inner-input-focus-background: #d1a861;
+                  --inner-input-focus-border-color: #825d1c;
+                }
+                time-input.preset {
+                  --input-color: #111;
+                  --input-background: #61b0d1;
+                  --input-border-color: #207395;
+                  --inner-input-focus-color: #111;
+                  --inner-input-focus-background: #61b0d1;
+                  --inner-input-focus-border-color: #207395;
+                }
+              </style>
+              <date-input class="preset" default="2025-02-01T00:00" date="{{date}}"></date-input><br>
+              <time-input class="preset" hour="11" time="{{time}}"></time-input>
               <div class="vertical-section-container result">
                 <div><code>date</code>: <b>[[date]]</b></div>
                 <div><code>time</code>: <b>[[time]]</b></div>

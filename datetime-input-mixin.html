@@ -1,5 +1,6 @@
 <link rel="import" href="../property-mixins/datetime-mixin.html">
 <link rel="import" href="../input-picker-pattern/form-element-mixin.html">
+<link rel="import" href="../input-picker-pattern/input-shared-style.html">
 
 <script>
   /**
@@ -20,28 +21,22 @@
 
       static get template() {
         return `
-          ${this.styleTemplate}
+          <style include="${this.styleToInclude}">
+            ${this.styleTemplate}
+          </style>
           <div id="input">
             ${this.inputTemplate}
           </div>
         `
       }
 
+      static get styleToInclude() {
+        return 'input-shared-style';
+      }
+
       static get styleTemplate() {
         return `
-          <style include="${this.customStyleToInclude}">
-            ${this.customStyleContent}
-          </style>
-        `;
-      }
-
-      static get customStyleToInclude() {
-        return '';
-      }
-
-      static get customStyleContent() {
-        return `
-          ${super.customStyleToInclude || ''}
+          ${super.styleTemplate || ''}
           :host {
             display: inline-flex;
             outline: none;
@@ -49,38 +44,26 @@
           :host([disabled]) {
             pointer-events: none;
           }
-          :host > #input {
-            color: var(--input-color, inherit);
-            background: var(--input-background, transparent);
-            border: var(--input-border, thin dotted transparent);
-            padding: var(--input-padding, 0.3em);
-            border-radius: var(--input-border-radius, 0.2em);
-            transition: var(--input-transition, background 250ms cubic-bezier(0.6, 1, 0.2, 1));
-            @apply --input-style;
-            display: inline-flex;
-            align-items: baseline;
-            line-height: normal;
-            -webkit-background-clip: padding-box;
-            background-clip: padding-box;
-          }
+          #input,
           #input > div {
             display: inline-flex;
             align-items: baseline;
-            padding: 0;
           }
-          :host([invalid]) > #input {
-            color: var(--input-invalid-color, inherit);
-            background: var(--input-invalid-background, rgba(255,0,0,0.16));
-            border: var(--input-invalid-border, thin dotted rgba(255,0,0,0.5));
-            @apply --input-invalid;
+          #input > div {
+            padding: var(--input-field-padding, 0.1em);
           }
           #input integer-input {
-            @apply --input-style;
-            --input-color: currentColor;
-            --input-background: transparent;
-            --input-border: thin solid transparent;
-            --input-padding: 0.15em;
-            border-color: transparent;
+            --input-color: var(--inner-input-color, currentColor);
+            --input-background: var(--inner-input-background, transparent);
+            --input-border-width: var(--inner-input-border-width, thin);
+            --input-border-color: var(--inner-input-border-color, transparent);
+            --input-border-style: var(--inner-input-border-style, dotted);
+            --input-padding: var(--inner-input-padding, 0);
+            --input-border-radius: var(--inner-input-border-radius, 0.1em);
+            --input-focus-color: var(--inner-input-focus-color, currentColor);
+            --input-focus-background: var(--inner-input-focus-background, transparent);
+            --input-focus-border-color: var(--inner-input-focus-border-color, transparent);
+            --input-focus-border-style: var(--inner-input-focus-border-style, dotted);
           }
           #input .reset {
             display: inline-flex;
@@ -90,13 +73,15 @@
             align-self: center;
             margin: 0 0.1em;
             cursor: pointer;
-            border: var(--input-focus-border, thin dotted transparent);
+            border-width: var(--inner-input-border-width, thin);
+            border-style: var(--inner-input-border-style, dotted);
+            border-color: var(--inner-input-border-color, transparent);
             box-sizing: content-box;
             order: 2;
             opacity: 0.5;
             color: inherit;
             background: transparent;
-            transition: background 250ms cubic-bezier(0.6, 1, 0.2, 1), color 250ms cubic-bezier(0.6, 1, 0.2, 1);
+            transition: opacity 250ms cubic-bezier(0.6, 1, 0.2, 1);
             height: 1em;
             width: 1em;
             border-radius: 50%;
@@ -107,29 +92,18 @@
             width: 100%;
             fill: currentColor;
           }
+          #input .reset:hover,
           #input .reset:focus {
-            color: var(--input-focus-background);
-            background: transparent;
-            border: thin solid currentColor;
+            color: var(--inner-input-focus-color);
+            border-color: var(--input-focus-border-color, currentColor);
             outline: none;
           }
           #input .reset:hover {
+            background: transparent;
             opacity: 1;
-            color: var(--input-focus-color, inherit);
-            background: var(--input-focus-background, rgba(0,0,0,0.16));
-            border: var(--input-focus-border, thin dotted currentColor);
           }
-          #input .reset::-moz-focusring {
-            border-width: 0;
-            color: transparent;
-            text-shadow: 0 0 0 var(--input-focus-color, #000);
-          }
-          #input .reset::-moz-focus-inner {
-            border-style: none;
-            padding: 0;
-          }
-          [hidden] {
-            display: none !important;
+          #input .reset:focus {
+            background: var(--inner-input-focus-background, rgba(255,255,255,0.25));
           }
           [invisible] {
             visibility: hidden;
