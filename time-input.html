@@ -22,9 +22,9 @@
               <integer-input value="{{hour}}" id="hour" hidden$="[[hour12Format]]" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
               <integer-input value="{{hour12}}" hidden$="[[!hour12Format]]" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
             </span>
-            <span hidden$="[[partsHidden.hour]]">[[timeSeparator]]</span>
+            <span hidden$="[[_computeOr(partsHidden.hour, partsHidden.minute)]]">[[timeSeparator]]</span>
             <integer-input id="minute" value="{{minute}}" hidden$="[[partsHidden.minute]]" pad-length="2" no-clamp step="[[partsStep.minute]]" disabled="[[partsDisabled.minute]]" placeholder="00"></integer-input>
-            <span hidden$="[[partsHidden.minute]]">[[timeSeparator]]</span>
+            <span hidden$="[[_computeOr(partsHidden.second, partsHidden.minute)]]">[[timeSeparator]]</span>
             <integer-input hidden$="[[partsHidden.second]]" pad-length="2" no-clamp step="[[partsStep.second]]" disabled="[[partsDisabled.second]]" value="{{second}}" placeholder="00"></integer-input>
             <template is="dom-if" if="[[partsHidden.second]]">
               <span hidden$="[[partsHidden.millisecond]]">0</span>
@@ -47,9 +47,9 @@
         `;
       }
 
-      static get customStyleContent() {
+      static get styleTemplate() {
         return `
-          ${super.customStyleContent || ''}
+          ${super.styleTemplate || ''}
           #input .hour12 {
             -moz-appearance: none;
             -webkit-appearance: none;
@@ -120,6 +120,10 @@
 
       _switchAm() {
         this.isAm = !this.isAm;
+      }
+      
+      _computeOr(a, b) {
+        return a || b;
       }
     }
   }

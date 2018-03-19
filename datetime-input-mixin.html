@@ -94,16 +94,14 @@
           }
           #input .reset:hover,
           #input .reset:focus {
-            color: var(--inner-input-focus-color);
-            border-color: var(--input-focus-border-color, currentColor);
+            color: var(--input-focus-color, inherit);
+            background: var(--inner-input-focus-background, rgba(0,0,0,0.16));
+            border-style: var(--inner-input-focus-border-style, dotted);
+            border-color: var(--inner-input-focus-border-color, transparent);
             outline: none;
           }
           #input .reset:hover {
-            background: transparent;
             opacity: 1;
-          }
-          #input .reset:focus {
-            background: var(--inner-input-focus-background, rgba(255,255,255,0.25));
           }
           [invisible] {
             visibility: hidden;
