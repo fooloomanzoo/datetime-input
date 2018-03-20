@@ -20,7 +20,9 @@
           <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];" hidden$="[[_ifClamped(clamp, 'hour')]]">
             <span hidden$="[[partsHidden.hour]]">
               <integer-input value="{{hour}}" id="hour" hidden$="[[hour12Format]]" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
-              <integer-input value="{{hour12}}" hidden$="[[!hour12Format]]" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
+              <template is="dom-if" if="[[hour12Format]]">
+                <integer-input value="{{hour12}}" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
+              </template>
             </span>
             <span hidden$="[[_computeOr(partsHidden.hour, partsHidden.minute)]]">[[timeSeparator]]</span>
             <integer-input id="minute" value="{{minute}}" hidden$="[[partsHidden.minute]]" pad-length="2" no-clamp step="[[partsStep.minute]]" disabled="[[partsDisabled.minute]]" placeholder="00"></integer-input>
@@ -121,7 +123,7 @@
       _switchAm() {
         this.isAm = !this.isAm;
       }
-      
+
       _computeOr(a, b) {
         return a || b;
       }
@@ -145,8 +147,8 @@
      * `--input-border-width`             | border width of the input                      | thin
      * `--input-border-style`             | border style of the input                      | dotted
      * `--input-border-color`             | border color of the input                      | transparent
-     * `--input-padding`                  | padding of the input                           | 0.16em
-     * `--input-border-radius`            | border-radius of the input                     | 0.16em
+     * `--input-padding`                  | padding of the input                           | 0.2em
+     * `--input-border-radius`            | border-radius of the input                     | 0.25em
      * `--input-transition`               | transition of the input                        | background 250ms cubic-bezier(0.6, 1, 0.2, 1)
      * `--input-allign`                   | text-allign of the input input                 | center
      * `--input-cursor`                   | cursor of the input input                      | initial
