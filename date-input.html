@@ -97,6 +97,12 @@
         }
       }
 
+      /**
+       *  Sets value to the actual date
+       **/
+      now() {
+        this._setDate(this._fromDatetime(this._toDate(new Date())));
+      }
     }
   }
 </script>
@@ -147,8 +153,8 @@
      * `--inner-input-border-width`       | border width of the inner inputs                      | thin
      * `--inner-input-border-style`       | border style of the inner inputs                      | dotted
      * `--inner-input-border-color`       | border color of the inner inputs                      | transparent
-     * `--inner-input-padding`            | padding of the inner inputs                           | 0.16em
-     * `--inner-input-border-radius`      | border-radius of the inner inputs                     | 0.16em
+     * `--inner-input-padding`            | padding of the inner inputs                           | 0.1em
+     * `--inner-input-border-radius`      | border-radius of the inner inputs                     | 0.1em
      * `--inner-input-focus-color`        | color of the focussed and hovered inner inputs        | inherit
      * `--inner-input-focus-background`   | background of the focussed and hovered inner inputs   | rgba(0, 0, 0, 0.16)
      * `--inner-input-focus-border-style` | border style of the focussed and hovered inner inputs | dotted

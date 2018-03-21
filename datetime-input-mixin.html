@@ -58,7 +58,7 @@
             --input-border-width: var(--inner-input-border-width, thin);
             --input-border-color: var(--inner-input-border-color, transparent);
             --input-border-style: var(--inner-input-border-style, dotted);
-            --input-padding: var(--inner-input-padding, 0);
+            --input-padding: var(--inner-input-padding, 0.1em);
             --input-border-radius: var(--inner-input-border-radius, 0.1em);
             --input-focus-color: var(--inner-input-focus-color, currentColor);
             --input-focus-background: var(--inner-input-focus-background, transparent);
@@ -177,12 +177,6 @@
         }
       }
 
-      static get observers() {
-        return [
-          '_computePartsHidden(clamp)'
-        ]
-      }
-
       _computeInvalid(required, value) {
         this.invalid = required && isNaN(value);
       }
@@ -213,21 +207,21 @@
             this.set('partsHidden.month', true); // falls through
           case 'day':
             this.set('partsHidden.day', true);
-            step = 86400; // falls through
           case 'hour':
             this.set('partsHidden.hour', true);
-            step = 3600; // falls through
+            step = 86400; // falls through
           case 'minute':
             this.set('partsHidden.minute', true);
-            step = 60; // falls through
+            step = 3600; // falls through
           case 'second':
             this.set('partsHidden.second', true);
-            step = 1; // falls through
+            step = 60; // falls through
           case 'millisecond':
             this.set('partsHidden.millisecond', true);
-            step = 0.001; // falls through
+            step = 1; // falls through
             break;
           default:
+            step = 0.001;
             if (this.partsHidden.year === undefined)
               this.set('partsHidden.year', false);
 

@@ -32,7 +32,7 @@
               <span hidden$="[[partsHidden.millisecond]]">0</span>
             </template>
             <span hidden$="[[partsHidden.millisecond]]">[[decimalSeparator]]</span>
-            <integer-input value="{{millisecond}}" hidden$="[[partsHidden.millisecond]]" pad-length="3" no-clamp step-mod="1000" step="[[partsStep.millisecond]]" disabled="[[partsDisabled.millisecond]]" placeholder="000"></integer-input>
+            <integer-input value="{{millisecond}}" hidden$="[[partsHidden.millisecond]]" pad-length="3" no-clamp step="[[_partsStepMillisecond]]" disabled="[[partsDisabled.millisecond]]" placeholder="000"></integer-input>
             <template is="dom-if" if="[[hour12Format]]">
               <button class="hour12" hidden$="[[!_valueIsSet]]" on-click="_switchAm">
                 <span hidden$="[[!isAm]]">[[amString]]</span>
@@ -100,6 +100,12 @@
           withTimezone: {
             type: Boolean,
             value: false
+          },
+
+          _partsStepMillisecond: {
+            type: Number,
+            notify: true,
+            computed: '_computePartsStepMillisecond(_partsStep.millisecond)'
           }
         }
       }
@@ -118,6 +124,11 @@
           hourInput.startAt = d.getHours();
           this.$.minute.startAt = d.getMinutes();
         })
+      }
+
+      // modified step for millisecond switches
+      _computePartsStepMillisecond(partsStepMillisecond) {
+        return (partsStepMillisecond === undefined) ? 1 : window._numberUtilities._safeMult(partsStepMillisecond, 1000);
       }
 
       _switchAm() {
@@ -177,8 +188,8 @@
      * `--inner-input-border-width`       | border width of the inner inputs                      | thin
      * `--inner-input-border-style`       | border style of the inner inputs                      | dotted
      * `--inner-input-border-color`       | border color of the inner inputs                      | transparent
-     * `--inner-input-padding`            | padding of the inner inputs                           | 0.16em
-     * `--inner-input-border-radius`      | border-radius of the inner inputs                     | 0.16em
+     * `--inner-input-padding`            | padding of the inner inputs                           | 0.1em
+     * `--inner-input-border-radius`      | border-radius of the inner inputs                     | 0.1em
      * `--inner-input-focus-color`        | color of the focussed and hovered inner inputs        | inherit
      * `--inner-input-focus-background`   | background of the focussed and hovered inner inputs   | rgba(0, 0, 0, 0.16)
      * `--inner-input-focus-border-style` | border style of the focussed and hovered inner inputs | dotted
@@ -212,6 +223,13 @@
           return;
         }
         this.datetime = (date || '1970-01-01') + 'T' + (time || (this.timezone ? this.timezone.slice(1) : '00:00')) + (this.timezone || 'Z');
+      }
+
+      /**
+       *  Sets value to the actual date
+       **/
+      now() {
+        this._setDate(this._fromDatetime((this.date ? this.date + 'T' : '') + this._toTime(new Date())));
       }
 
     }
