@@ -161,8 +161,10 @@
            */
           partsDisabled: {
             type: Object,
-            computed: '_computePartsDisabled(partsStep, disabled)',
-            notify: true
+            notify: true,
+            value: function() {
+              return {}
+            }
           },
 
           /**
@@ -170,11 +172,27 @@
            */
           partsStep: {
             type: Object,
-            computed: '_computePartsStep(step)',
-            notify: true
+            notify: true,
+            readOnly: true,
+            value: function() {
+              return {
+                day: 1,
+                hour: 1,
+                minute: 1,
+                second: 1,
+                millisecond: 1
+              }
+            }
           }
 
         }
+      }
+
+      static get observers() {
+        return [
+          '_computePartsStep(step)',
+          '_computePartsDisabled(partsStep.*, disabled)'
+        ]
       }
 
       _computeInvalid(required, value) {
@@ -198,56 +216,6 @@
         return !_valueIsSet || (_defaultValue !== undefined && _defaultValue === value);
       }
 
-      _computePartsHidden(clamp) {
-        let step;
-        switch (clamp) {
-          case 'year':
-            this.set('partsHidden.year', true); // falls through
-          case 'month':
-            this.set('partsHidden.month', true); // falls through
-          case 'day':
-            this.set('partsHidden.day', true);
-          case 'hour':
-            this.set('partsHidden.hour', true);
-            step = 86400; // falls through
-          case 'minute':
-            this.set('partsHidden.minute', true);
-            step = 3600; // falls through
-          case 'second':
-            this.set('partsHidden.second', true);
-            step = 60; // falls through
-          case 'millisecond':
-            this.set('partsHidden.millisecond', true);
-            step = 1; // falls through
-            break;
-          default:
-            step = 0.001;
-            if (this.partsHidden.year === undefined)
-              this.set('partsHidden.year', false);
-
-            if (this.partsHidden.month === undefined)
-              this.set('partsHidden.month', false);
-
-            if (this.partsHidden.day === undefined)
-              this.set('partsHidden.day', false);
-
-            if (this.partsHidden.hour === undefined)
-              this.set('partsHidden.hour', false);
-
-            if (this.partsHidden.minute === undefined)
-              this.set('partsHidden.minute', false);
-
-            if (this.partsHidden.second === undefined)
-              this.set('partsHidden.second', false);
-
-            if (this.partsHidden.millisecond === undefined)
-              this.set('partsHidden.millisecond', false);
-        }
-        if (this.step === undefined) {
-          this.set('step', step);
-        }
-      }
-
       /**
        * compute the steps for the related inputs. The day-input is the highest modified input allthough if the step is higher than a day in seconds it might also change month- or year-inputs.
        */
@@ -255,100 +223,94 @@
         if (step === undefined) return;
 
         if (step === 0) {
-          return {
-            day: 0,
-            hour: 0,
-            minute: 0,
-            second: 0,
-            millisecond: 0
-          };
+          this.set('partsStep.day', 0);
+          this.set('partsStep.hour', 0);
+          this.set('partsStep.minute', 0);
+          this.set('partsStep.second', 0);
+          this.set('partsStep.millisecond', 0);
+          this.notifyPath('partsStep');
+          this._computePartsDisabled(this.disabled);
+          return;
         } else if (step < 0.001) {
-          this.step = 0.001;
-          return {
-            day: 1,
-            hour: 1,
-            minute: 1,
-            second: 1,
-            millisecond: 0.001
-          };
+          this.set('step', 0.001);
+          this.set('partsStep.day', 1);
+          this.set('partsStep.hour', 1);
+          this.set('partsStep.minute', 1);
+          this.set('partsStep.second', 1);
+          this.set('partsStep.millisecond', 1);
+          this.notifyPath('partsStep');
+          this._computePartsDisabled(this.disabled);
+          return;
         }
         step = +step.toFixed(3);
 
-        let partsStep = {
-          day: 1,
-          hour: 1,
-          minute: 1,
-          second: 1,
-          millisecond: 0.001
-        };
-
         if (step % 86400 === 0) {
-          partsStep.day = step / 86400;
-          partsStep.hour = 0;
-          partsStep.minute = 0;
-          partsStep.second = 0;
-          partsStep.millisecond = 0;
+          this.set('partsStep.day', step / 86400);
+          this.set('partsStep.hour', 0);
+          this.set('partsStep.minute', 0);
+          this.set('partsStep.second', 0);
+          this.set('partsStep.millisecond', 0);
           if (this._ifClamped(this.clamp, 'day')) {
             // reset `clamp` to next inferior standing if clamped
-            this.clamp = 'hour';
+            this.set('clamp', 'hour');
           }
         } else if (step % 3600 === 0) {
-          partsStep.hour = step / 3600;
-          partsStep.minute = 0;
-          partsStep.second = 0;
-          partsStep.millisecond = 0;
+          this.set('partsStep.day', 1);
+          this.set('partsStep.hour', step / 3600);
+          this.set('partsStep.minute', 0);
+          this.set('partsStep.second', 0);
+          this.set('partsStep.millisecond', 0);
           if (this._ifClamped(this.clamp, 'hour')) {
             // reset `clamp` to next inferior standing if clamped
-            this.clamp = 'minute';
+            this.set('clamp', 'minute');
           }
         } else if (step % 60 === 0) {
-          partsStep.minute = step / 60;
-          partsStep.second = 0;
-          partsStep.millisecond = 0;
+          this.set('partsStep.day', 1);
+          this.set('partsStep.hour', 1);
+          this.set('partsStep.minute', step / 60);
+          this.set('partsStep.second', 0);
+          this.set('partsStep.millisecond', 0);
           if (this._ifClamped(this.clamp, 'minute')) {
             // reset `clamp` to next inferior standing if clamped
-            this.clamp = 'second';
+            this.clamp = second;
           }
+          this.notifyPath('partsStep.*');
         } else if (step % 1 === 0) {
-          partsStep.second = step;
-          partsStep.millisecond = 0;
+          this.set('partsStep.day', 1);
+          this.set('partsStep.hour', 1);
+          this.set('partsStep.minute', 1);
+          this.set('partsStep.second', step);
+          this.set('partsStep.millisecond', 0);
           if (this._ifClamped(this.clamp, 'second')) {
             // reset `clamp` to next inferior standing if clamped
-            this.clamp = 'millisecond';
+            this.set('clamp', 'millisecond');
           }
         } else {
-          partsStep.millisecond = step;
+          this.set('partsStep.day', 1);
+          this.set('partsStep.hour', 1);
+          this.set('partsStep.minute', 1);
+          this.set('partsStep.second', 1);
+          this.set('partsStep.millisecond', step * 1000);
           if (this._ifClamped(this.clamp, 'millisecond')) {
             // reset `clamp` to next inferior standing if clamped
-            this.clamp = '';
+            this.set('clamp', '');
           }
         }
-        return partsStep;
+        this.notifyPath('partsStep');
+        this._computePartsDisabled(this.disabled);
       }
 
-      _computePartsDisabled(partsStep, disabled) {
-        if (!disabled && partsStep === undefined) return;
-
-        if (disabled) {
-          return {
-            year: true,
-            month: true,
-            day: true,
-            hour: true,
-            minute: true,
-            second: true,
-            millisecond: true
-          };
+      _computePartsDisabled(change, disabled) {
+        if (change === undefined) {
+          return;
         }
-        return {
-          year: !partsStep.day,
-          month: !partsStep.day,
-          day: !partsStep.day,
-          hour: !partsStep.hour,
-          minute: !partsStep.minute,
-          second: !partsStep.second,
-          millisecond: !partsStep.millisecond
-        };
+        const key = 'partsDisabled.' + change.path.split('.')[1];
+        if (disabled) {
+          this.set(key, true);
+        } else if (this.partsStep !== undefined) {
+          this.set(key, !change.value);
+        }
+        this.notifyPath('partsDisabled');
       }
     }
   }
