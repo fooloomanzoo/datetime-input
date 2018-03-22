@@ -22,9 +22,9 @@
         return `
           <div style$="order:[[_computePartOrder(dateOrder.dateFirst)]];" tabindex>
             <integer-input id="year" value="{{year}}" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[_ifClamped(clamp, 'year', partsHidden.year)]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
-            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, _ifClamped(clamp, 'year', partsHidden.year), _ifClamped(clamp, 'month', partsHidden.month), _ifClamped(clamp, 'day', partsHidden.day), 'true')]]">[[dateSeparator]]</span>
+            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.year, partsHidden.month, partsHidden.day, 'true')]]">[[dateSeparator]]</span>
             <integer-input id="month" value="{{month}}" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[_ifClamped(clamp, 'month', partsHidden.month)]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
-            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, _ifClamped(clamp, 'year', partsHidden.year), _ifClamped(clamp, 'month', partsHidden.month), _ifClamped(clamp, 'day', partsHidden.day))]]">[[dateSeparator]]</span>
+            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.year, partsHidden.month, partsHidden.day)]]">[[dateSeparator]]</span>
             <integer-input id="day" value="{{day}}" style$="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[_ifClamped(clamp, 'day', partsHidden.day)]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
           </div>
           ${super.inputTemplate || ''}
@@ -59,13 +59,16 @@
         this.$.day.startAt = d.getDate();
       }
 
-      _edgeIsHidden(order, yearHidden, monthHidden, dayHidden, leftToRight) {
+      _edgeIsHidden(order, clamp, yearHidden, monthHidden, dayHidden, leftToRight) {
         if (order === undefined) {
           return true; // hide if not fully initialized
         }
         if (yearHidden + monthHidden + dayHidden >= 2) {
           return true; // more than two are hidden
         }
+        yearHidden = this._ifClamped(clamp, 'year', yearHidden);
+        monthHidden = this._ifClamped(clamp, 'month', monthHidden);
+        dayHidden = this._ifClamped(clamp, 'day', dayHidden);
         if (leftToRight) {
           if (order.year < order.month) {
             if (order.year < order.day) {
@@ -173,21 +176,6 @@
 
       static get is() {
         return 'date-input';
-      }
-
-      _dateTimeChanged(date, time) {
-        if (this.__updatingTimezoneOffset) {
-          return;
-        }
-        if (date === undefined) {
-          if (this.default !== undefined) {
-            this._setDate(new Date(this.default));
-          } else {
-            this._resetDate();
-          }
-          return;
-        }
-        this.datetime = date + 'T' + (time || '00:00') + (this.timezone || 'Z');
       }
 
     }
