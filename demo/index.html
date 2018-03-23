@@ -84,7 +84,7 @@
                   --inner-input-focus-border-color: #207395;
                 }
               </style>
-              <date-input class="preset" default="2025-02-01T00:00" date="{{date}}"></date-input><br>
+              <date-input class="preset" default="2025-02-01T00:00" date="{{date}}"></date-input><br><br>
               <time-input class="preset" hour="11" time="{{time}}"></time-input>
               <div class="vertical-section-container result">
                 <div><code>date</code>: <b>[[date]]</b></div>
@@ -102,7 +102,7 @@
         <template>
           <dom-bind>
             <template is="dom-bind">
-              <datetime-input min="2025-02-01" max="2035-05-28T22:11:00+04:00" value="{{value}}" datetime="{{datetime}}" with-timezone></datetime-input>
+              <datetime-input min="2025-02-01" max="2035-05-28T22:11:00+04:00" value="{{value}}" datetime="{{datetime}}"></datetime-input>
               <div class="vertical-section-container result">
                 <div><code>datetime</code>: <b>[[datetime]]</b></div>
                 <div><code>value</code>: <b>[[value]]</b></div>
