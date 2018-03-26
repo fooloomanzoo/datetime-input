@@ -21,11 +21,11 @@
       static get inputTemplate() {
         return `
           <div style$="order:[[_computePartOrder(dateOrder.dateFirst)]];" tabindex>
-            <integer-input id="year" value="{{year}}" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[_ifClamped(clamp, 'year', partsHidden.year)]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
+            <integer-input id="year" value="{{year}}" start-at="[[_startAtYear]]" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[_ifClamped(clamp, 'year', partsHidden.year)]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
             <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.year, partsHidden.month, partsHidden.day, 'true')]]">[[dateSeparator]]</span>
-            <integer-input id="month" value="{{month}}" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[_ifClamped(clamp, 'month', partsHidden.month)]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
+            <integer-input id="month" value="{{month}}" start-at="[[_startAtMonth]]" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[_ifClamped(clamp, 'month', partsHidden.month)]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
             <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.year, partsHidden.month, partsHidden.day)]]">[[dateSeparator]]</span>
-            <integer-input id="day" value="{{day}}" style$="order:[[dateOrder.day]];" tabindex$="[[dateOrder.day]]" hidden$="[[_ifClamped(clamp, 'day', partsHidden.day)]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
+            <integer-input id="day" value="{{day}}" style$="order:[[dateOrder.day]];" start-at="[[_startAtDay]]" tabindex$="[[dateOrder.day]]" hidden$="[[_ifClamped(clamp, 'day', partsHidden.day)]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
           </div>
           ${super.inputTemplate || ''}
         `;
@@ -54,9 +54,9 @@
         if (isNaN(d)) {
           d = new Date();
         }
-        this.$.year.startAt = d.getFullYear();
-        this.$.month.startAt = d.getMonth() + 1;
-        this.$.day.startAt = d.getDate();
+        this._startAtYear = d.getFullYear();
+        this._startAtMonth = d.getMonth() + 1;
+        this._startAtDay = d.getDate();
       }
 
       _edgeIsHidden(order, clamp, yearHidden, monthHidden, dayHidden, leftToRight) {
@@ -129,7 +129,7 @@
      * `--input-padding`                  | padding of the input                           | 0.2em
      * `--input-border-radius`            | border-radius of the input                     | 0.25em
      * `--input-transition`               | transition of the input                        | background 250ms cubic-bezier(0.6, 1, 0.2, 1)
-     * `--input-allign`                   | text-allign of the input input                 | center
+     * `--input-align`                   | text-align of the input input                 | center
      * `--input-cursor`                   | cursor of the input input                      | initial
      * `--input-focus-color`              | color of the focussed and hovered input        | inherit
      * `--input-focus-background`         | background of the focussed and hovered input   | rgba(0, 0, 0, 0.16)
@@ -172,7 +172,7 @@
      * @demo demo/index.html
      * @demo demo/form.html in a form
      **/
-    class DateInput extends DateInputPattern(DatetimeInputMixin(Polymer.Element)) { // eslint-disable-line no-undef
+    class DateInput extends DateInputPattern(DatetimeInputMixin(DatetimeMixin(FormElementMixin(Polymer.Element)))) { // eslint-disable-line no-undef
 
       static get is() {
         return 'date-input';

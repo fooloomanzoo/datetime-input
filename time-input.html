@@ -72,7 +72,7 @@
             border-color: transparent;
           }
           #input integer-input[always-sign] {
-            --input-allign: end;
+            --input-align: end;
           }
           #input .hour12:hover,
           #input .hour12:focus {
@@ -114,9 +114,8 @@
           d = new Date();
         }
         setTimeout(() => {
-          const hourInput = this.root.querySelector('#hour');
-          hourInput.startAt = d.getHours();
-          this.$.minute.startAt = d.getMinutes();
+          this._startAtHour = d.getHours();
+          this._startAtMinute = d.getMinutes();
         })
       }
 
@@ -150,7 +149,7 @@
      * `--input-padding`                  | padding of the input                           | 0.2em
      * `--input-border-radius`            | border-radius of the input                     | 0.25em
      * `--input-transition`               | transition of the input                        | background 250ms cubic-bezier(0.6, 1, 0.2, 1)
-     * `--input-allign`                   | text-allign of the input input                 | center
+     * `--input-align`                   | text-align of the input input                 | center
      * `--input-cursor`                   | cursor of the input input                      | initial
      * `--input-focus-color`              | color of the focussed and hovered input        | inherit
      * `--input-focus-background`         | background of the focussed and hovered input   | rgba(0, 0, 0, 0.16)
@@ -193,7 +192,7 @@
      * @demo demo/index.html
      * @demo demo/form.html in a form
      **/
-    class TimeInput extends TimeInputPattern(DatetimeInputMixin(Polymer.Element)) { // eslint-disable-line no-undef
+    class TimeInput extends TimeInputPattern(DatetimeInputMixin(DatetimeMixin(FormElementMixin(Polymer.Element)))) { // eslint-disable-line no-undef
 
       static get is() {
         return 'time-input';
