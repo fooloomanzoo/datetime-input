@@ -51,7 +51,8 @@
             align-items: baseline;
           }
           #input > div {
-            padding: var(--input-field-padding, 0.1em);
+            padding: var(--input-field-padding, 0 1px);
+            border: var(--input-border-width, thin) solid transparent;
           }
           #input .reset {
             display: inline-flex;
@@ -82,7 +83,7 @@
           }
           #input .reset:hover,
           #input .reset:focus {
-            color: var(--input-focus-color, inherit);
+            color: var(--inner-input-focus-color, inherit);
             background-color: var(--inner-input-focus-background, rgba(0,0,0,0.16));
             border-style: var(--inner-input-focus-border-style, dotted);
             border-color: var(--inner-input-focus-border-color, transparent);
@@ -298,12 +299,19 @@
         if (!(change && change.path)) {
           return;
         }
-        const key = 'partsDisabled.' + change.path.split('.')[1];
-        if (disabled) {
-          this.set(key, true);
-        } else if (this.partsStep !== undefined) {
-          this.set(key, !change.value);
+        if (change.path.indexOf('.') !== -1) {
+          const key = 'partsDisabled.' + change.path.split('.')[1];
+          if (disabled) {
+            this.set(key, true);
+          } else {
+            this.set(key, !change.value);
+          }
+        } else if (change && change.value) {
+          for (let key in change.value) {
+            this.set('partsDisabled.' + key, !change.value[key]);
+          }
         }
+
         this.notifyPath('partsDisabled');
       }
     }

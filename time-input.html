@@ -19,30 +19,30 @@
         return `
           <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];" hidden$="[[_ifClamped(clamp, 'hour')]]">
             <span hidden$="[[_ifClamped(clamp, 'hour', partsHidden.hour)]]">
-              <integer-input value="{{hour}}" id="hour" hidden$="[[hour12Format]]" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
+              <integer-input value-as-number="{{hour}}" id="hour" hidden$="[[hour12Format]]" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
               <template is="dom-if" if="[[hour12Format]]">
-                <integer-input value="{{hour12}}" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
+                <integer-input value-as-number="{{hour12}}" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
               </template>
             </span>
             <span hidden$="[[_computeMultibleClamp(clamp, 'hour', partsHidden.hour, 'minute', partsHidden.minute)]]">[[timeSeparator]]</span>
-            <integer-input id="minute" value="{{minute}}" hidden$="[[_ifClamped(clamp, 'minute', partsHidden.minute)]]" pad-length="2" no-clamp step="[[partsStep.minute]]" disabled="[[partsDisabled.minute]]" placeholder="00"></integer-input>
+            <integer-input id="minute" value-as-number="{{minute}}" hidden$="[[_ifClamped(clamp, 'minute', partsHidden.minute)]]" pad-length="2" no-clamp step="[[partsStep.minute]]" disabled="[[partsDisabled.minute]]" placeholder="00"></integer-input>
             <span hidden$="[[_computeMultibleClamp(clamp, 'second', partsHidden.second, 'minute', partsHidden.minute)]]">[[timeSeparator]]</span>
-            <integer-input hidden$="[[_ifClamped(clamp, 'second', partsHidden.second)]]" pad-length="2" no-clamp step="[[partsStep.second]]" disabled="[[partsDisabled.second]]" value="{{second}}" placeholder="00"></integer-input>
+            <integer-input hidden$="[[_ifClamped(clamp, 'second', partsHidden.second)]]" pad-length="2" no-clamp step="[[partsStep.second]]" disabled="[[partsDisabled.second]]" value-as-number="{{second}}" placeholder="00"></integer-input>
             <template is="dom-if" if="[[_ifClamped(clamp, 'second', partsHidden.second)]]">
               <span hidden$="[[_ifClamped(clamp, 'millisecond', partsHidden.millisecond)]]">0</span>
             </template>
             <span hidden$="[[_ifClamped(clamp, 'millisecond', partsHidden.millisecond)]]">[[decimalSeparator]]</span>
-            <integer-input value="{{millisecond}}" hidden$="[[_ifClamped(clamp, 'millisecond', partsHidden.millisecond)]]" pad-length="3" no-clamp step="[[partsStep.millisecond]]" disabled="[[partsDisabled.millisecond]]" placeholder="000"></integer-input>
+            <integer-input value-as-number="{{millisecond}}" hidden$="[[_ifClamped(clamp, 'millisecond', partsHidden.millisecond)]]" pad-length="3" no-clamp step="[[partsStep.millisecond]]" disabled="[[partsDisabled.millisecond]]" placeholder="000"></integer-input>
             <template is="dom-if" if="[[hour12Format]]">
-              <button class="hour12" hidden$="[[!_valueIsSet]]" on-click="_switchAm">
-                <span hidden$="[[!isAm]]">[[amString]]</span>
-                <span hidden$="[[isAm]]">[[pmString]]</span>
+              <button class="hour12" disabled$="[[partsHidden.hour]]" on-click="_switchAm" hidden$="[[!_valueIsSet]]">
+                <div hidden$="[[!isAm]]">[[amString]]</div>
+                <div hidden$="[[isAm]]">[[pmString]]</div>
               </button>
             </template>
             <template is="dom-if" if="[[withTimezone]]">
-              <integer-input value="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="+00" min="-23" max="23"></integer-input>
+              <integer-input value-as-number="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="+00" min="-23" max="23"></integer-input>
               <span>[[timeSeparator]]</span>
-              <integer-input value="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
+              <integer-input value-as-number="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
             </template>
           </div>
           ${super.inputTemplate || ''}
@@ -53,34 +53,14 @@
         return `
           ${super.styleTemplate || ''}
           #input .hour12 {
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            appearance: none;
-            color: inherit;
-            background: transparent;
-            align-self: stretch;
-            cursor: pointer;
             font-size: 0.8em;
             margin: 0 0.2em;
             padding: 0.1em;
-            border-radius: var(--inner-input-border-radius, 0.2em);
-            border-width: var(--inner-input-border-width, thin);
-            border-style: var(--inner-input-border-style, dotted);
-            border-color: var(--inner-input-border-color, transparent);
-            transition: var(--input-transition, background 250ms cubic-bezier(0.6, 1, 0.2, 1));
-            @apply --input-style;
+            align-self: stretch;
             border-color: transparent;
           }
           #input integer-input[always-sign] {
             --input-align: end;
-          }
-          #input .hour12:hover,
-          #input .hour12:focus {
-            color: var(--input-focus-color, inherit);
-            background: var(--inner-input-focus-background, rgba(0,0,0,0.16));
-            border-style: var(--inner-input-focus-border-style, dotted);
-            border-color: var(--inner-input-focus-border-color, transparent);
-            outline: none;
           }
         `
       }
@@ -104,21 +84,6 @@
         }
       }
 
-      connectedCallback() {
-        super.connectedCallback();
-        let d;
-        if (this.default) {
-          d = new Date(this.default);
-        }
-        if (isNaN(d)) {
-          d = new Date();
-        }
-        setTimeout(() => {
-          this._startAtHour = d.getHours();
-          this._startAtMinute = d.getMinutes();
-        })
-      }
-
       _switchAm() {
         this.isAm = !this.isAm;
       }
@@ -139,49 +104,7 @@
      *    <time-input value="{{value}}"></time-input>
      *  ```
      *
-     * Custom property | Description | Default
-     * ----------------|-------------|----------
-     * `--input-color`                    | color of the input                             | inherit
-     * `--input-background`               | background of the input                        | transparent
-     * `--input-border-width`             | border width of the input                      | thin
-     * `--input-border-style`             | border style of the input                      | dotted
-     * `--input-border-color`             | border color of the input                      | transparent
-     * `--input-padding`                  | padding of the input                           | 0.2em
-     * `--input-border-radius`            | border-radius of the input                     | 0.25em
-     * `--input-transition`               | transition of the input                        | background 250ms cubic-bezier(0.6, 1, 0.2, 1)
-     * `--input-align`                   | text-align of the input input                 | center
-     * `--input-cursor`                   | cursor of the input input                      | initial
-     * `--input-focus-color`              | color of the focussed and hovered input        | inherit
-     * `--input-focus-background`         | background of the focussed and hovered input   | rgba(0, 0, 0, 0.16)
-     * `--input-focus-border-style`       | border style of the focussed and hovered input | dotted
-     * `--input-focus-border-color`       | border color of the focussed and hovered input | currentColor
-     * `--input-invalid-color`            | color of the invalid input                     | inherit
-     * `--input-invalid-background`       | background of the invalid input                | rgba(255, 0, 0, 0.16)
-     * `--input-invalid-border-style`     | border style of the invalid input              | dotted
-     * `--input-invalid-border-color`     | border color of the invalid input              | rgba(255, 0, 0, 0.5)
-     * `--input-disabled-color`           | color of the disabled input                    | inherit
-     * `--input-disabled-background`      | background of the disabled input               | transparent
-     * `--input-disabled-font-style`      | font-style of the disabled input               | oblique
-     * `--input-disabled-opacity`         | opacity of the disabled input                  | 0.9
-     * `--input-placeholder-color`        | color of the placeholder                       | inherit
-     * `--input-placeholder-opacity`      | opacity of the placeholder                     | 0.75
-     * `--input-selection-color`          | color of the selected text                     | inherit
-     * `--input-selection-background`     | background of the selected text                | rgba(255, 255, 255, 0.5)
-     * `--input-style`                    | style of the input                             | {}
-     * `--input-focus`                    | style of the focussed and hovered input        | {}
-     * `--input-invalid`                  | style of the invalid input                     | {}
-     * `--input-placeholder`              | style of the placeholder                       | {}
-     * `--inner-input-color`              | color of the inner inputs                      | inherit
-     * `--inner-input-background`         | background of the inner inputs                        | transparent
-     * `--inner-input-border-width`       | border width of the inner inputs                      | thin
-     * `--inner-input-border-style`       | border style of the inner inputs                      | dotted
-     * `--inner-input-border-color`       | border color of the inner inputs                      | transparent
-     * `--inner-input-padding`            | padding of the inner inputs                           | 0.1em
-     * `--inner-input-border-radius`      | border-radius of the inner inputs                     | 0.1em
-     * `--inner-input-focus-color`        | color of the focussed and hovered inner inputs        | inherit
-     * `--inner-input-focus-background`   | background of the focussed and hovered inner inputs   | rgba(0, 0, 0, 0.16)
-     * `--inner-input-focus-border-style` | border style of the focussed and hovered inner inputs | dotted
-     * `--inner-input-focus-border-color` | border color of the focussed and hovered inner inputs | currentColor
+     *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see the used style-properties. 
      *
      *  @polymer
      *  @customElement
@@ -198,13 +121,14 @@
         return 'time-input';
       }
 
-      /**
-       *  Sets value to the actual date
-       **/
-      now() {
-        this._setDate(this._fromDatetime((this.date ? this.date + 'T' : '') + this._toTime(new Date())));
+      static get properties() {
+        return {
+          _timeOnly: {
+            type: Boolean,
+            value: true
+          }
+        }
       }
-
     }
     window.customElements.define(TimeInput.is, TimeInput);
   </script>

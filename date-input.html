@@ -21,11 +21,11 @@
       static get inputTemplate() {
         return `
           <div style$="order:[[_computePartOrder(dateOrder.dateFirst)]];" tabindex>
-            <integer-input id="year" value="{{year}}" start-at="[[_startAtYear]]" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[_ifClamped(clamp, 'year', partsHidden.year)]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
+            <integer-input id="year" value-as-number="{{year}}" start-at="[[_getDefaultForProp('year')]]" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[_ifClamped(clamp, 'year', partsHidden.year)]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
             <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.year, partsHidden.month, partsHidden.day, 'true')]]">[[dateSeparator]]</span>
-            <integer-input id="month" value="{{month}}" start-at="[[_startAtMonth]]" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[_ifClamped(clamp, 'month', partsHidden.month)]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
+            <integer-input id="month" value-as-number="{{month}}" start-at="[[_getDefaultForProp('month')]]" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[_ifClamped(clamp, 'month', partsHidden.month)]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
             <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.year, partsHidden.month, partsHidden.day)]]">[[dateSeparator]]</span>
-            <integer-input id="day" value="{{day}}" style$="order:[[dateOrder.day]];" start-at="[[_startAtDay]]" tabindex$="[[dateOrder.day]]" hidden$="[[_ifClamped(clamp, 'day', partsHidden.day)]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
+            <integer-input id="day" value-as-number="{{day}}" style$="order:[[dateOrder.day]];" start-at="[[_getDefaultForProp('day')]]" tabindex$="[[dateOrder.day]]" hidden$="[[_ifClamped(clamp, 'day', partsHidden.day)]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
           </div>
           ${super.inputTemplate || ''}
         `;
@@ -43,20 +43,6 @@
             notify: true
           }
         }
-      }
-
-      connectedCallback() {
-        super.connectedCallback();
-        let d;
-        if (this.default) {
-          d = new Date(this.default);
-        }
-        if (isNaN(d)) {
-          d = new Date();
-        }
-        this._startAtYear = d.getFullYear();
-        this._startAtMonth = d.getMonth() + 1;
-        this._startAtDay = d.getDate();
       }
 
       _edgeIsHidden(order, clamp, yearHidden, monthHidden, dayHidden, leftToRight) {
@@ -100,11 +86,18 @@
         }
       }
 
-      /**
-       *  Sets value to the actual date
-       **/
-      now() {
-        this._setDate(this._fromDatetime(this._toDate(new Date())));
+      _getDefaultForProp(prop) {
+        const d = (this.default && this._fromDatetime(this.default)) || new Date();
+        switch (prop) {
+          case 'year':
+            return d.getFullYear();
+          case 'month':
+            return d.getMonth() + 1;
+          case 'day':
+            return d.getDate();
+          default:
+            return 0;
+        }
       }
     }
   }
@@ -119,49 +112,7 @@
      *    <date-input value="{{value}}"></date-input>
      *  ```
      *
-     * Custom property | Description | Default
-     * ----------------|-------------|----------
-     * `--input-color`                    | color of the input                             | inherit
-     * `--input-background`               | background of the input                        | transparent
-     * `--input-border-width`             | border width of the input                      | thin
-     * `--input-border-style`             | border style of the input                      | dotted
-     * `--input-border-color`             | border color of the input                      | transparent
-     * `--input-padding`                  | padding of the input                           | 0.2em
-     * `--input-border-radius`            | border-radius of the input                     | 0.25em
-     * `--input-transition`               | transition of the input                        | background 250ms cubic-bezier(0.6, 1, 0.2, 1)
-     * `--input-align`                   | text-align of the input input                 | center
-     * `--input-cursor`                   | cursor of the input input                      | initial
-     * `--input-focus-color`              | color of the focussed and hovered input        | inherit
-     * `--input-focus-background`         | background of the focussed and hovered input   | rgba(0, 0, 0, 0.16)
-     * `--input-focus-border-style`       | border style of the focussed and hovered input | dotted
-     * `--input-focus-border-color`       | border color of the focussed and hovered input | currentColor
-     * `--input-invalid-color`            | color of the invalid input                     | inherit
-     * `--input-invalid-background`       | background of the invalid input                | rgba(255, 0, 0, 0.16)
-     * `--input-invalid-border-style`     | border style of the invalid input              | dotted
-     * `--input-invalid-border-color`     | border color of the invalid input              | rgba(255, 0, 0, 0.5)
-     * `--input-disabled-color`           | color of the disabled input                    | inherit
-     * `--input-disabled-background`      | background of the disabled input               | transparent
-     * `--input-disabled-font-style`      | font-style of the disabled input               | oblique
-     * `--input-disabled-opacity`         | opacity of the disabled input                  | 0.9
-     * `--input-placeholder-color`        | color of the placeholder                       | inherit
-     * `--input-placeholder-opacity`      | opacity of the placeholder                     | 0.75
-     * `--input-selection-color`          | color of the selected text                     | inherit
-     * `--input-selection-background`     | background of the selected text                | rgba(255, 255, 255, 0.5)
-     * `--input-style`                    | style of the input                             | {}
-     * `--input-focus`                    | style of the focussed and hovered input        | {}
-     * `--input-invalid`                  | style of the invalid input                     | {}
-     * `--input-placeholder`              | style of the placeholder                       | {}
-     * `--inner-input-color`              | color of the inner inputs                      | inherit
-     * `--inner-input-background`         | background of the inner inputs                        | transparent
-     * `--inner-input-border-width`       | border width of the inner inputs                      | thin
-     * `--inner-input-border-style`       | border style of the inner inputs                      | dotted
-     * `--inner-input-border-color`       | border color of the inner inputs                      | transparent
-     * `--inner-input-padding`            | padding of the inner inputs                           | 0.1em
-     * `--inner-input-border-radius`      | border-radius of the inner inputs                     | 0.1em
-     * `--inner-input-focus-color`        | color of the focussed and hovered inner inputs        | inherit
-     * `--inner-input-focus-background`   | background of the focussed and hovered inner inputs   | rgba(0, 0, 0, 0.16)
-     * `--inner-input-focus-border-style` | border style of the focussed and hovered inner inputs | dotted
-     * `--inner-input-focus-border-color` | border color of the focussed and hovered inner inputs | currentColor
+     *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see the used style-properties. 
      *
      *  @polymer
      *  @customElement
