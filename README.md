@@ -100,6 +100,9 @@ The properties `date`, `time`, `datetime` are always in **iso8061** but the visu
 <p>datetime: [[datetime]]</p>
 ```
 
+### Styling
+Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see how to style the element.
+
 ### Installation
 ```
 bower install --save fooloomanzoo/datetime-input
