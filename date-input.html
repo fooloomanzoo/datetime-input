@@ -22,9 +22,9 @@
         return `
           <div style$="order:[[_computePartOrder(dateOrder.dateFirst)]];" tabindex>
             <integer-input id="year" value-as-number="{{year}}" start-at="[[_getDefaultForProp('year')]]" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[_ifClamped(clamp, 'year', partsHidden.year)]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
-            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.year, partsHidden.month, partsHidden.day, 'true')]]">[[dateSeparator]]</span>
+            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.*, 'true')]]">[[dateSeparator]]</span>
             <integer-input id="month" value-as-number="{{month}}" start-at="[[_getDefaultForProp('month')]]" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[_ifClamped(clamp, 'month', partsHidden.month)]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
-            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.year, partsHidden.month, partsHidden.day)]]">[[dateSeparator]]</span>
+            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.*)]]">[[dateSeparator]]</span>
             <integer-input id="day" value-as-number="{{day}}" style$="order:[[dateOrder.day]];" start-at="[[_getDefaultForProp('day')]]" tabindex$="[[dateOrder.day]]" hidden$="[[_ifClamped(clamp, 'day', partsHidden.day)]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
           </div>
           ${super.inputTemplate || ''}
@@ -45,43 +45,43 @@
         }
       }
 
-      _edgeIsHidden(order, clamp, yearHidden, monthHidden, dayHidden, leftToRight) {
+      _edgeIsHidden(order, clamp, hidden, leftToRight) {
         if (order === undefined) {
           return true; // hide if not fully initialized
         }
-        if (yearHidden + monthHidden + dayHidden >= 2) {
+        const yearHidden = this._ifClamped(clamp, 'year', this.partsHidden.year),
+        monthHidden = this._ifClamped(clamp, 'month', this.partsHidden.month),
+        dayHidden = this._ifClamped(clamp, 'day', this.partsHidden.day);
+
+        const total = yearHidden + monthHidden + dayHidden;
+        if (total >= 2) {
           return true; // more than two are hidden
+        } else if (!total) {
+          return false; // none is hidden
         }
-        yearHidden = this._ifClamped(clamp, 'year', yearHidden);
-        monthHidden = this._ifClamped(clamp, 'month', monthHidden);
-        dayHidden = this._ifClamped(clamp, 'day', dayHidden);
+
         if (leftToRight) {
-          if (order.year < order.month) {
-            if (order.year < order.day) {
-              return Boolean(yearHidden);
-            } else {
-              return Boolean(dayHidden);
-            }
-          } else {
-            if (order.month < order.day) {
-              return Boolean(monthHidden);
-            } else {
-              return Boolean(dayHidden);
-            }
+          if (order.year < order.month && order.year < order.day) {
+            return Boolean(yearHidden);
+          }
+          if (order.month < order.year && order.month < order.day) {
+            return Boolean(monthHidden);
+          }
+          if (order.day < order.year && order.day < order.month) {
+            return Boolean(dayHidden);
           }
         } else {
-          if (order.year > order.month) {
-            if (order.year > order.day) {
-              return Boolean(yearHidden);
-            } else {
-              return Boolean(dayHidden);
-            }
-          } else {
-            if (order.month > order.day) {
-              return Boolean(monthHidden);
-            } else {
-              return Boolean(dayHidden);
-            }
+          if (order.day === 3 && dayHidden === true) {
+            return true;
+          }
+          if (order.year > order.month && order.year > order.day) {
+            return Boolean(yearHidden);
+          }
+          if (order.month > order.year && order.month > order.day) {
+            return Boolean(monthHidden);
+          }
+          if (order.day > order.year && order.day > order.month) {
+            return Boolean(dayHidden);
           }
         }
       }
@@ -112,7 +112,7 @@
      *    <date-input value="{{value}}"></date-input>
      *  ```
      *
-     *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see the used style-properties. 
+     *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see the used style-properties.
      *
      *  @polymer
      *  @customElement
