@@ -1159,13 +1159,7 @@
               "name": "clamp"
             },
             {
-              "name": "yearHidden"
-            },
-            {
-              "name": "monthHidden"
-            },
-            {
-              "name": "dayHidden"
+              "name": "hidden"
             },
             {
               "name": "leftToRight"
@@ -7140,13 +7134,7 @@
               "name": "clamp"
             },
             {
-              "name": "yearHidden"
-            },
-            {
-              "name": "monthHidden"
-            },
-            {
-              "name": "dayHidden"
+              "name": "hidden"
             },
             {
               "name": "leftToRight"
@@ -11979,13 +11967,7 @@
               "name": "clamp"
             },
             {
-              "name": "yearHidden"
-            },
-            {
-              "name": "monthHidden"
-            },
-            {
-              "name": "dayHidden"
+              "name": "hidden"
             },
             {
               "name": "leftToRight"
