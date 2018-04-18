@@ -18,12 +18,10 @@
       static get inputTemplate() {
         return `
           <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];" hidden$="[[_ifClamped(clamp, 'hour')]]">
-            <span hidden$="[[_ifClamped(clamp, 'hour', partsHidden.hour)]]">
-              <integer-input value-as-number="{{hour}}" id="hour" hidden$="[[hour12Format]]" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
-              <template is="dom-if" if="[[hour12Format]]">
-                <integer-input value-as-number="{{hour12}}" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]"></integer-input>
-              </template>
-            </span>
+            <integer-input value-as-number="{{hour}}" id="hour" hidden$="[[hour12Format]]" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]" hidden$="[[_ifClamped(clamp, 'hour', partsHidden.hour)]]"></integer-input>
+            <template is="dom-if" if="[[hour12Format]]">
+              <integer-input value-as-number="{{hour12}}" pad-length="2" no-clamp placeholder="00" step="[[partsStep.hour]]" disabled="[[partsDisabled.hour]]" hidden$="[[_ifClamped(clamp, 'hour', partsHidden.hour)]]"></integer-input>
+            </template>
             <span hidden$="[[_computeMultibleClamp(clamp, 'hour', partsHidden.hour, 'minute', partsHidden.minute)]]">[[timeSeparator]]</span>
             <integer-input id="minute" value-as-number="{{minute}}" hidden$="[[_ifClamped(clamp, 'minute', partsHidden.minute)]]" pad-length="2" no-clamp step="[[partsStep.minute]]" disabled="[[partsDisabled.minute]]" placeholder="00"></integer-input>
             <span hidden$="[[_computeMultibleClamp(clamp, 'second', partsHidden.second, 'minute', partsHidden.minute)]]">[[timeSeparator]]</span>
@@ -104,7 +102,7 @@
      *    <time-input value="{{value}}"></time-input>
      *  ```
      *
-     *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see the used style-properties. 
+     *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see the used style-properties.
      *
      *  @polymer
      *  @customElement
