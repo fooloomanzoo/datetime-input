@@ -33,6 +33,7 @@
             <template is="dom-bind">
               <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
               <input type="checkbox" checked="{{hour12Format::change}}">hour12 format<br><br>
+              <input type="checkbox" checked="{{hideResetButton::change}}">hide reset button<br><br>
               step: <number-input class="step" no-clamp default="1" minlength="2" value="{{step}}"></number-input><br><br>
               locale: <input list="locales" value="{{locale::change}}">
               <datalist id="locales">
@@ -47,13 +48,13 @@
               </datalist>
               <br>
               <br>
-              <datetime-input value="{{value}}" locale="{{locale}}" step="[[step]]" datetime="{{datetime}}" hour12-format="{{hour12Format}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone="{{timezone}}"></datetime-input>
+              <datetime-input value="{{value}}" locale="{{locale}}" step="[[step]]" datetime="{{datetime}}" hour12-format="{{hour12Format}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone="{{timezone}}" hide-reset-button="[[hideResetButton]]"></datetime-input>
               <br>
               <br>
-              <date-input date="{{date}}" locale="[[locale]]" step="[[step]]" timezone="[[timezone]]"></date-input>
+              <date-input date="{{date}}" locale="[[locale]]" step="[[step]]" timezone="[[timezone]]" hide-reset-button="[[hideResetButton]]"></date-input>
               <br>
               <br>
-              <time-input time="{{time}}" locale="[[locale]]" step="[[step]]" hour12-format="{{hour12Format}}" timezone="[[timezone]]" with-timezone="{{withTimezone}}"></time-input>
+              <time-input time="{{time}}" locale="[[locale]]" step="[[step]]" hour12-format="{{hour12Format}}" timezone="[[timezone]]" with-timezone="{{withTimezone}}" hide-reset-button="[[hideResetButton]]"></time-input>
               <p>
                 <code>datetime:</code>&#32;<b>[[datetime]]</b><br>
                 <code>date:</code>&#32;<b>[[date]]</b><br>

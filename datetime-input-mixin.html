@@ -1,8 +1,5 @@
-<link rel="import" href="../property-mixins/datetime-mixin.html">
-<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
 <link rel="import" href="../input-picker-pattern/input-shared-style.html">
 <link rel="import" href="../input-picker-pattern/input-picker-shared-style.html">
-
 <script>
   /**
    * Mixin to extend an element for picking date or time to locale formating and hiding certain datetime-properties
@@ -66,22 +63,12 @@
        */
       static get inputTemplate() {
         return `
-          ${super.inputTemplate || '<button class="icon reset" invisible$="[[_resetButtonIsInvisible]]" hidden$="[[disabled]]" on-click="_resetDate"><svg viewBox="0 0 24 24"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg></button>'}
+          ${super.inputTemplate || '<button class="icon reset" invisible$="[[_resetButtonIsInvisible]]" hidden$="[[_computeOr(disabled,hideResetButton)]]" on-click="resetDate"><svg viewBox="0 0 24 24"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg></button>'}
         `
       }
 
       static get properties() {
         return {
-
-          _resetButtonIsInvisible: {
-            type: Boolean,
-            computed: '_computeResetButtonIsHidden(_valueIsSet, _defaultValue, value)'
-          },
-
-          _defaultValue: {
-            type: Number,
-            computed: '_computeDefaultValue(default)'
-          },
 
           /**
           * If set the step defines the step a date should be incremented (in seconds). The input for the most inferior standing that would create an integer step is used to increment the value.
@@ -144,8 +131,22 @@
           propertyForValue: {
             type: String,
             value: 'valueAsNumber'
-          }
+          },
 
+          hideResetButton: {
+            type: Boolean,
+            reflectToAttribute: true
+          },
+
+          _resetButtonIsInvisible: {
+            type: Boolean,
+            computed: '_computeResetButtonIsHidden(_valueIsSet, _defaultValue, value)'
+          },
+
+          _defaultValue: {
+            type: Number,
+            computed: '_computeDefaultValue(default)'
+          }
         }
       }
 
@@ -157,7 +158,11 @@
       }
 
       _computeInvalid(required, value) {
-        this.invalid = required && isNaN(value);
+        this.invalid = required && (value === undefined);
+      }
+
+      _computeOr(a, b) {
+        return Boolean(a || b);
       }
 
       _computePartOrder(first) {
@@ -275,6 +280,20 @@
         }
 
         this.notifyPath('partsDisabled');
+      }
+
+      _getDefaultForProp(prop) {
+        const d = (this.default && this._fromDatetime(this.default)) || new Date();
+        switch (prop) {
+          case 'year':
+            return d.getFullYear();
+          case 'month':
+            return d.getMonth() + 1;
+          case 'day':
+            return d.getDate();
+          default:
+            return 0;
+        }
       }
     }
   }

@@ -10,7 +10,8 @@
     "build": "git pull && bower update && polymer analyze > analysis.json",
     "prestart": "polymer analyze > analysis.json",
     "start": "polymer serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "polymer test",
+    "test:p": "polymer test -p --config-file=wct.p.conf.json"
   },
   "keywords": [
     "date",

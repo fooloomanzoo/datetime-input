@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../number-input/integer-input.html">
-
+<link rel="import" href="../property-mixins/datetime-mixin.html">
+<link rel="import" href="../property-mixins/intl-datetime-format-mixin.html">
+<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
 <link rel="import" href="datetime-input-mixin.html">
 
 <script>
@@ -20,12 +22,12 @@
 
       static get inputTemplate() {
         return `
-          <div style$="order:[[_computePartOrder(dateOrder.dateFirst)]];" tabindex>
-            <integer-input id="year" value-as-number="{{year}}" start-at="[[_getDefaultForProp('year')]]" style$="order:[[dateOrder.year]];" tabindex$="[[dateOrder.year]]" hidden$="[[_ifClamped(clamp, 'year', partsHidden.year)]]" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]"></integer-input>
-            <span style="order:2;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.*, 'true')]]">[[dateSeparator]]</span>
-            <integer-input id="month" value-as-number="{{month}}" start-at="[[_getDefaultForProp('month')]]" style$="order:[[dateOrder.month]];" tabindex$="[[dateOrder.month]]" hidden$="[[_ifClamped(clamp, 'month', partsHidden.month)]]" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]"></integer-input>
-            <span style="order:4;" hidden$="[[_edgeIsHidden(dateOrder, clamp, partsHidden.*)]]">[[dateSeparator]]</span>
-            <integer-input id="day" value-as-number="{{day}}" style$="order:[[dateOrder.day]];" start-at="[[_getDefaultForProp('day')]]" tabindex$="[[dateOrder.day]]" hidden$="[[_ifClamped(clamp, 'day', partsHidden.day)]]" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]"></integer-input>
+          <div id="date" style$="order:[[_computePartOrder(dateOrder.dateFirst)]];" tabindex>
+            <integer-input id="year" value-as-number="{{year}}" pad-length="4" placeholder="−−−−" disabled="[[partsDisabled.year]]" start-at="[[_getDefaultForProp('year')]]"></integer-input>
+            <span id="dateSeparator1">[[dateSeparator]]</span>
+            <integer-input id="month" value-as-number="{{month}}" pad-length="2" placeholder="−−" disabled="[[partsDisabled.month]]" start-at="[[_getDefaultForProp('month')]]"></integer-input>
+            <span id="dateSeparator2"]]">[[dateSeparator]]</span>
+            <integer-input id="day" value-as-number="{{day}}" no-clamp pad-length="2" placeholder="−−" step="[[partsStep.day]]" disabled="[[partsDisabled.day]]" start-at="[[_getDefaultForProp('day')]]"></integer-input>
           </div>
           ${super.inputTemplate || ''}
         `;
@@ -45,59 +47,58 @@
         }
       }
 
-      _edgeIsHidden(order, clamp, hidden, leftToRight) {
-        if (order === undefined) {
-          return true; // hide if not fully initialized
-        }
-        const yearHidden = this._ifClamped(clamp, 'year', this.partsHidden.year),
-        monthHidden = this._ifClamped(clamp, 'month', this.partsHidden.month),
-        dayHidden = this._ifClamped(clamp, 'day', this.partsHidden.day);
-
-        const total = yearHidden + monthHidden + dayHidden;
-        if (total >= 2) {
-          return true; // more than two are hidden
-        } else if (!total) {
-          return false; // none is hidden
-        }
-
-        if (leftToRight) {
-          if (order.year < order.month && order.year < order.day) {
-            return Boolean(yearHidden);
-          }
-          if (order.month < order.year && order.month < order.day) {
-            return Boolean(monthHidden);
-          }
-          if (order.day < order.year && order.day < order.month) {
-            return Boolean(dayHidden);
-          }
-        } else {
-          if (order.day === 3 && dayHidden === true) {
-            return true;
-          }
-          if (order.year > order.month && order.year > order.day) {
-            return Boolean(yearHidden);
-          }
-          if (order.month > order.year && order.month > order.day) {
-            return Boolean(monthHidden);
-          }
-          if (order.day > order.year && order.day > order.month) {
-            return Boolean(dayHidden);
-          }
-        }
+      static get observers() {
+        return [
+          '_orderDateParts(dateOrder, partsHidden, clamp)'
+        ]
       }
 
-      _getDefaultForProp(prop) {
-        const d = (this.default && this._fromDatetime(this.default)) || new Date();
-        switch (prop) {
-          case 'year':
-            return d.getFullYear();
-          case 'month':
-            return d.getMonth() + 1;
-          case 'day':
-            return d.getDate();
-          default:
-            return 0;
-        }
+      _orderDateParts(dateOrder, partsHidden, clamp) {
+        requestAnimationFrame(() => {
+          // set hidden attributes
+          let hidden = this._ifClamped(clamp, dateOrder.parts[0], partsHidden[dateOrder.parts[0]]),
+            totalhidden = 0;
+          if (hidden) {
+            this.$[dateOrder.parts[0]].setAttribute('hidden');
+            this.$.dateSeparator1.setAttribute('hidden');
+            totalhidden++;
+          } else {
+            this.$[dateOrder.parts[0]].removeAttribute('hidden');
+            this.$.dateSeparator1.removeAttribute('hidden');
+          }
+          hidden = this._ifClamped(clamp, dateOrder.parts[1], partsHidden[dateOrder.parts[1]]);
+          if (hidden) {
+            this.$[dateOrder.parts[1]].setAttribute('hidden');
+            totalhidden++;
+          } else {
+            this.$[dateOrder.parts[1]].removeAttribute('hidden');
+          }
+          hidden = this._ifClamped(clamp, dateOrder.parts[2], partsHidden[dateOrder.parts[2]]);
+          if (hidden) {
+            this.$[dateOrder.parts[2]].setAttribute('hidden');
+            this.$.dateSeparator2.setAttribute('hidden');
+            totalhidden++;
+          } else {
+            this.$[dateOrder.parts[2]].removeAttribute('hidden');
+            this.$.dateSeparator2.removeAttribute('hidden');
+          }
+
+          if (totalhidden >= 2) {
+            this.$.dateSeparator1.setAttribute('hidden');
+            this.$.dateSeparator2.setAttribute('hidden');
+          }
+
+          // reorder parts
+          this.$.date.appendChild(this.$[dateOrder.parts[0]]);
+          this.$.date.appendChild(this.$.dateSeparator1);
+          this.$.date.appendChild(this.$[dateOrder.parts[1]]);
+          this.$.date.appendChild(this.$.dateSeparator2);
+          this.$.date.appendChild(this.$[dateOrder.parts[2]]);
+
+          if (this.$[dateOrder.parts[2]].hasAttribute('hidden')) {
+            this.$.dateSeparator2.setAttribute('hidden');
+          }
+        })
       }
     }
   }
@@ -123,7 +124,7 @@
      * @demo demo/index.html
      * @demo demo/form.html in a form
      **/
-    class DateInput extends DateInputPattern(DatetimeInputMixin(DatetimeMixin(FormElementMixin(Polymer.Element)))) { // eslint-disable-line no-undef
+    class DateInput extends DateInputPattern(DatetimeInputMixin(FormElementMixin(DatetimeMixin(IntlDatetimeFormatMixin(Polymer.Element))))) { // eslint-disable-line no-undef
 
       static get is() {
         return 'date-input';

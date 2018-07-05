@@ -1,5 +1,9 @@
 <link rel="import" href="../polymer/polymer.html">
-
+<link rel="import" href="../number-input/integer-input.html">
+<link rel="import" href="../property-mixins/datetime-mixin.html">
+<link rel="import" href="../property-mixins/intl-datetime-format-mixin.html">
+<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
+<link rel="import" href="datetime-input-mixin.html">
 <link rel="import" href="date-input.html">
 <link rel="import" href="time-input.html">
 
@@ -12,7 +16,7 @@
    *    <datetime-input value="{{value}}"></datetime-input>
    *  ```
    *
-   *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see the used style-properties. 
+   *  Have a look at [input-picker-pattern#input-shared-style](https://github.com/fooloomanzoo/input-picker-pattern#input-shared-style) to see the used style-properties.
    *
    *  @polymer
    *  @customElement
@@ -24,7 +28,7 @@
    *  @demo demo/index.html
    * @demo demo/form.html in a form
    **/
-    class DatetimeInput extends DateInputPattern(TimeInputPattern(DatetimeInputMixin(DatetimeMixin(FormElementMixin(Polymer.Element))))) { // eslint-disable-line no-undef
+    class DatetimeInput extends DateInputPattern(TimeInputPattern(DatetimeInputMixin(FormElementMixin(DatetimeMixin(IntlDatetimeFormatMixin(Polymer.Element)))))) { // eslint-disable-line no-undef
 
       static get properties() {
         return {
