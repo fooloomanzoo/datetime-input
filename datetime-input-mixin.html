@@ -99,7 +99,7 @@
           /**
            * date-parts that are disabled
            */
-          partsDisabled: {
+          _partsDisabled: {
             type: Object,
             notify: true,
             value: function() {
@@ -110,7 +110,7 @@
           /**
            * the computed steps for the date-parts
            */
-          partsStep: {
+          _partsStep: {
             type: Object,
             notify: true,
             readOnly: true,
@@ -153,7 +153,7 @@
       static get observers() {
         return [
           '_computePartsStep(step)',
-          '_computePartsDisabled(partsStep.*, disabled)'
+          '_computePartsDisabled(_partsStep.*, disabled)'
         ]
       }
 
@@ -189,77 +189,77 @@
         if (step === undefined) return;
 
         if (step === 0) {
-          this.set('partsStep.day', 0);
-          this.set('partsStep.hour', 0);
-          this.set('partsStep.minute', 0);
-          this.set('partsStep.second', 0);
-          this.set('partsStep.millisecond', 0);
-          this.notifyPath('partsStep');
+          this.set('_partsStep.day', 0);
+          this.set('_partsStep.hour', 0);
+          this.set('_partsStep.minute', 0);
+          this.set('_partsStep.second', 0);
+          this.set('_partsStep.millisecond', 0);
+          this.notifyPath('_partsStep');
           return;
         } else if (step < 0.001) {
           this.set('step', 0.001);
-          this.set('partsStep.day', 1);
-          this.set('partsStep.hour', 1);
-          this.set('partsStep.minute', 1);
-          this.set('partsStep.second', 1);
-          this.set('partsStep.millisecond', 1);
-          this.notifyPath('partsStep');
+          this.set('_partsStep.day', 1);
+          this.set('_partsStep.hour', 1);
+          this.set('_partsStep.minute', 1);
+          this.set('_partsStep.second', 1);
+          this.set('_partsStep.millisecond', 1);
+          this.notifyPath('_partsStep');
           return;
         }
         step = +step.toFixed(3);
 
         if (step % 86400 === 0) {
-          this.set('partsStep.day', step / 86400);
-          this.set('partsStep.hour', 0);
-          this.set('partsStep.minute', 0);
-          this.set('partsStep.second', 0);
-          this.set('partsStep.millisecond', 0);
+          this.set('_partsStep.day', step / 86400);
+          this.set('_partsStep.hour', 0);
+          this.set('_partsStep.minute', 0);
+          this.set('_partsStep.second', 0);
+          this.set('_partsStep.millisecond', 0);
           if (this._ifClamped(this.clamp, 'day')) {
             // reset `clamp` to next inferior standing if clamped
             this.set('clamp', 'hour');
           }
         } else if (step % 3600 === 0) {
-          this.set('partsStep.day', 1);
-          this.set('partsStep.hour', step / 3600);
-          this.set('partsStep.minute', 0);
-          this.set('partsStep.second', 0);
-          this.set('partsStep.millisecond', 0);
+          this.set('_partsStep.day', 1);
+          this.set('_partsStep.hour', step / 3600);
+          this.set('_partsStep.minute', 0);
+          this.set('_partsStep.second', 0);
+          this.set('_partsStep.millisecond', 0);
           if (this._ifClamped(this.clamp, 'hour')) {
             // reset `clamp` to next inferior standing if clamped
             this.set('clamp', 'minute');
           }
         } else if (step % 60 === 0) {
-          this.set('partsStep.day', 1);
-          this.set('partsStep.hour', 1);
-          this.set('partsStep.minute', step / 60);
-          this.set('partsStep.second', 0);
-          this.set('partsStep.millisecond', 0);
+          this.set('_partsStep.day', 1);
+          this.set('_partsStep.hour', 1);
+          this.set('_partsStep.minute', step / 60);
+          this.set('_partsStep.second', 0);
+          this.set('_partsStep.millisecond', 0);
           if (this._ifClamped(this.clamp, 'minute')) {
             // reset `clamp` to next inferior standing if clamped
             this.set('clamp', 'second');
           }
         } else if (step % 1 === 0) {
-          this.set('partsStep.day', 1);
-          this.set('partsStep.hour', 1);
-          this.set('partsStep.minute', 1);
-          this.set('partsStep.second', step);
-          this.set('partsStep.millisecond', 0);
+          this.set('_partsStep.day', 1);
+          this.set('_partsStep.hour', 1);
+          this.set('_partsStep.minute', 1);
+          this.set('_partsStep.second', step);
+          this.set('_partsStep.millisecond', 0);
           if (this._ifClamped(this.clamp, 'second')) {
             // reset `clamp` to next inferior standing if clamped
             this.set('clamp', 'millisecond');
           }
         } else {
-          this.set('partsStep.day', 1);
-          this.set('partsStep.hour', 1);
-          this.set('partsStep.minute', 1);
-          this.set('partsStep.second', 1);
-          this.set('partsStep.millisecond', step * 1000);
+          this.set('_partsStep.day', 1);
+          this.set('_partsStep.hour', 1);
+          this.set('_partsStep.minute', 1);
+          this.set('_partsStep.second', 1);
+          this.set('_partsStep.millisecond', step * 1000);
           if (this._ifClamped(this.clamp, 'millisecond')) {
             // reset `clamp` to next inferior standing if clamped
             this.set('clamp', '');
           }
         }
-        this.notifyPath('partsStep');
+        this.notifyPath('_partsStep');
       }
 
       _computePartsDisabled(change, disabled) {
@@ -267,7 +267,7 @@
           return;
         }
         if (change.path.indexOf('.') !== -1) {
-          const key = 'partsDisabled.' + change.path.split('.')[1];
+          const key = '_partsDisabled.' + change.path.split('.')[1];
           if (disabled) {
             this.set(key, true);
           } else {
@@ -275,11 +275,11 @@
           }
         } else if (change && change.value) {
           for (let key in change.value) {
-            this.set('partsDisabled.' + key, !change.value[key]);
+            this.set('_partsDisabled.' + key, !change.value[key]);
           }
         }
 
-        this.notifyPath('partsDisabled');
+        this.notifyPath('_partsDisabled');
       }
 
       _getDefaultForProp(prop) {
