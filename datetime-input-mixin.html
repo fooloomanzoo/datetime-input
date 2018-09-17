@@ -283,7 +283,7 @@
       }
 
       _getDefaultForProp(prop) {
-        const d = (this.default && this._fromDatetime(this.default)) || new Date();
+        const d = (this.default && this._fromDatetime(this.default)) || new Date(new Date().getFullYear(), new Date().getMonth(), 1);
         switch (prop) {
           case 'year':
             return d.getFullYear();
