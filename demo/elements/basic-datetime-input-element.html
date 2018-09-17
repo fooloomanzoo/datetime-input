@@ -1,0 +1,16 @@
+<link rel="import" href="../../../polymer/polymer.html">
+<link rel="import" href="../../datetime-input-mixin.html">
+<link rel="import" href="../../bower_components/property-mixins/datetime-mixin.html">
+<link rel="import" href="../../bower_components/property-mixins/intl-datetime-format-mixin.html">
+<link rel="import" href="../../bower_components/input-picker-pattern/form-element-mixin.html">
+
+<dom-module id="basic-datetime-input-element">
+  <script>
+    class BasicDatetimeInputElement extends DatetimeInputMixin(FormElementMixin(DatetimeMixin(IntlDatetimeFormatMixin(Polymer.Element)))) { // eslint-disable-line no-undef
+      static get is() {
+        return 'basic-datetime-input-element';
+      }
+    }
+    window.customElements.define(BasicDatetimeInputElement.is, BasicDatetimeInputElement);
+  </script>
+</dom-module>

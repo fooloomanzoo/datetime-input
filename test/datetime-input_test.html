@@ -13,7 +13,8 @@
   </head>
   <body>
 
-    <test-fixture id="BasicTestFixture">
+
+    <test-fixture id="basic">
       <template>
         <datetime-input></datetime-input>
       </template>
@@ -27,24 +28,6 @@
 
     <script>
       suite('datetime-input', function() {
-
-        test('instantiating the element with default properties works', done => {
-          const element = fixture('BasicTestFixture');
-          assert.isUndefined(element.default, 'default is not defined');
-          assert.isUndefined(element.startAt, 'startAt is not defined');
-          assert.isUndefined(element.useNegativeZero, 'useNegativeZero is not defined');
-          assert.isUndefined(element.numberStyle, 'valueAsNumber is not defined');
-          assert.isUndefined(element.valueAsNumber, 'valueAsNumber is not defined');
-          assert.equal(element.input, '', 'input is not defined');
-          done();
-        });
-
-        test('setting a property on the element works', done => {
-          // Create a test fixture
-          const element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.step, 2, 'step is set');
-          done();
-        });
 
       });
     </script>

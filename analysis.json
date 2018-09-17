@@ -1087,7 +1087,7 @@
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
-          "name": "partsDisabled",
+          "name": "_partsDisabled",
           "type": "Object",
           "description": "date-parts that are disabled",
           "privacy": "public",
@@ -4100,7 +4100,7 @@
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
-          "name": "partsDisabled",
+          "name": "_partsDisabled",
           "type": "Object",
           "description": "date-parts that are disabled",
           "privacy": "public",
@@ -7061,7 +7061,7 @@
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
-          "name": "partsDisabled",
+          "name": "_partsDisabled",
           "type": "Object",
           "description": "date-parts that are disabled",
           "privacy": "public",
@@ -10076,7 +10076,7 @@
           "defaultValue": "{}"
         },
         {
-          "name": "partsDisabled",
+          "name": "_partsDisabled",
           "type": "Object",
           "description": "date-parts that are disabled",
           "privacy": "public",

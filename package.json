@@ -11,7 +11,7 @@
     "prestart": "polymer analyze > analysis.json",
     "start": "polymer serve",
     "test": "polymer test",
-    "test:p": "polymer test -p --config-file=wct.p.conf.json"
+    "test:p": "polymer test -p --config-file=wct.p.conf.js"
   },
   "keywords": [
     "date",
@@ -31,10 +31,10 @@
     "@fooloomanzoo/property-mixins": "^2"
   },
   "devDependencies": {
-    "@webcomponents/webcomponentsjs": "*",
     "@polymer/iron-component-page": "*",
-    "@polymer/iron-flex-layout": "*",
     "@polymer/iron-demo-helpers": "*",
-    "@polymer/iron-form": "*"
+    "@polymer/iron-flex-layout": "*",
+    "@polymer/iron-form": "*",
+    "@webcomponents/webcomponentsjs": "*"
   }
 }
