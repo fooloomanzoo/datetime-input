@@ -85,18 +85,6 @@
           },
 
           /**
-           * date-parts that are hidden
-           * e.g. '{ "year": true }' would hide the input for the year
-           */
-          partsHidden: {
-            type: Object,
-            value: function() {
-              return {};
-            },
-            notify: true
-          },
-
-          /**
            * date-parts that are disabled
            */
           _partsDisabled: {
@@ -209,6 +197,7 @@
         step = +step.toFixed(3);
 
         if (step % 86400 === 0) {
+          // step is multiple of a day
           this.set('_partsStep.day', step / 86400);
           this.set('_partsStep.hour', 0);
           this.set('_partsStep.minute', 0);
@@ -219,6 +208,7 @@
             this.set('clamp', 'hour');
           }
         } else if (step % 3600 === 0) {
+          // step is multiple of an hour
           this.set('_partsStep.day', 1);
           this.set('_partsStep.hour', step / 3600);
           this.set('_partsStep.minute', 0);
@@ -229,6 +219,7 @@
             this.set('clamp', 'minute');
           }
         } else if (step % 60 === 0) {
+          // step is multiple of a minute
           this.set('_partsStep.day', 1);
           this.set('_partsStep.hour', 1);
           this.set('_partsStep.minute', step / 60);
@@ -239,6 +230,7 @@
             this.set('clamp', 'second');
           }
         } else if (step % 1 === 0) {
+          // step is multiple of a second
           this.set('_partsStep.day', 1);
           this.set('_partsStep.hour', 1);
           this.set('_partsStep.minute', 1);
@@ -275,7 +267,7 @@
           }
         } else if (change && change.value) {
           for (let key in change.value) {
-            this.set('_partsDisabled.' + key, !change.value[key]);
+            this.set('_partsDisabled.' + key, disabled || !change.value[key]);
           }
         }
 

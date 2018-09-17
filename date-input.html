@@ -49,62 +49,63 @@
 
       static get observers() {
         return [
-          '_orderDateParts(dateOrder, partsHidden, clamp)'
+          '_orderDateParts(dateOrder, clamp)'
         ]
       }
 
-      _orderDateParts(dateOrder, partsHidden, clamp) {
-        requestAnimationFrame(() => {
-          // set hidden attributes
-          let hidden = this._ifClamped(clamp, dateOrder.parts[0], partsHidden[dateOrder.parts[0]]),
-            totalhidden = 0;
-          // if first date part is clamped, hide the first date sperator and the first date part
-          if (hidden) {
-            this.$[dateOrder.parts[0]].setAttribute('hidden');
-            this.$.dateSeparator1.setAttribute('hidden');
-            totalhidden++;
-          } else {
-            this.$[dateOrder.parts[0]].removeAttribute('hidden');
-            this.$.dateSeparator1.removeAttribute('hidden');
-          }
+      _orderDateParts(order, clamp) {
+        if (order === undefined) {
+          return;
+        }
+        // set hidden attributes
+        let hidden = this._ifClamped(clamp, order.parts[0]),
+          totalhidden = 0;
+        // if first date part is clamped, hide the first date sperator and the first date part
+        if (hidden) {
+          this.$[order.parts[0]].setAttribute('hidden');
+          this.$.dateSeparator1.setAttribute('hidden');
+          totalhidden++;
+        } else {
+          this.$[order.parts[0]].removeAttribute('hidden');
+          this.$.dateSeparator1.removeAttribute('hidden');
+        }
 
-          hidden = this._ifClamped(clamp, dateOrder.parts[1], partsHidden[dateOrder.parts[1]]);
-          // if middle date part is clamped, hide the middle date part
-          if (hidden) {
-            this.$[dateOrder.parts[1]].setAttribute('hidden');
-            totalhidden++;
-          } else {
-            this.$[dateOrder.parts[1]].removeAttribute('hidden');
-          }
+        hidden = this._ifClamped(clamp, order.parts[1]);
+        // if middle date part is clamped, hide the middle date part
+        if (hidden) {
+          this.$[order.parts[1]].setAttribute('hidden');
+          totalhidden++;
+        } else {
+          this.$[order.parts[1]].removeAttribute('hidden');
+        }
 
-          hidden = this._ifClamped(clamp, dateOrder.parts[2], partsHidden[dateOrder.parts[2]]);
-          // if last date part is clamped, hide the last date sperator the last date part
-          if (hidden) {
-            this.$[dateOrder.parts[2]].setAttribute('hidden');
-            this.$.dateSeparator2.setAttribute('hidden');
-            totalhidden++;
-          } else {
-            this.$[dateOrder.parts[2]].removeAttribute('hidden');
-            this.$.dateSeparator2.removeAttribute('hidden');
-          }
+        hidden = this._ifClamped(clamp, order.parts[2]);
+        // if last date part is clamped, hide the last date sperator the last date part
+        if (hidden) {
+          this.$[order.parts[2]].setAttribute('hidden');
+          this.$.dateSeparator2.setAttribute('hidden');
+          totalhidden++;
+        } else {
+          this.$[order.parts[2]].removeAttribute('hidden');
+          this.$.dateSeparator2.removeAttribute('hidden');
+        }
 
-          // if more than one date part is clamped, hide all the date sperators
-          if (totalhidden > 1) {
-            this.$.dateSeparator1.setAttribute('hidden');
-            this.$.dateSeparator2.setAttribute('hidden');
-          }
+        // if more than one date part is clamped, hide all the date sperators
+        if (totalhidden > 1) {
+          this.$.dateSeparator1.setAttribute('hidden');
+          this.$.dateSeparator2.setAttribute('hidden');
+        }
 
-          // reorder parts
-          this.$.date.appendChild(this.$[dateOrder.parts[0]]);
-          this.$.date.appendChild(this.$.dateSeparator1);
-          this.$.date.appendChild(this.$[dateOrder.parts[1]]);
-          this.$.date.appendChild(this.$.dateSeparator2);
-          this.$.date.appendChild(this.$[dateOrder.parts[2]]);
+        // reorder parts
+        this.$.date.appendChild(this.$[order.parts[0]]);
+        this.$.date.appendChild(this.$.dateSeparator1);
+        this.$.date.appendChild(this.$[order.parts[1]]);
+        this.$.date.appendChild(this.$.dateSeparator2);
+        this.$.date.appendChild(this.$[order.parts[2]]);
 
-          // if (this.$[dateOrder.parts[2]].hasAttribute('hidden')) {
-          //   this.$.dateSeparator2.setAttribute('hidden');
-          // }
-        })
+        if (this.$[order.parts[2]].hasAttribute('hidden')) {
+          this.$.dateSeparator2.setAttribute('hidden');
+        }
       }
     }
   }
