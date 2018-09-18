@@ -9,7 +9,7 @@
     "gh-pages": "git checkout gh-pages && git pull && bower update -f && git add . && git commit -m \"update\" && git push && git checkout master",
     "build": "git pull && bower update && polymer analyze > analysis.json",
     "prestart": "polymer analyze > analysis.json",
-    "start": "polymer serve",
+    "start": "polymer serve -o",
     "test": "polymer test",
     "test:p": "polymer test -p --config-file=wct.p.conf.js"
   },

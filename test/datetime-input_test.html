@@ -13,7 +13,6 @@
   </head>
   <body>
 
-
     <test-fixture id="basic">
       <template>
         <datetime-input></datetime-input>
@@ -21,10 +20,15 @@
     </test-fixture>
 
     <script>
-      suite('datetime-input', function() {
+      suite('basic', function() {
+
+        let element;
+
+        setup(function() {
+          element = fixture('basic');
+        });
 
         test('instantiating the element with default properties should work', done => {
-          let element = fixture('basic');
           assert.isUndefined(element.date, 'no date is defined');
           assert.isUndefined(element.time, 'no time is defined');
           assert.isUndefined(element.datetime, 'no datetime is defined');
@@ -46,7 +50,6 @@
         });
 
         test('calling "now" on the element should work', done => {
-          let element = fixture('basic');
           assert.isDefined(element.now, '"now" exists');
           element.now();
           assert.isDefined(element.date, 'date is defined');
