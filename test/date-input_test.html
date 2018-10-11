@@ -20,10 +20,28 @@
     </test-fixture>
 
     <script>
+      const specifier = new URLSearchParams(window.location.search).get('specifier');
+      const url = new URLSearchParams(window.location.search).get('url');
+
+      // applying suites to another element (e.g. when another element depends on the the same mixin)
+      if (specifier) {
+        suite(`Suite for ${specifier.toUpperCase()}`, function() {
+          test('loading dependencies', done => {
+            Polymer.importHref(window.location.origin + '/components/' + url, e => done(), e => {
+              console.warn(`failed to load: ${url}`)
+            })
+          })
+        })
+      }
+
       suite('basic', function() {
+
         let element;
 
         setup(function() {
+          if (specifier) {
+            replace('date-input').with(specifier)
+          }
           element = fixture('basic');
         });
 
@@ -57,7 +75,7 @@
           done();
         });
 
-        test('calling "now" on the element should work', done => {          
+        test('calling "now" on the element should work', done => {
           assert.isDefined(element.now, '"now" exists');
           element.now();
           assert.isDefined(element.date, 'date is defined');

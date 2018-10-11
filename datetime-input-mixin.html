@@ -128,12 +128,7 @@
 
           _resetButtonIsInvisible: {
             type: Boolean,
-            computed: '_computeResetButtonIsHidden(_valueIsSet, _defaultValue, value)'
-          },
-
-          _defaultValue: {
-            type: Number,
-            computed: '_computeDefaultValue(default)'
+            computed: '_computeResetButtonIsInvisible(_valueIsSet, _defaultValue, valueAsNumber)'
           }
         }
       }
@@ -145,10 +140,6 @@
         ]
       }
 
-      _computeInvalid(required, value) {
-        this.invalid = required && (value === undefined);
-      }
-
       _computeOr(a, b) {
         return Boolean(a || b);
       }
@@ -157,19 +148,16 @@
         return first ? 0 : 1;
       }
 
-      _computeDefaultValue(def) {
-        if (def !== undefined) {
-          const d = this._fromDatetime(def);
-          if (!isNaN(d)) {
-            return +d;
-          }
+      _computeResetButtonIsInvisible(_valueIsSet, defaultValue, valueAsNumber) {
+        return !_valueIsSet || (!isNaN(defaultValue) && defaultValue === valueAsNumber);
+      }
+
+      _defaultChanged(def) {
+        if (this._isSet(def) === false) {
+          this.default = undefined;
         }
       }
-
-      _computeResetButtonIsHidden(_valueIsSet, _defaultValue, value) {
-        return !_valueIsSet || (_defaultValue !== undefined && _defaultValue === value);
-      }
-
+      
       /**
        * compute the steps for the related inputs. The day-input is the highest modified input allthough if the step is higher than a day in seconds it might also change month- or year-inputs.
        */
@@ -183,6 +171,7 @@
           this.set('_partsStep.second', 0);
           this.set('_partsStep.millisecond', 0);
           this.notifyPath('_partsStep');
+          this.set('clamp', '');
           return;
         } else if (step < 0.001) {
           this.set('step', 0.001);
@@ -192,6 +181,7 @@
           this.set('_partsStep.second', 1);
           this.set('_partsStep.millisecond', 1);
           this.notifyPath('_partsStep');
+          this.set('clamp', '');
           return;
         }
         step = +step.toFixed(3);
