@@ -157,7 +157,18 @@
           this.default = undefined;
         }
       }
-      
+
+      _isSet(value) {
+        return !(typeof value === 'boolean' || value === undefined || value === null || value === '');
+      }
+
+      _valueChanged(value) {
+        // test if value is set and if needed set value to default
+        if (this._isSet(value) === false) {
+          this.resetDate();
+        }
+      }
+
       /**
        * compute the steps for the related inputs. The day-input is the highest modified input allthough if the step is higher than a day in seconds it might also change month- or year-inputs.
        */

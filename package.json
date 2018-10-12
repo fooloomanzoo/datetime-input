@@ -4,12 +4,12 @@
   "description": "an input for date and time",
   "main": "index.html",
   "scripts": {
-    "postinstall": "bower install --save-dev",
+    "postinstall": "bower install",
     "prepublish": "npm run build && git add . && git commit -m \"publish new version\" && npm version patch && git push",
     "gh-pages": "git checkout gh-pages && git pull && bower update -f && git add . && git commit -m \"update\" && git push && git checkout master",
-    "build": "git pull && bower update && polymer analyze > analysis.json",
-    "prestart": "polymer analyze > analysis.json",
-    "start": "polymer serve -o",
+    "build": "git pull && bower update && npm run analyze",
+    "start": "npm run analyze && polymer serve -o",
+    "analyze": "polymer analyze -i datetime-input.html date-input.html time-input.html datetime-input-mixin.html > analysis.json",
     "test": "polymer test",
     "test:p": "polymer test -p --config-file=wct.p.conf.js"
   },

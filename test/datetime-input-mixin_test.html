@@ -8,6 +8,7 @@
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../input-picker-pattern/utils/wct-mixin-test-helper.js"></script>
 
     <link rel="import" href="../demo/elements/basic-datetime-input-element.html">
   </head>
@@ -32,28 +33,13 @@
     </test-fixture>
 
     <script>
-      const specifier = new URLSearchParams(window.location.search).get('specifier');
-      const url = new URLSearchParams(window.location.search).get('url');
-
-      // applying suites to another element (e.g. when another element depends on the the same mixin)
-      if (specifier) {
-        suite(`Suite for ${specifier.toUpperCase()}`, function() {
-          test('loading dependencies', done => {
-            Polymer.importHref(window.location.origin + '/components/' + url, e => done(), e => {
-              console.warn(`failed to load: ${url}`)
-            })
-          })
-        })
-      }
+      WCT.helpers.mixinSuite('basic-datetime-input-element');
 
       suite('basic', function() {
 
         let element;
 
         setup(function() {
-          if (specifier) {
-            replace('basic-datetime-input-element').with(specifier)
-          }
           element = fixture('basic');
         });
 
@@ -216,7 +202,11 @@
         });
 
         test('valueAsDate should serialize and deserialize"', done => {
-          const d = new Date();
+          let d = new Date();
+          // transforming date according to its clamp attribute
+          d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+          d = element._clampUTC(d, element.clamp);
+          d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
           // NOTE: milliseconds are often not serialized by browsers
           d.setMilliseconds(0);
           element.setAttribute('value', d);
