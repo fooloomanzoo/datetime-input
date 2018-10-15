@@ -20,6 +20,18 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="clamp">
+      <template>
+        <div>
+          <time-input id="clamp-hour" clamp="hour"></time-input>
+          <time-input id="clamp-minute" clamp="minute"></time-input>
+          <time-input id="clamp-second" clamp="second"></time-input>
+          <time-input id="clamp-millisecond" clamp="millisecond"></time-input>
+          <time-input id="clamp-none" clamp=""></time-input>
+        </div>
+      </template>
+    </test-fixture>
+
     <script>
       WCT.helpers.mixinSuite('time-input');
 
@@ -83,6 +95,123 @@
           assert.isDefined(element._timeZoneMinutes, 'timezone-minutes is defined');
           done();
         });
+      });
+
+      suite('clamp and hidden inputs', function() {
+        let f;
+
+        setup(function() {
+          f = fixture('clamp');
+        });
+
+        test('clamp hour', done => {
+          let element = f.querySelector('#clamp-hour');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let hourInput = element.shadowRoot.querySelector('#hour');
+            let minuteInput = element.shadowRoot.querySelector('#minute');
+            let secondInput = element.shadowRoot.querySelector('#second');
+            let millisecondInput = element.shadowRoot.querySelector('#millisecond');
+            if (hourInput) {
+              assert.equal(document.defaultView.getComputedStyle(hourInput).display, 'none', 'hour is hidden');
+            }
+            if (minuteInput) {
+              assert.equal(document.defaultView.getComputedStyle(minuteInput).display, 'none', 'minute is hidden');
+            }
+            if (secondInput) {
+              assert.equal(document.defaultView.getComputedStyle(secondInput).display, 'none', 'second is hidden');
+            }
+            if (millisecondInput) {
+              assert.equal(document.defaultView.getComputedStyle(millisecondInput).display, 'none', 'millisecond is hidden');
+            }
+            done();
+          }, 0);
+        });
+
+        test('clamp minute', done => {
+          let element = f.querySelector('#clamp-minute');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let hourInput = element.shadowRoot.querySelector('#hour');
+            let minuteInput = element.shadowRoot.querySelector('#minute');
+            let secondInput = element.shadowRoot.querySelector('#second');
+            let millisecondInput = element.shadowRoot.querySelector('#millisecond');
+
+            assert.notEqual(document.defaultView.getComputedStyle(hourInput).display, 'none', 'hour is not hidden');
+
+            if (minuteInput) {
+              assert.equal(document.defaultView.getComputedStyle(minuteInput).display, 'none', 'minute is hidden');
+            }
+            if (secondInput) {
+              assert.equal(document.defaultView.getComputedStyle(secondInput).display, 'none', 'second is hidden');
+            }
+            if (millisecondInput) {
+              assert.equal(document.defaultView.getComputedStyle(millisecondInput).display, 'none', 'millisecond is hidden');
+            }
+            done();
+          }, 0);
+        });
+
+        test('clamp second', done => {
+          let element = f.querySelector('#clamp-second');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let hourInput = element.shadowRoot.querySelector('#hour');
+            let minuteInput = element.shadowRoot.querySelector('#minute');
+            let secondInput = element.shadowRoot.querySelector('#second');
+            let millisecondInput = element.shadowRoot.querySelector('#millisecond');
+
+            assert.notEqual(document.defaultView.getComputedStyle(hourInput).display, 'none', 'hour is not hidden');
+            assert.notEqual(document.defaultView.getComputedStyle(minuteInput).display, 'none', 'minute is not hidden');
+
+            if (secondInput) {
+              assert.equal(document.defaultView.getComputedStyle(secondInput).display, 'none', 'second is hidden');
+            }
+            if (millisecondInput) {
+              assert.equal(document.defaultView.getComputedStyle(millisecondInput).display, 'none', 'millisecond is hidden');
+            }
+            done();
+          }, 0);
+        });
+
+        test('clamp millisecond', done => {
+          let element = f.querySelector('#clamp-millisecond');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let hourInput = element.shadowRoot.querySelector('#hour');
+            let minuteInput = element.shadowRoot.querySelector('#minute');
+            let secondInput = element.shadowRoot.querySelector('#second');
+            let millisecondInput = element.shadowRoot.querySelector('#millisecond');
+
+            assert.notEqual(document.defaultView.getComputedStyle(hourInput).display, 'none', 'hour is not hidden');
+            assert.notEqual(document.defaultView.getComputedStyle(minuteInput).display, 'none', 'minute is not hidden');
+            assert.notEqual(document.defaultView.getComputedStyle(secondInput).display, 'none', 'second is not hidden');
+
+            if (millisecondInput) {
+              assert.equal(document.defaultView.getComputedStyle(millisecondInput).display, 'none', 'millisecond is hidden');
+            }
+            done();
+          }, 0);
+        });
+
+        test('no clamp', done => {
+          let element = f.querySelector('#clamp-none');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let hourInput = element.shadowRoot.querySelector('#hour');
+            let minuteInput = element.shadowRoot.querySelector('#minute');
+            let secondInput = element.shadowRoot.querySelector('#second');
+            let millisecondInput = element.shadowRoot.querySelector('#millisecond');
+
+            assert.notEqual(document.defaultView.getComputedStyle(hourInput).display, 'none', 'hour is not hidden');
+            assert.notEqual(document.defaultView.getComputedStyle(minuteInput).display, 'none', 'minute is not hidden');
+            assert.notEqual(document.defaultView.getComputedStyle(secondInput).display, 'none', 'second is not hidden');
+            assert.notEqual(document.defaultView.getComputedStyle(millisecondInput).display, 'none', 'millisecond is not hidden');
+
+            done();
+          }, 0);
+        });
+
       });
     </script>
 

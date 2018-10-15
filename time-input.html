@@ -19,34 +19,34 @@
 
       static get inputTemplate() {
         return `
-          <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];" hidden$="[[_ifClamped(clamp, 'hour')]]">
-            <template is="dom-if" if="[[!_ifClamped(clamp, 'hour')]]">
-              <integer-input id="hour" hidden$="[[hour12Format]]" pad-length="2" no-clamp value-as-number="{{hour}}" placeholder="00" disabled$="[[_partsDisabled.hour]]" step="[[_partsStep.hour]]"></integer-input>
+          <template is="dom-if" if="[[!_ifClamped(clamp, 'hour')]]">
+            <div class="time part" style$="order:[[_computePartOrder(dateOrder.timeFirst)]];">
+              <integer-input id="hour" hidden$="[[hour12Format]]" pad-length="2" no-clamp value="{{hour}}" placeholder="00" disabled$="[[_partsDisabled.hour]]" step="[[_partsStep.hour]]"></integer-input>
               <template is="dom-if" if="[[hour12Format]]">
-                <integer-input pad-length="2" no-clamp value-as-number="{{hour12}}" placeholder="00" disabled$="[[_partsDisabled.hour]]" step="[[_partsStep.hour]]"></integer-input>
+                <integer-input pad-length="2" no-clamp value="{{hour12}}" placeholder="00" disabled$="[[_partsDisabled.hour]]" step="[[_partsStep.hour]]"></integer-input>
               </template>
-            </template>
-            <span hidden$="[[_computeMultipleClamp(clamp, 'hour', 'minute')]]">[[timeSeparator]]</span>
-            <integer-input id="minute" value-as-number="{{minute}}" hidden$="[[_ifClamped(clamp, 'minute')]]" pad-length="2" no-clamp step="[[_partsStep.minute]]" disabled="[[_partsDisabled.minute]]" placeholder="00"></integer-input>
-            <span hidden$="[[_computeMultipleClamp(clamp, 'second', 'minute')]]">[[timeSeparator]]</span>
-            <integer-input hidden$="[[_ifClamped(clamp, 'second')]]" pad-length="2" no-clamp step="[[_partsStep.second]]" disabled="[[_partsDisabled.second]]" value-as-number="{{second}}" placeholder="00"></integer-input>
-            <template is="dom-if" if="[[_ifClamped(clamp, 'second')]]">
-              <span hidden$="[[_ifClamped(clamp, 'millisecond']]">0</span>
-            </template>
-            <span hidden$="[[_ifClamped(clamp, 'millisecond']]">[[decimalSeparator]]</span>
-            <integer-input value-as-number="{{millisecond}}" hidden$="[[_ifClamped(clamp, 'millisecond']]" pad-length="3" no-clamp step="[[_partsStep.millisecond]]" disabled="[[_partsDisabled.millisecond]]" placeholder="000"></integer-input>
-            <template is="dom-if" if="[[hour12Format]]">
-              <button class="hour12" on-click="_switchAm" hidden$="[[!_valueIsSet]]">
-                <div hidden$="[[!isAm]]">[[amString]]</div>
-                <div hidden$="[[isAm]]">[[pmString]]</div>
-              </button>
-            </template>
-            <template is="dom-if" if="[[withTimezone]]">
-              <integer-input value-as-number="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="±00" min="-23" max="23" use-negative-zero></integer-input>
-              <span>[[timeSeparator]]</span>
-              <integer-input value-as-number="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
-            </template>
-          </div>
+              <span hidden$="[[_computeMultipleClamp(clamp, 'hour', 'minute')]]">[[timeSeparator]]</span>
+              <integer-input id="minute" value="{{minute}}" hidden$="[[_ifClamped(clamp, 'minute')]]" pad-length="2" no-clamp step="[[_partsStep.minute]]" disabled="[[_partsDisabled.minute]]" placeholder="00"></integer-input>
+              <span hidden$="[[_computeMultipleClamp(clamp, 'second', 'minute')]]">[[timeSeparator]]</span>
+              <integer-input id="second" hidden$="[[_ifClamped(clamp, 'second')]]" pad-length="2" no-clamp step="[[_partsStep.second]]" disabled="[[_partsDisabled.second]]" value="{{second}}" placeholder="00"></integer-input>
+              <template is="dom-if" if="[[_ifClamped(clamp, 'second')]]">
+                <span hidden$="[[_ifClamped(clamp, 'millisecond']]">0</span>
+              </template>
+              <span hidden$="[[_ifClamped(clamp, 'millisecond')]]">[[decimalSeparator]]</span>
+              <integer-input id="millisecond" value="{{millisecond}}" hidden$="[[_ifClamped(clamp, 'millisecond')]]" pad-length="3" no-clamp step="[[_partsStep.millisecond]]" disabled="[[_partsDisabled.millisecond]]" placeholder="000"></integer-input>
+              <template is="dom-if" if="[[hour12Format]]">
+                <button class="hour12" on-click="_switchAm" hidden$="[[!_valueIsSet]]">
+                  <div hidden$="[[!isAm]]">[[amString]]</div>
+                  <div hidden$="[[isAm]]">[[pmString]]</div>
+                </button>
+              </template>
+              <template is="dom-if" if="[[withTimezone]]">
+                <integer-input value="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="±00" min="-23" max="23" use-negative-zero></integer-input>
+                <span>[[timeSeparator]]</span>
+                <integer-input value="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
+              </template>
+            </div>
+          </template>
           ${super.inputTemplate || ''}
         `;
       }
@@ -91,7 +91,7 @@
       }
 
       _computeMultipleClamp(clamp, prop1, prop2) {
-        return this._ifClamped(clamp, prop1) || this._ifClamped(clamp, prop2);
+        return this._ifClamped(clamp, prop1, this._ifClamped(clamp, prop2));
       }
     }
   }

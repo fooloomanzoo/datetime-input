@@ -20,11 +20,16 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="WithTimezone">
+      <template>
+        <datetime-input with-timezone></datetime-input>
+      </template>
+    </test-fixture>
+
     <script>
       WCT.helpers.mixinSuite('datetime-input');
 
       suite('basic', function() {
-
         let element;
 
         setup(function() {
@@ -71,6 +76,20 @@
           assert.isDefined(element.offsetMinutes, 'timezone-offset is defined');
           assert.isDefined(element._timeZoneHours, 'timezone-hours is defined');
           assert.isDefined(element._timeZoneMinutes, 'timezone-minutes is defined');
+          done();
+        });
+
+      });
+
+      suite('timezone', function() {
+        let element;
+
+        setup(function() {
+          element = fixture('WithTimezone');
+        });
+
+        test('with timezone', done => {
+          assert.isTrue(element.withTimezone, 'withTimezone is set');
           done();
         });
 
