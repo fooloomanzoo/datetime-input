@@ -24,7 +24,7 @@
 
   <test-fixture id="ChangingProperties">
     <template>
-      <date-input date="180"></date-input>
+      <date-input date="1980-02-01"></date-input>
     </template>
   </test-fixture>
 
@@ -103,6 +103,30 @@
       });
     });
 
+    suite('setting properties', () => {
+      let element;
+
+      setup(function() {
+        element = fixture('ChangingProperties');
+      });
+
+      test('setting property should work', done => {
+        assert.equal(element.year, 1980, 'year should be set');
+        assert.equal(element.month, 2, 'month should be set');
+        assert.equal(element.day, 1, 'day should be set');
+        assert.equal(element.hour, 0, 'hour should be set');
+        assert.equal(element.minute, 0, 'minute should be set');
+        assert.equal(element.second, 0, 'second should be set');
+        assert.equal(element.millisecond, 0, 'millisecond should be set');
+        assert.equal(element.date, '1980-02-01', 'date should be set');
+        assert.equal(element.time, '00:00:00.000', 'time should be set');
+        assert.isDefined(element.valueAsNumber, 'valueAsNumber should be set');
+        assert.isDefined(element.valueAsDate, 'valueAsDate should be set');
+        assert.isDefined(element.timezone, 'timezone should be set');
+        assert.isDefined(element.offsetMinutes, 'offsetMinutes should be set');
+        done();
+      });
+    });
 
     suite('clamp and hidden inputs', function() {
       let f;

@@ -14,13 +14,19 @@
   </head>
   <body>
 
-    <test-fixture id="basic">
+    <test-fixture id="Basic">
       <template>
         <time-input></time-input>
       </template>
     </test-fixture>
 
-    <test-fixture id="clamp">
+    <test-fixture id="ChangingProperties">
+      <template>
+        <time-input time="02:03:04.567"></time-input>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="Clamp">
       <template>
         <div>
           <time-input id="clamp-hour" clamp="hour"></time-input>
@@ -40,7 +46,7 @@
         let element;
 
         setup(function() {
-          element = fixture('basic');
+          element = fixture('Basic');
         });
 
         test('instantiating the element with default properties should work', done => {
@@ -97,11 +103,41 @@
         });
       });
 
+      suite('setting properties', () => {
+        let element;
+
+        setup(function() {
+          element = fixture('ChangingProperties');
+        });
+
+        test('setting property should work', done => {
+          if (element._timeOnly) {
+            assert.equal(element.year, 1970, 'year should be set');
+            assert.equal(element.date, '1970-01-01', 'date should be set');
+          } else {
+            assert.equal(element.year, new Date().getFullYear(), 'year should be set');
+            assert.equal(element.date, new Date().getFullYear() + '-02-01', 'date should be set');
+          }
+          assert.equal(element.month, 1, 'month should be set');
+          assert.equal(element.day, 1, 'day should be set');
+          assert.equal(element.hour, 2, 'hour should be set');
+          assert.equal(element.minute, 3, 'minute should be set');
+          assert.equal(element.second, 4, 'second should be set');
+          assert.equal(element.millisecond, 567, 'millisecond should be set');
+          assert.equal(element.time, '02:03:04.567', 'date should be set');
+          assert.isDefined(element.valueAsNumber, 'valueAsNumber should be set');
+          assert.isDefined(element.valueAsDate, 'valueAsDate should be set');
+          assert.isDefined(element.timezone, 'timezone should be set');
+          assert.isDefined(element.offsetMinutes, 'offsetMinutes should be set');
+          done();
+        });
+      });
+
       suite('clamp and hidden inputs', function() {
         let f;
 
         setup(function() {
-          f = fixture('clamp');
+          f = fixture('Clamp');
         });
 
         test('clamp hour', done => {
