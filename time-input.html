@@ -1,8 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../number-input/integer-input.html">
-<link rel="import" href="../property-mixins/datetime-mixin.html">
-<link rel="import" href="../property-mixins/intl-datetime-format-mixin.html">
-<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
 <link rel="import" href="datetime-input-mixin.html">
 
 <script>
@@ -82,6 +79,7 @@
       }
     }
   }
+  window.TimeInputPattern = TimeInputPattern;
 </script>
 
 <dom-module id="time-input">
@@ -104,7 +102,7 @@
      * @demo demo/index.html
      * @demo demo/form.html in a form
      **/
-    class TimeInput extends TimeInputPattern(DatetimeInputMixin(FormElementMixin(DatetimeMixin(IntlDatetimeFormatMixin(Polymer.Element))))) { // eslint-disable-line no-undef
+    class TimeInput extends TimeInputPattern(DatetimeInputMixin(Polymer.Element)) { // eslint-disable-line no-undef
 
       static get is() {
         return 'time-input';

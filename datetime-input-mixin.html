@@ -1,13 +1,72 @@
 <link rel="import" href="../input-picker-pattern/input-shared-style.html">
 <link rel="import" href="../input-picker-pattern/input-picker-shared-style.html">
+<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
+<link rel="import" href="../property-mixins/datetime-mixin.html">
+<link rel="import" href="../property-mixins/intl-datetime-format-mixin.html">
 <link rel="import" href="../number-input/integer-input.html">
 
 <script>
   /**
-   * Mixin to extend an element for picking date or time to locale formating and hiding certain datetime-properties
+   * Mixin to extend an element for combining form-element-mixin and datetime-mixin
    *
-   * @appliesMixin DatetimeMixin
    * @appliesMixin FormElementMixin
+   * @appliesMixin DatetimeMixin
+   * @appliesMixin IntlDatetimeFormatMixin
+   */
+   const DatetimeFormMixin = superClass => { // eslint-disable-line no-unused-vars
+
+     return class extends FormElementMixin(DatetimeMixin(IntlDatetimeFormatMixin(superClass))) { // eslint-disable-line no-undef
+
+       static get properties() {
+         return {
+           /**
+            * defines the property that should be used for the value
+            */
+           propertyForValue: {
+             type: String,
+             value: 'valueAsNumber'
+           }
+         }
+       }
+
+       _defaultChanged(def) {
+         // overwrite form-element-mixin's behaviour in favour of datetime-mixins handling
+         if (this._isSet(def) === false) {
+           this.default = undefined;
+         }
+       }
+
+       _isSet(value) {
+         return !(typeof value === 'boolean' || value === undefined || value === null || value === '');
+       }
+
+       _valueChanged(value) {
+         // test if value is set and if needed set value to default
+         if (this._isSet(value) === false) {
+           this.resetDate();
+         }
+       }
+
+       _getDefaultForProp(prop) {
+         const d = (this._defaultView && this._fromDatetime(this.default)) || new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+         switch (prop) {
+           case 'year':
+             return d.getFullYear();
+           case 'month':
+             return d.getMonth() + 1;
+           case 'day':
+             return d.getDate();
+           default:
+             return 0;
+         }
+       }
+     }
+   }
+   window.DatetimeFormMixin = DatetimeFormMixin;
+  /**
+   * Mixin to extend an element for an datetime input element
+   *
+   * @appliesMixin DatetimeFormMixin
    *
    * @mixinFunction
    * @polymer
@@ -17,7 +76,7 @@
    */
   const DatetimeInputMixin = superClass => { // eslint-disable-line no-unused-vars
 
-    return class extends superClass { // eslint-disable-line no-undef
+    return class extends DatetimeFormMixin(superClass) { // eslint-disable-line no-undef
 
       static get template() {
         return `
@@ -125,14 +184,6 @@
           },
 
           /**
-           * defines the property that should be used for the value
-           */
-          propertyForValue: {
-            type: String,
-            value: 'valueAsNumber'
-          },
-
-          /**
            * if true, the reset button is hidden
            */
           hideResetButton: {
@@ -172,24 +223,6 @@
 
       _computeResetButtonIsInvisible(valueIsSet, defaultValue, valueAsNumber) {
         return !valueIsSet || (!isNaN(defaultValue) && defaultValue === valueAsNumber) || this._isSet(valueAsNumber) === false;
-      }
-
-      _defaultChanged(def) {
-        // overwrite form-element-mixin's behaviour in favour of datetime-mixins handling
-        if (this._isSet(def) === false) {
-          this.default = undefined;
-        }
-      }
-
-      _isSet(value) {
-        return !(typeof value === 'boolean' || value === undefined || value === null || value === '');
-      }
-
-      _valueChanged(value) {
-        // test if value is set and if needed set value to default
-        if (this._isSet(value) === false) {
-          this.resetDate();
-        }
       }
 
       /**
@@ -297,20 +330,7 @@
 
         this.notifyPath('_partsDisabled');
       }
-
-      _getDefaultForProp(prop) {
-        const d = (this.default && this._fromDatetime(this.default)) || new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-        switch (prop) {
-          case 'year':
-            return d.getFullYear();
-          case 'month':
-            return d.getMonth() + 1;
-          case 'day':
-            return d.getDate();
-          default:
-            return 0;
-        }
-      }
     }
   }
+  window.DatetimeInputMixin = DatetimeInputMixin;
 </script>
