@@ -48,7 +48,7 @@
        }
 
        _getDefaultForProp(prop) {
-         const d = (this._defaultView && this._fromDatetime(this.default)) || new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+         const d = (this._defaultValue && new Date(this._defaultValue)) || new Date();
          switch (prop) {
            case 'year':
              return d.getFullYear();
