@@ -14,15 +14,28 @@
   </head>
   <body>
 
-    <test-fixture id="basic">
+    <test-fixture id="Basic">
       <template>
         <basic-datetime-input-element></basic-datetime-input-element>
       </template>
     </test-fixture>
 
-    <test-fixture id="required">
+    <test-fixture id="Required">
       <template>
         <basic-datetime-input-element required></basic-datetime-input-element>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="ResetButton">
+      <template>
+        <div>
+          <basic-datetime-input-element id="hide-reset-button" hide-reset-button></basic-datetime-input-element>
+          <basic-datetime-input-element id="disabled" disabled></basic-datetime-input-element>
+          <basic-datetime-input-element id="basic"></basic-datetime-input-element>
+          <basic-datetime-input-element id="default" default="1980-02-01T01:02:03.456Z" clamp=""></basic-datetime-input-element>
+          <basic-datetime-input-element id="value" datetime="1980-02-01T01:02:03.456Z" clamp=""></basic-datetime-input-element>
+          <basic-datetime-input-element id="default-and-value" default="1980-02-01T01:02:03.456Z" datetime="2000-02-01T01:02:03.456Z" clamp=""></basic-datetime-input-element>
+        </div>
       </template>
     </test-fixture>
 
@@ -40,7 +53,7 @@
         let element;
 
         setup(function() {
-          element = fixture('basic');
+          element = fixture('Basic');
         });
 
         test('instantiating the element with default properties should work', done => {
@@ -62,6 +75,7 @@
           assert.isUndefined(element.offsetMinutes, 'no timezone-offset is defined');
           assert.isUndefined(element._timeZoneHours, 'no timezone-hours is defined');
           assert.isUndefined(element._timeZoneMinutes, 'no timezone-minutes is defined');
+          assert.isUndefined(element.setp, 'no step is defined');
           assert.isDefined(element.locale, 'locale is defined');
           assert.isDefined(element.decimalSeparator, 'decimalSeparator is defined');
           assert.isDefined(element.dateSeparator, 'dateSeparator is defined');
@@ -102,7 +116,7 @@
         let element;
 
         setup(function() {
-          element = fixture('basic');
+          element = fixture('Basic');
         });
 
         test('setting step to 1 millisecond', done => {
@@ -162,13 +176,119 @@
         });
       });
 
+      suite('hide reset button', function() {
+        let f;
+
+        setup(function() {
+          f = fixture('ResetButton');
+        });
+
+        test('hide reset button', done => {
+          let element = f.querySelector('#hide-reset-button');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let resetButton = element.shadowRoot.querySelector('.reset');
+            if (resetButton) {
+              assert.equal(document.defaultView.getComputedStyle(resetButton).display, 'none', 'reset-button is hidden');
+            }
+            done();
+          }, 0);
+        });
+
+        test('disabled', done => {
+          let element = f.querySelector('#disabled');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let resetButton = element.shadowRoot.querySelector('.reset');
+            if (resetButton) {
+              assert.equal(document.defaultView.getComputedStyle(resetButton).display, 'none', 'reset-button is hidden');
+            }
+            done();
+          }, 0);
+        });
+
+        test('basic', done => {
+          let element = f.querySelector('#basic');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let resetButton = element.shadowRoot.querySelector('.reset');
+            if (resetButton) {
+              assert.equal(document.defaultView.getComputedStyle(resetButton).visibility, 'hidden', 'reset-button is invisible');
+            }
+            done();
+          }, 0);
+        });
+
+        test('default value', done => {
+          let element = f.querySelector('#default');
+          assert.isDefined(element.value, 'value is set');
+          assert.isDefined(element._defaultValue, 'default value is set');
+          assert.equal(element.valueAsNumber, element._defaultValue, 'valueAsNumber is equal defaultvalue');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let resetButton = element.shadowRoot.querySelector('.reset');
+            if (resetButton) {
+              assert.equal(document.defaultView.getComputedStyle(resetButton).visibility, 'hidden', 'reset-button is invisible');
+            }
+            element.valueAsNumber = 1;
+            assert.notEqual(element.valueAsNumber, element._defaultValue, 'valueAsNumber is not equal defaultvalue');
+            if (resetButton) {
+              assert.notEqual(document.defaultView.getComputedStyle(resetButton).visibility, 'hidden', 'reset-button is visible');
+            }
+            element.resetDate();
+            assert.equal(element.valueAsNumber, element._defaultValue, 'valueAsNumber is equal defaultvalue');
+            if (resetButton) {
+              assert.equal(document.defaultView.getComputedStyle(resetButton).visibility, 'hidden', 'reset-button is invisible when default value equals valueAsNumber');
+            }
+            done();
+          }, 0);
+        });
+
+        test('value is set', done => {
+          let element = f.querySelector('#value');
+          assert.isDefined(element.value, 'value is set');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let resetButton = element.shadowRoot.querySelector('.reset');
+            if (resetButton) {
+              assert.notEqual(document.defaultView.getComputedStyle(resetButton).visibility, 'hidden', 'reset-button is visible');
+            }
+            element.resetDate();
+            assert.notOk(element.valueAsNumber, 'valueAsNumber is unset');
+            if (resetButton) {
+              assert.equal(document.defaultView.getComputedStyle(resetButton).visibility, 'hidden', 'reset-button is not visible');
+            }
+            done();
+          }, 0);
+        });
+
+        test('default and value is set', done => {
+          let element = f.querySelector('#default-and-value');
+          assert.isDefined(element.value, 'value is set');
+          assert.isDefined(element._defaultValue, 'default value is set');
+          assert.notEqual(element.valueAsNumber, element._defaultValue, 'valueAsNumber is not equal defaultvalue');
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let resetButton = element.shadowRoot.querySelector('.reset');
+            if (resetButton) {
+              assert.notEqual(document.defaultView.getComputedStyle(resetButton).visibility, 'hidden', 'reset-button is visible');
+            }
+            element.resetDate();
+            assert.equal(element.valueAsNumber, element._defaultValue, 'valueAsNumber is equal defaultvalue');
+            if (resetButton) {
+              assert.equal(document.defaultView.getComputedStyle(resetButton).visibility, 'hidden', 'reset-button is invisible when default value equals valueAsNumber');
+            }
+            done();
+          }, 0);
+        });
+      });
 
       suite('required', function() {
 
         let element;
 
         setup(function() {
-          element = fixture('required');
+          element = fixture('Required');
         });
 
         test('"value is not set" is invalid when required', done => {
@@ -190,7 +310,6 @@
           assert.isFalse(element.invalid, 'state is not invalid');
           done();
         });
-
       });
 
       suite('property for value', function() {
@@ -216,7 +335,6 @@
           assert.isTrue(element.value instanceof Date, 'value is a date-object');
           done();
         });
-
       });
     </script>
 

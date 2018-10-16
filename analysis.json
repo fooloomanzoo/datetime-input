@@ -31,6 +31,29 @@
           "inheritedFrom": "DateInputPattern"
         },
         {
+          "name": "_timeOnly",
+          "type": "boolean | null | undefined",
+          "description": "if true perspective starts at 0 (1970-01-01)",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 49,
+              "column": 10
+            },
+            "end": {
+              "line": 52,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false",
+          "inheritedFrom": "DateInputPattern"
+        },
+        {
           "name": "step",
           "type": "number | null | undefined",
           "description": "If set the step defines the step a date should be incremented (in seconds). The input for the most inferior standing that would create an integer step is used to increment the value.\nFor example, if the **step** is:\n + **0.05**: the millisecond-input will increment the value by 50 (50 milliseconds), the other inputs behaive as expected\n + **1.05**: the millisecond-input will increment the value by 1050 (1 second and 50 millisecond), the other inputs behaive as expected\n + **2**: the millisecond-input will be disabled, the second-input will increment the value by 2000 (2 seconds), the other inputs behaive as expected\n + **180**: the millisecond-input and the second-input will be disabled, the minute-input will increment the value by 180000 (3 minutes), the other inputs behaive as expected\nIf `step=\"0\"` all inputs will be disabled, else if the step is below _0.001_ the step will be set to **0.001**. The most supirior input that will become the given step is the day-input.",
@@ -38,11 +61,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 81,
+              "line": 90,
               "column": 10
             },
             "end": {
-              "line": 84,
+              "line": 94,
               "column": 11
             }
           },
@@ -52,6 +75,7 @@
               "attributeType": "Number"
             }
           },
+          "defaultValue": "0.001",
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
@@ -62,11 +86,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 89,
+              "line": 99,
               "column": 10
             },
             "end": {
-              "line": 95,
+              "line": 105,
               "column": 11
             }
           },
@@ -87,11 +111,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 100,
+              "line": 110,
               "column": 10
             },
             "end": {
-              "line": 113,
+              "line": 123,
               "column": 11
             }
           },
@@ -113,11 +137,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 118,
+              "line": 128,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 131,
               "column": 11
             }
           },
@@ -132,16 +156,16 @@
         {
           "name": "hideResetButton",
           "type": "boolean | null | undefined",
-          "description": "",
+          "description": "if true, the reset button is hidden",
           "privacy": "public",
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 123,
+              "line": 136,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 139,
               "column": 11
             }
           },
@@ -153,6 +177,30 @@
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
+          "name": "withTimezone",
+          "type": "boolean | null | undefined",
+          "description": "if true, show timezone inputs",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "datetime-input-mixin.html",
+            "start": {
+              "line": 144,
+              "column": 10
+            },
+            "end": {
+              "line": 147,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false",
+          "inheritedFrom": "DatetimeInputMixin"
+        },
+        {
           "name": "_resetButtonIsInvisible",
           "type": "boolean | null | undefined",
           "description": "",
@@ -160,11 +208,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 128,
+              "line": 149,
               "column": 10
             },
             "end": {
-              "line": 131,
+              "line": 152,
               "column": 11
             }
           },
@@ -184,11 +232,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 55,
+              "line": 62,
               "column": 6
             },
             "end": {
-              "line": 110,
+              "line": 117,
               "column": 7
             }
           },
@@ -207,17 +255,43 @@
           "inheritedFrom": "DateInputPattern"
         },
         {
+          "name": "_test",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "datetime-input-mixin.html",
+            "start": {
+              "line": 163,
+              "column": 6
+            },
+            "end": {
+              "line": 165,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "a"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "DatetimeInputMixin"
+        },
+        {
           "name": "_computeOr",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 142,
+              "line": 166,
               "column": 6
             },
             "end": {
-              "line": 144,
+              "line": 168,
               "column": 7
             }
           },
@@ -239,11 +313,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 146,
+              "line": 170,
               "column": 6
             },
             "end": {
-              "line": 148,
+              "line": 172,
               "column": 7
             }
           },
@@ -262,18 +336,18 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 150,
+              "line": 174,
               "column": 6
             },
             "end": {
-              "line": 152,
+              "line": 176,
               "column": 7
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "_valueIsSet"
+              "name": "valueIsSet"
             },
             {
               "name": "defaultValue"
@@ -291,11 +365,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 154,
+              "line": 178,
               "column": 6
             },
             "end": {
-              "line": 158,
+              "line": 183,
               "column": 7
             }
           },
@@ -317,11 +391,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 160,
+              "line": 185,
               "column": 6
             },
             "end": {
-              "line": 162,
+              "line": 187,
               "column": 7
             }
           },
@@ -340,11 +414,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 164,
+              "line": 189,
               "column": 6
             },
             "end": {
-              "line": 169,
+              "line": 194,
               "column": 7
             }
           },
@@ -366,11 +440,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 174,
+              "line": 199,
               "column": 6
             },
             "end": {
-              "line": 255,
+              "line": 280,
               "column": 7
             }
           },
@@ -392,11 +466,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 257,
+              "line": 282,
               "column": 6
             },
             "end": {
-              "line": 275,
+              "line": 300,
               "column": 7
             }
           },
@@ -421,11 +495,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 277,
+              "line": 302,
               "column": 6
             },
             "end": {
-              "line": 289,
+              "line": 314,
               "column": 7
             }
           },
@@ -452,11 +526,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 135,
+          "line": 142,
           "column": 4
         },
         "end": {
-          "line": 141,
+          "line": 148,
           "column": 5
         }
       },
@@ -487,11 +561,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 81,
+              "line": 90,
               "column": 10
             },
             "end": {
-              "line": 84,
+              "line": 94,
               "column": 11
             }
           },
@@ -505,11 +579,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 118,
+              "line": 128,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 131,
               "column": 11
             }
           },
@@ -519,15 +593,33 @@
         },
         {
           "name": "hide-reset-button",
-          "description": "",
+          "description": "if true, the reset button is hidden",
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 123,
+              "line": 136,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 139,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined",
+          "inheritedFrom": "DatetimeInputMixin"
+        },
+        {
+          "name": "with-timezone",
+          "description": "if true, show timezone inputs",
+          "sourceRange": {
+            "file": "datetime-input-mixin.html",
+            "start": {
+              "line": 144,
+              "column": 10
+            },
+            "end": {
+              "line": 147,
               "column": 11
             }
           },
@@ -561,11 +653,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 81,
+              "line": 90,
               "column": 10
             },
             "end": {
-              "line": 84,
+              "line": 94,
               "column": 11
             }
           },
@@ -575,6 +667,7 @@
               "attributeType": "Number"
             }
           },
+          "defaultValue": "0.001",
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
@@ -585,11 +678,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 89,
+              "line": 99,
               "column": 10
             },
             "end": {
-              "line": 95,
+              "line": 105,
               "column": 11
             }
           },
@@ -610,11 +703,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 100,
+              "line": 110,
               "column": 10
             },
             "end": {
-              "line": 113,
+              "line": 123,
               "column": 11
             }
           },
@@ -636,11 +729,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 118,
+              "line": 128,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 131,
               "column": 11
             }
           },
@@ -655,16 +748,16 @@
         {
           "name": "hideResetButton",
           "type": "boolean | null | undefined",
-          "description": "",
+          "description": "if true, the reset button is hidden",
           "privacy": "public",
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 123,
+              "line": 136,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 139,
               "column": 11
             }
           },
@@ -676,6 +769,30 @@
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
+          "name": "withTimezone",
+          "type": "boolean | null | undefined",
+          "description": "if true, show timezone inputs",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "datetime-input-mixin.html",
+            "start": {
+              "line": 144,
+              "column": 10
+            },
+            "end": {
+              "line": 147,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false",
+          "inheritedFrom": "DatetimeInputMixin"
+        },
+        {
           "name": "_resetButtonIsInvisible",
           "type": "boolean | null | undefined",
           "description": "",
@@ -683,11 +800,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 128,
+              "line": 149,
               "column": 10
             },
             "end": {
-              "line": 131,
+              "line": 152,
               "column": 11
             }
           },
@@ -706,11 +823,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 127,
+              "line": 114,
               "column": 10
             },
             "end": {
-              "line": 130,
+              "line": 117,
               "column": 11
             }
           },
@@ -724,17 +841,43 @@
       ],
       "methods": [
         {
+          "name": "_test",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "datetime-input-mixin.html",
+            "start": {
+              "line": 163,
+              "column": 6
+            },
+            "end": {
+              "line": 165,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "a"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "DatetimeInputMixin"
+        },
+        {
           "name": "_computeOr",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 142,
+              "line": 166,
               "column": 6
             },
             "end": {
-              "line": 144,
+              "line": 168,
               "column": 7
             }
           },
@@ -756,11 +899,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 146,
+              "line": 170,
               "column": 6
             },
             "end": {
-              "line": 148,
+              "line": 172,
               "column": 7
             }
           },
@@ -779,18 +922,18 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 150,
+              "line": 174,
               "column": 6
             },
             "end": {
-              "line": 152,
+              "line": 176,
               "column": 7
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "_valueIsSet"
+              "name": "valueIsSet"
             },
             {
               "name": "defaultValue"
@@ -808,11 +951,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 154,
+              "line": 178,
               "column": 6
             },
             "end": {
-              "line": 158,
+              "line": 183,
               "column": 7
             }
           },
@@ -834,11 +977,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 160,
+              "line": 185,
               "column": 6
             },
             "end": {
-              "line": 162,
+              "line": 187,
               "column": 7
             }
           },
@@ -857,11 +1000,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 164,
+              "line": 189,
               "column": 6
             },
             "end": {
-              "line": 169,
+              "line": 194,
               "column": 7
             }
           },
@@ -883,11 +1026,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 174,
+              "line": 199,
               "column": 6
             },
             "end": {
-              "line": 255,
+              "line": 280,
               "column": 7
             }
           },
@@ -909,11 +1052,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 257,
+              "line": 282,
               "column": 6
             },
             "end": {
-              "line": 275,
+              "line": 300,
               "column": 7
             }
           },
@@ -938,11 +1081,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 277,
+              "line": 302,
               "column": 6
             },
             "end": {
-              "line": 289,
+              "line": 314,
               "column": 7
             }
           },
@@ -969,11 +1112,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 119,
+          "line": 106,
           "column": 4
         },
         "end": {
-          "line": 133,
+          "line": 120,
           "column": 5
         }
       },
@@ -987,11 +1130,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 81,
+              "line": 90,
               "column": 10
             },
             "end": {
-              "line": 84,
+              "line": 94,
               "column": 11
             }
           },
@@ -1005,11 +1148,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 118,
+              "line": 128,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 131,
               "column": 11
             }
           },
@@ -1019,15 +1162,33 @@
         },
         {
           "name": "hide-reset-button",
-          "description": "",
+          "description": "if true, the reset button is hidden",
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 123,
+              "line": 136,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 139,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined",
+          "inheritedFrom": "DatetimeInputMixin"
+        },
+        {
+          "name": "with-timezone",
+          "description": "if true, show timezone inputs",
+          "sourceRange": {
+            "file": "datetime-input-mixin.html",
+            "start": {
+              "line": 144,
+              "column": 10
+            },
+            "end": {
+              "line": 147,
               "column": 11
             }
           },
@@ -1077,6 +1238,28 @@
           "defaultValue": "\"millisecond\""
         },
         {
+          "name": "_timeOnly",
+          "type": "boolean | null | undefined",
+          "description": "if true perspective starts at 0 (1970-01-01)",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 47,
+              "column": 10
+            },
+            "end": {
+              "line": 50,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
           "name": "step",
           "type": "number | null | undefined",
           "description": "If set the step defines the step a date should be incremented (in seconds). The input for the most inferior standing that would create an integer step is used to increment the value.\nFor example, if the **step** is:\n + **0.05**: the millisecond-input will increment the value by 50 (50 milliseconds), the other inputs behaive as expected\n + **1.05**: the millisecond-input will increment the value by 1050 (1 second and 50 millisecond), the other inputs behaive as expected\n + **2**: the millisecond-input will be disabled, the second-input will increment the value by 2000 (2 seconds), the other inputs behaive as expected\n + **180**: the millisecond-input and the second-input will be disabled, the minute-input will increment the value by 180000 (3 minutes), the other inputs behaive as expected\nIf `step=\"0\"` all inputs will be disabled, else if the step is below _0.001_ the step will be set to **0.001**. The most supirior input that will become the given step is the day-input.",
@@ -1084,11 +1267,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 81,
+              "line": 90,
               "column": 10
             },
             "end": {
-              "line": 84,
+              "line": 94,
               "column": 11
             }
           },
@@ -1098,6 +1281,7 @@
               "attributeType": "Number"
             }
           },
+          "defaultValue": "0.001",
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
@@ -1108,11 +1292,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 89,
+              "line": 99,
               "column": 10
             },
             "end": {
-              "line": 95,
+              "line": 105,
               "column": 11
             }
           },
@@ -1133,11 +1317,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 100,
+              "line": 110,
               "column": 10
             },
             "end": {
-              "line": 113,
+              "line": 123,
               "column": 11
             }
           },
@@ -1159,11 +1343,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 118,
+              "line": 128,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 131,
               "column": 11
             }
           },
@@ -1178,16 +1362,16 @@
         {
           "name": "hideResetButton",
           "type": "boolean | null | undefined",
-          "description": "",
+          "description": "if true, the reset button is hidden",
           "privacy": "public",
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 123,
+              "line": 136,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 139,
               "column": 11
             }
           },
@@ -1199,6 +1383,30 @@
           "inheritedFrom": "DatetimeInputMixin"
         },
         {
+          "name": "withTimezone",
+          "type": "boolean | null | undefined",
+          "description": "if true, show timezone inputs",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "datetime-input-mixin.html",
+            "start": {
+              "line": 144,
+              "column": 10
+            },
+            "end": {
+              "line": 147,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false",
+          "inheritedFrom": "DatetimeInputMixin"
+        },
+        {
           "name": "_resetButtonIsInvisible",
           "type": "boolean | null | undefined",
           "description": "",
@@ -1206,11 +1414,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 128,
+              "line": 149,
               "column": 10
             },
             "end": {
-              "line": 131,
+              "line": 152,
               "column": 11
             }
           },
@@ -1231,11 +1439,11 @@
           "sourceRange": {
             "file": "date-input.html",
             "start": {
-              "line": 55,
+              "line": 62,
               "column": 6
             },
             "end": {
-              "line": 110,
+              "line": 117,
               "column": 7
             }
           },
@@ -1254,17 +1462,43 @@
           "inheritedFrom": "DateInputPattern"
         },
         {
+          "name": "_test",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "datetime-input-mixin.html",
+            "start": {
+              "line": 163,
+              "column": 6
+            },
+            "end": {
+              "line": 165,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "a"
+            }
+          ],
+          "return": {
+            "type": "void"
+          },
+          "inheritedFrom": "DatetimeInputMixin"
+        },
+        {
           "name": "_computeOr",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 142,
+              "line": 166,
               "column": 6
             },
             "end": {
-              "line": 144,
+              "line": 168,
               "column": 7
             }
           },
@@ -1286,11 +1520,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 146,
+              "line": 170,
               "column": 6
             },
             "end": {
-              "line": 148,
+              "line": 172,
               "column": 7
             }
           },
@@ -1309,18 +1543,18 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 150,
+              "line": 174,
               "column": 6
             },
             "end": {
-              "line": 152,
+              "line": 176,
               "column": 7
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "_valueIsSet"
+              "name": "valueIsSet"
             },
             {
               "name": "defaultValue"
@@ -1338,11 +1572,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 154,
+              "line": 178,
               "column": 6
             },
             "end": {
-              "line": 158,
+              "line": 183,
               "column": 7
             }
           },
@@ -1364,11 +1598,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 160,
+              "line": 185,
               "column": 6
             },
             "end": {
-              "line": 162,
+              "line": 187,
               "column": 7
             }
           },
@@ -1387,11 +1621,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 164,
+              "line": 189,
               "column": 6
             },
             "end": {
-              "line": 169,
+              "line": 194,
               "column": 7
             }
           },
@@ -1413,11 +1647,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 174,
+              "line": 199,
               "column": 6
             },
             "end": {
-              "line": 255,
+              "line": 280,
               "column": 7
             }
           },
@@ -1439,11 +1673,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 257,
+              "line": 282,
               "column": 6
             },
             "end": {
-              "line": 275,
+              "line": 300,
               "column": 7
             }
           },
@@ -1468,11 +1702,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 277,
+              "line": 302,
               "column": 6
             },
             "end": {
-              "line": 289,
+              "line": 314,
               "column": 7
             }
           },
@@ -1503,7 +1737,7 @@
           "column": 4
         },
         "end": {
-          "line": 50,
+          "line": 58,
           "column": 5
         }
       },
@@ -1533,11 +1767,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 81,
+              "line": 90,
               "column": 10
             },
             "end": {
-              "line": 84,
+              "line": 94,
               "column": 11
             }
           },
@@ -1551,11 +1785,11 @@
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 118,
+              "line": 128,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 131,
               "column": 11
             }
           },
@@ -1565,15 +1799,33 @@
         },
         {
           "name": "hide-reset-button",
-          "description": "",
+          "description": "if true, the reset button is hidden",
           "sourceRange": {
             "file": "datetime-input-mixin.html",
             "start": {
-              "line": 123,
+              "line": 136,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 139,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined",
+          "inheritedFrom": "DatetimeInputMixin"
+        },
+        {
+          "name": "with-timezone",
+          "description": "if true, show timezone inputs",
+          "sourceRange": {
+            "file": "datetime-input-mixin.html",
+            "start": {
+              "line": 144,
+              "column": 10
+            },
+            "end": {
+              "line": 147,
               "column": 11
             }
           },
@@ -1616,11 +1868,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 81,
+              "line": 90,
               "column": 10
             },
             "end": {
-              "line": 84,
+              "line": 94,
               "column": 11
             }
           },
@@ -1629,7 +1881,8 @@
               "notify": true,
               "attributeType": "Number"
             }
-          }
+          },
+          "defaultValue": "0.001"
         },
         {
           "name": "_partsDisabled",
@@ -1638,11 +1891,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 89,
+              "line": 99,
               "column": 10
             },
             "end": {
-              "line": 95,
+              "line": 105,
               "column": 11
             }
           },
@@ -1661,11 +1914,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 100,
+              "line": 110,
               "column": 10
             },
             "end": {
-              "line": 113,
+              "line": 123,
               "column": 11
             }
           },
@@ -1685,11 +1938,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 118,
+              "line": 128,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 131,
               "column": 11
             }
           },
@@ -1703,15 +1956,15 @@
         {
           "name": "hideResetButton",
           "type": "boolean | null | undefined",
-          "description": "",
+          "description": "if true, the reset button is hidden",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 136,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 139,
               "column": 11
             }
           },
@@ -1722,17 +1975,39 @@
           }
         },
         {
+          "name": "withTimezone",
+          "type": "boolean | null | undefined",
+          "description": "if true, show timezone inputs",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 144,
+              "column": 10
+            },
+            "end": {
+              "line": 147,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
           "name": "_resetButtonIsInvisible",
           "type": "boolean | null | undefined",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 128,
+              "line": 149,
               "column": 10
             },
             "end": {
-              "line": 131,
+              "line": 152,
               "column": 11
             }
           },
@@ -1746,16 +2021,40 @@
       ],
       "methods": [
         {
+          "name": "_test",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 163,
+              "column": 6
+            },
+            "end": {
+              "line": 165,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "a"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
           "name": "_computeOr",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 142,
+              "line": 166,
               "column": 6
             },
             "end": {
-              "line": 144,
+              "line": 168,
               "column": 7
             }
           },
@@ -1775,11 +2074,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 146,
+              "line": 170,
               "column": 6
             },
             "end": {
-              "line": 148,
+              "line": 172,
               "column": 7
             }
           },
@@ -1796,18 +2095,18 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 150,
+              "line": 174,
               "column": 6
             },
             "end": {
-              "line": 152,
+              "line": 176,
               "column": 7
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "_valueIsSet"
+              "name": "valueIsSet"
             },
             {
               "name": "defaultValue"
@@ -1823,11 +2122,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 154,
+              "line": 178,
               "column": 6
             },
             "end": {
-              "line": 158,
+              "line": 183,
               "column": 7
             }
           },
@@ -1847,11 +2146,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 160,
+              "line": 185,
               "column": 6
             },
             "end": {
-              "line": 162,
+              "line": 187,
               "column": 7
             }
           },
@@ -1868,11 +2167,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 164,
+              "line": 189,
               "column": 6
             },
             "end": {
-              "line": 169,
+              "line": 194,
               "column": 7
             }
           },
@@ -1892,11 +2191,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 174,
+              "line": 199,
               "column": 6
             },
             "end": {
-              "line": 255,
+              "line": 280,
               "column": 7
             }
           },
@@ -1916,11 +2215,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 257,
+              "line": 282,
               "column": 6
             },
             "end": {
-              "line": 275,
+              "line": 300,
               "column": 7
             }
           },
@@ -1943,11 +2242,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 277,
+              "line": 302,
               "column": 6
             },
             "end": {
-              "line": 289,
+              "line": 314,
               "column": 7
             }
           },
@@ -1968,7 +2267,7 @@
           "column": 2
         },
         "end": {
-          "line": 291,
+          "line": 316,
           "column": 3
         }
       },
@@ -1980,11 +2279,11 @@
           "description": "If set the step defines the step a date should be incremented (in seconds). The input for the most inferior standing that would create an integer step is used to increment the value.\nFor example, if the **step** is:\n + **0.05**: the millisecond-input will increment the value by 50 (50 milliseconds), the other inputs behaive as expected\n + **1.05**: the millisecond-input will increment the value by 1050 (1 second and 50 millisecond), the other inputs behaive as expected\n + **2**: the millisecond-input will be disabled, the second-input will increment the value by 2000 (2 seconds), the other inputs behaive as expected\n + **180**: the millisecond-input and the second-input will be disabled, the minute-input will increment the value by 180000 (3 minutes), the other inputs behaive as expected\nIf `step=\"0\"` all inputs will be disabled, else if the step is below _0.001_ the step will be set to **0.001**. The most supirior input that will become the given step is the day-input.",
           "sourceRange": {
             "start": {
-              "line": 81,
+              "line": 90,
               "column": 10
             },
             "end": {
-              "line": 84,
+              "line": 94,
               "column": 11
             }
           },
@@ -1996,11 +2295,11 @@
           "description": "defines the property that should be used for the value",
           "sourceRange": {
             "start": {
-              "line": 118,
+              "line": 128,
               "column": 10
             },
             "end": {
-              "line": 121,
+              "line": 131,
               "column": 11
             }
           },
@@ -2009,14 +2308,30 @@
         },
         {
           "name": "hide-reset-button",
-          "description": "",
+          "description": "if true, the reset button is hidden",
           "sourceRange": {
             "start": {
-              "line": 123,
+              "line": 136,
               "column": 10
             },
             "end": {
-              "line": 126,
+              "line": 139,
+              "column": 11
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        },
+        {
+          "name": "with-timezone",
+          "description": "if true, show timezone inputs",
+          "sourceRange": {
+            "start": {
+              "line": 144,
+              "column": 10
+            },
+            "end": {
+              "line": 147,
               "column": 11
             }
           },
@@ -2062,6 +2377,28 @@
             }
           },
           "defaultValue": "\"hour\""
+        },
+        {
+          "name": "_timeOnly",
+          "type": "boolean | null | undefined",
+          "description": "if true perspective starts at 0 (1970-01-01)",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 49,
+              "column": 10
+            },
+            "end": {
+              "line": 52,
+              "column": 11
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "false"
         }
       ],
       "methods": [
@@ -2071,11 +2408,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 55,
+              "line": 62,
               "column": 6
             },
             "end": {
-              "line": 110,
+              "line": 117,
               "column": 7
             }
           },
@@ -2111,7 +2448,7 @@
           "column": 2
         },
         "end": {
-          "line": 112,
+          "line": 119,
           "column": 3
         }
       },
@@ -2156,11 +2493,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 88,
+              "line": 75,
               "column": 6
             },
             "end": {
-              "line": 90,
+              "line": 77,
               "column": 7
             }
           },
@@ -2176,11 +2513,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 92,
+              "line": 79,
               "column": 6
             },
             "end": {
-              "line": 94,
+              "line": 81,
               "column": 7
             }
           },
@@ -2207,7 +2544,7 @@
           "column": 11
         },
         "end": {
-          "line": 95,
+          "line": 82,
           "column": 5
         }
       },

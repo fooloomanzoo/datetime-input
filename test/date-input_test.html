@@ -140,6 +140,8 @@
 
         setTimeout(() => {
           // wait a tick to let dom-if stamping finish
+          assert.equal(element.clamp, 'month', 'clamp is set');
+          
           let yearInput = element.shadowRoot.querySelector('#year');
           let monthInput = element.shadowRoot.querySelector('#month');
           let dayInput = element.shadowRoot.querySelector('#day');

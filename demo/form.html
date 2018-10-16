@@ -82,7 +82,7 @@
             <template>
               <label>
                 <input type="checkbox" checked onchange="form1.allowRedirect = !this.checked;">Prevent automatic form redirection<br>
-                <input type="checkbox" checked="{{hour12::change}}">hour12 format<br>
+                <input type="checkbox" checked="{{hour12Format::change}}">hour12 format<br>
                 property to submit: <select value="{{propertyForValue::change}}">
                   <option value="valueAsNumber">value as number</option>
                   <option value="valueAsDate">value as date</option>
@@ -105,11 +105,11 @@
                   name: <input name="name" required value="Batman"/><br>
                   job: <input name="job" required value="Hero"/><br>
                   <p>
-                  first day (required): <date-input name="firstDay" required max="{{end}}" value="{{start}}" property-for-value="[[propertyForValue]]"></date-input><br>
-                  expected retirement: <date-input name="expectedRetirement" min="{{start}}" value="{{end}}" property-for-value="[[propertyForValue]]"></date-input><br>
-                  last job (required): <datetime-input name="lastJob" required min="[[start]]" max="[[end]]" datetime="{{lastjob}}" hour12="[[hour12]]" property-for-value="[[propertyForValue]]"></datetime-input><br>
-                  return: <time-input name="return" min="[[lastjob]]" default="{{lastjob}}" max="[[end]]" hour12="[[hour12]]" property-for-value="[[propertyForValue]]"></time-input><br>
-                </p>
+                    first day (required): <date-input name="firstDay" required max="[[end]]" value-as-number="{{start}}" property-for-value="[[propertyForValue]]"></date-input><br>
+                    expected retirement: <date-input name="expectedRetirement" min="[[start]]" value-as-number="{{end}}" property-for-value="[[propertyForValue]]"></date-input><br>
+                    last job (required): <datetime-input name="lastJob" required min="[[start]]" max="[[end]]" value-as-number="{{lastjob}}"  hour12-format="[[hour12Format]]" property-for-value="[[propertyForValue]]" timezone="{{timezone}}"></datetime-input><br>
+                    return: <time-input name="return" min="[[lastjob]]" default="[[lastjob]]" max="[[end]]" hour12-format="[[hour12Format]]" property-for-value="[[propertyForValue]]" timezone="[[timezone]]"></time-input>
+                  </p>
                   <button onclick="form1.submit()">Submit</button>
                   <button onclick="form1.validate()">Validate</button>
                 </form>

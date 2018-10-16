@@ -22,7 +22,7 @@
 
     <test-fixture id="ChangingProperties">
       <template>
-        <time-input time="02:03:04.567"></time-input>
+        <time-input time="02:03:04.567" with-timezone clamp=""></time-input>
       </template>
     </test-fixture>
 
@@ -101,6 +101,27 @@
           assert.isDefined(element._timeZoneMinutes, 'timezone-minutes is defined');
           done();
         });
+
+        test('hour12 format', done => {
+          element.clamp = ''; // enshure that hours are always displayed
+          element.hour12Format = true;
+          setTimeout(() => {
+            // wait a tick to let dom-if stamping finish
+            let hourInput = element.shadowRoot.querySelector('#hour');
+            let hour12Input = element.shadowRoot.querySelector('#hour12');
+
+            assert.equal(document.defaultView.getComputedStyle(hourInput).display, 'none', 'hour is hidden');
+            assert.notEqual(document.defaultView.getComputedStyle(hour12Input).display, 'none', 'hour12 is not hidden');
+
+            element.hour12Format = false;
+            setTimeout(() => {
+              // wait a tick to let dom-if stamping finish
+              assert.notEqual(document.defaultView.getComputedStyle(hourInput).display, 'none', 'hour is not hidden');
+              assert.equal(document.defaultView.getComputedStyle(hour12Input).display, 'none', 'hour12 is hidden');
+              done();
+            }, 0);
+          }, 0);
+        });
       });
 
       suite('setting properties', () => {
@@ -111,13 +132,9 @@
         });
 
         test('setting property should work', done => {
-          if (element._timeOnly) {
-            assert.equal(element.year, 1970, 'year should be set');
-            assert.equal(element.date, '1970-01-01', 'date should be set');
-          } else {
-            assert.equal(element.year, new Date().getFullYear(), 'year should be set');
-            assert.equal(element.date, new Date().getFullYear() + '-02-01', 'date should be set');
-          }
+          assert.isTrue(element.withTimezone, 'with timezone is set');
+          assert.equal(element.year, 1970, 'year should be set');
+          assert.equal(element.date, '1970-01-01', 'date should be set');
           assert.equal(element.month, 1, 'month should be set');
           assert.equal(element.day, 1, 'day should be set');
           assert.equal(element.hour, 2, 'hour should be set');
@@ -129,6 +146,10 @@
           assert.isDefined(element.valueAsDate, 'valueAsDate should be set');
           assert.isDefined(element.timezone, 'timezone should be set');
           assert.isDefined(element.offsetMinutes, 'offsetMinutes should be set');
+          if (element._timeOnly) {
+            assert.equal(element.timezone, '+00:00', 'timezone should be set to GMT');
+            assert.equal(element.offsetMinutes, 0, 'offsetMinutes should be set to 0');
+          }
           done();
         });
       });
@@ -247,7 +268,6 @@
             done();
           }, 0);
         });
-
       });
     </script>
 
