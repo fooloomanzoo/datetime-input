@@ -20,12 +20,6 @@
       </template>
     </test-fixture>
 
-    <test-fixture id="Required">
-      <template>
-        <basic-datetime-input-element required></basic-datetime-input-element>
-      </template>
-    </test-fixture>
-
     <test-fixture id="ResetButton">
       <template>
         <div>
@@ -36,12 +30,6 @@
           <basic-datetime-input-element id="value" datetime="1980-02-01T01:02:03.456Z" clamp=""></basic-datetime-input-element>
           <basic-datetime-input-element id="default-and-value" default="1980-02-01T01:02:03.456Z" datetime="2000-02-01T01:02:03.456Z" clamp=""></basic-datetime-input-element>
         </div>
-      </template>
-    </test-fixture>
-
-    <test-fixture id="valueAsDate for value-property">
-      <template>
-        <basic-datetime-input-element property-for-value="valueAsDate"></basic-datetime-input-element>
       </template>
     </test-fixture>
 
@@ -107,71 +95,6 @@
           assert.isDefined(element.offsetMinutes, 'timezone-offset is defined');
           assert.isDefined(element._timeZoneHours, 'timezone-hours is defined');
           assert.isDefined(element._timeZoneMinutes, 'timezone-minutes is defined');
-          done();
-        });
-      });
-
-      suite('step and disabled', function() {
-
-        let element;
-
-        setup(function() {
-          element = fixture('Basic');
-        });
-
-        test('setting step to 1 millisecond', done => {
-          element.step = 0.001;
-          assert.deepEqual(element._partsStep, {day: 1, hour: 1, minute: 1, second: 1, millisecond: 1}, 'partsStep is set');
-          assert.deepEqual(element._partsDisabled, {day: false, hour: false, minute: false, second: false, millisecond: false}, 'partsDisabled is set');
-          done();
-        });
-
-        test('setting step to 50 millisecond', done => {
-          element.step = 0.05;
-          assert.deepEqual(element._partsStep, {day: 1, hour: 1, minute: 1, second: 1, millisecond: 50}, 'partsStep is set');
-          assert.deepEqual(element._partsDisabled, {day: false, hour: false, minute: false, second: false, millisecond: false}, 'partsDisabled is set');
-          done();
-        });
-
-        test('setting step to 1 second', done => {
-          element.step = 1;
-          assert.deepEqual(element._partsStep, {day: 1, hour: 1, minute: 1, second: 1, millisecond: 0}, 'partsStep is set');
-          assert.deepEqual(element._partsDisabled, {day: false, hour: false, minute: false, second: false, millisecond: true}, 'partsDisabled is set');
-          done();
-        });
-
-        test('setting step to 1.250 second', done => {
-          element.step = 1.25;
-          assert.deepEqual(element._partsStep, {day: 1, hour: 1, minute: 1, second: 1, millisecond: 1250}, 'partsStep is set');
-          assert.deepEqual(element._partsDisabled, {day: false, hour: false, minute: false, second: false, millisecond: false}, 'partsDisabled is set');
-          done();
-        });
-
-        test('setting step to 2 minutes', done => {
-          element.step = 120;
-          assert.deepEqual(element._partsStep, {day: 1, hour: 1, minute: 2, second: 0, millisecond: 0}, 'partsStep is set');
-          assert.deepEqual(element._partsDisabled, {day: false, hour: false, minute: false, second: true, millisecond: true}, 'partsDisabled is set');
-          done();
-        });
-
-        test('setting step to 3 hours', done => {
-          element.step = 10800;
-          assert.deepEqual(element._partsStep, {day: 1, hour: 3, minute: 0, second: 0, millisecond: 0}, 'partsStep is set');
-          assert.deepEqual(element._partsDisabled, {day: false, hour: false, minute: true, second: true, millisecond: true}, 'partsDisabled is set');
-          done();
-        });
-
-        test('setting step to 4 days', done => {
-          element.step = 345600;
-          assert.deepEqual(element._partsStep, {day: 4, hour: 0, minute: 0, second: 0, millisecond: 0}, 'partsStep is set');
-          assert.deepEqual(element._partsDisabled, {day: false, hour: true, minute: true, second: true, millisecond: true}, 'partsDisabled is set');
-          done();
-        });
-
-        test('setting step when input is disabled', done => {
-          element.disabled = true;
-          element.step = 1;
-          assert.deepEqual(element._partsDisabled, {day: true, hour: true, minute: true, second: true, millisecond: true}, 'partsDisabled is set');
           done();
         });
       });
@@ -282,61 +205,6 @@
           }, 0);
         });
       });
-
-      suite('required', function() {
-
-        let element;
-
-        setup(function() {
-          element = fixture('Required');
-        });
-
-        test('"value is not set" is invalid when required', done => {
-          assert.isUndefined(element.value, 'no value is defined');
-          assert.isTrue(element.invalid, 'state is invalid');
-          done();
-        });
-
-        test('settting an invalid date is invalid', done => {
-          element.setAttribute('datetime', 'abc');
-          assert.isUndefined(element.value, 'no value is defined');
-          assert.isTrue(element.invalid, 'state is invalid');
-          done();
-        });
-
-        test('"value is set" is not invalid when required', done => {
-          element.now();
-          assert.isDefined(element.value, 'value is defined');
-          assert.isFalse(element.invalid, 'state is not invalid');
-          done();
-        });
-      });
-
-      suite('property for value', function() {
-
-        let element;
-
-        setup(function() {
-          element = fixture('valueAsDate for value-property');
-        });
-
-        test('valueAsDate should serialize and deserialize"', done => {
-          let d = new Date();
-          // transforming date according to its clamp attribute
-          d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-          d = element._clampUTC(d, element.clamp);
-          d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
-          // NOTE: milliseconds are often not serialized by browsers
-          d.setMilliseconds(0);
-          element.setAttribute('value', d);
-          assert.equal(+new Date(element.value), +d, 'value does not change');
-          assert.equal(+element.valueAsNumber, +d, 'valueAsNumber is set');
-          assert.equal(+element.valueAsDate, +d, 'valueAsDate is set');
-          assert.isTrue(element.value instanceof Date, 'value is a date-object');
-          done();
-        });
-      });
     </script>
-
   </body>
 </html>

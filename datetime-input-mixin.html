@@ -13,127 +13,20 @@
    * @appliesMixin DatetimeMixin
    * @appliesMixin IntlDatetimeFormatMixin
    */
-   const DatetimeFormMixin = superClass => { // eslint-disable-line no-unused-vars
+  const DatetimeFormMixin = superClass => { // eslint-disable-line no-unused-vars
 
-     return class extends FormElementMixin(DatetimeMixin(IntlDatetimeFormatMixin(superClass))) { // eslint-disable-line no-undef
-
-       static get properties() {
-         return {
-           /**
-            * defines the property that should be used for the value
-            */
-           propertyForValue: {
-             type: String,
-             value: 'valueAsNumber'
-           }
-         }
-       }
-
-       _defaultChanged(def) {
-         // overwrite form-element-mixin's behaviour in favour of datetime-mixins handling
-         if (this._isSet(def) === false) {
-           this.default = undefined;
-         }
-       }
-
-       _isSet(value) {
-         return !(typeof value === 'boolean' || value === undefined || value === null || value === '');
-       }
-
-       _valueChanged(value) {
-         // test if value is set and if needed set value to default
-         if (this._isSet(value) === false) {
-           this.resetDate();
-         }
-       }
-     }
-   }
-   window.DatetimeFormMixin = DatetimeFormMixin;
-  /**
-   * Mixin to extend an element for an datetime input element
-   *
-   * @appliesMixin DatetimeFormMixin
-   *
-   * @mixinFunction
-   * @polymer
-   *
-   * @param {Object} superClass class to extend
-   * @return {Object} extended class
-   */
-  const DatetimeInputMixin = superClass => { // eslint-disable-line no-unused-vars
-
-    return class extends DatetimeFormMixin(superClass) { // eslint-disable-line no-undef
-
-      static get template() {
-        return `
-          <style include="${this.styleToInclude}">
-            ${this.styleTemplate}
-          </style>
-          <div id="input">
-            ${this.inputTemplate}
-          </div>
-        `
-      }
-
-      static get styleToInclude() {
-        return `${super.styleToInclude || ''} input-shared-style`;
-      }
-
-      static get styleTemplate() {
-        return `
-          ${super.styleTemplate || ''}
-          :host {
-            display: inline-flex;
-            outline: none;
-          }
-          #input,
-          #input > div {
-            display: inline-flex;
-            align-items: baseline;
-          }
-          #input > div {
-            padding: var(--input-field-padding, 0 1px);
-            border: var(--input-border-width, thin) solid transparent;
-          }
-          #input .reset {
-            order: 2;
-          }
-          #input integer-input[always-sign] {
-            --input-align: end;
-          }
-        `;
-      }
-
-      /**
-       * template for the focusable
-       * @type {string}
-       */
-      static get inputTemplate() {
-        return `
-          <template is="dom-if" if="[[withTimezone]]">
-            <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];">
-              <integer-input value="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="±00" min="-23" max="23" use-negative-zero></integer-input>
-              <span>[[timeSeparator]]</span>
-              <integer-input value="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
-            </div>
-          </template>
-          <button class="icon reset" invisible$="[[_resetButtonIsInvisible]]" hidden$="[[_computeOr(disabled,hideResetButton)]]" on-click="resetDate">
-            <svg viewBox="0 0 24 24"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg>
-          </button>
-          ${super.inputTemplate || ''}
-        `
-      }
+    return class extends FormElementMixin(DatetimeMixin(IntlDatetimeFormatMixin(superClass))) { // eslint-disable-line no-undef
 
       static get properties() {
         return {
           /**
-          * If set the step defines the step a date should be incremented (in seconds). The input for the most inferior standing that would create an integer step is used to increment the value.
-          * For example, if the **step** is:
-          *  + **0.05**: the millisecond-input will increment the value by 50 (50 milliseconds), the other inputs behaive as expected
-          *  + **1.05**: the millisecond-input will increment the value by 1050 (1 second and 50 millisecond), the other inputs behaive as expected
-          *  + **2**: the millisecond-input will be disabled, the second-input will increment the value by 2000 (2 seconds), the other inputs behaive as expected
-          *  + **180**: the millisecond-input and the second-input will be disabled, the minute-input will increment the value by 180000 (3 minutes), the other inputs behaive as expected
-          * If `step="0"` all inputs will be disabled, else if the step is below _0.001_ the step will be set to **0.001**. The most supirior input that will become the given step is the day-input.
+           * If set the step defines the step a date should be incremented (in seconds). The input for the most inferior standing that would create an integer step is used to increment the value.
+           * For example, if the **step** is:
+           *  + **0.05**: the millisecond-input will increment the value by 50 (50 milliseconds), the other inputs behaive as expected
+           *  + **1.05**: the millisecond-input will increment the value by 1050 (1 second and 50 millisecond), the other inputs behaive as expected
+           *  + **2**: the millisecond-input will be disabled, the second-input will increment the value by 2000 (2 seconds), the other inputs behaive as expected
+           *  + **180**: the millisecond-input and the second-input will be disabled, the minute-input will increment the value by 180000 (3 minutes), the other inputs behaive as expected
+           * If `step="0"` all inputs will be disabled, else if the step is below _0.001_ the step will be set to **0.001**. The most supirior input that will become the given step is the day-input.
            */
           step: {
             type: Number,
@@ -168,26 +61,12 @@
               }
             }
           },
-
           /**
-           * if true, the reset button is hidden
+           * defines the property that should be used for the value
            */
-          hideResetButton: {
-            type: Boolean,
-            reflectToAttribute: true
-          },
-
-          /**
-           * if true, show timezone inputs
-           */
-          withTimezone: {
-            type: Boolean,
-            value: false
-          },
-
-          _resetButtonIsInvisible: {
-            type: Boolean,
-            computed: '_computeResetButtonIsInvisible(_valueIsSet, _defaultValue, valueAsNumber)'
+          propertyForValue: {
+            type: String,
+            value: 'valueAsNumber'
           }
         }
       }
@@ -199,16 +78,22 @@
         ]
       }
 
-      _computeOr(a, b) {
-        return Boolean(a || b);
+      _defaultChanged(def) {
+        // overwrite form-element-mixin's behaviour in favour of datetime-mixins handling
+        if (this._isSet(def) === false) {
+          this.default = undefined;
+        }
       }
 
-      _computePartOrder(first) {
-        return first ? 0 : 1;
+      _isSet(value) {
+        return !(typeof value === 'boolean' || value === undefined || value === null || value === '');
       }
 
-      _computeResetButtonIsInvisible(valueIsSet, defaultValue, valueAsNumber) {
-        return !valueIsSet || (!isNaN(defaultValue) && defaultValue === valueAsNumber) || this._isSet(valueAsNumber) === false;
+      _valueChanged(value) {
+        // test if value is set and if needed set value to default
+        if (this._isSet(value) === false) {
+          this.resetDate();
+        }
       }
 
       /**
@@ -316,6 +201,121 @@
 
         this.notifyPath('_partsDisabled');
       }
+    }
+  }
+  window.DatetimeFormMixin = DatetimeFormMixin;
+  /**
+   * Mixin to extend an element for an datetime input element
+   *
+   * @appliesMixin DatetimeFormMixin
+   *
+   * @mixinFunction
+   * @polymer
+   *
+   * @param {Object} superClass class to extend
+   * @return {Object} extended class
+   */
+  const DatetimeInputMixin = superClass => { // eslint-disable-line no-unused-vars
+
+    return class extends DatetimeFormMixin(superClass) { // eslint-disable-line no-undef
+
+      static get template() {
+        return `
+          <style include="${this.styleToInclude}">
+            ${this.styleTemplate}
+          </style>
+          <div id="input">
+            ${this.inputTemplate}
+          </div>
+        `
+      }
+
+      static get styleToInclude() {
+        return `${super.styleToInclude || ''} input-shared-style`;
+      }
+
+      static get styleTemplate() {
+        return `
+          ${super.styleTemplate || ''}
+          :host {
+            display: inline-flex;
+            outline: none;
+          }
+          #input,
+          #input > div {
+            display: inline-flex;
+            align-items: baseline;
+          }
+          #input > div {
+            padding: var(--input-field-padding, 0 1px);
+            border: var(--input-border-width, thin) solid transparent;
+          }
+          #input .reset {
+            order: 2;
+          }
+          #input integer-input[always-sign] {
+            --input-align: end;
+          }
+        `;
+      }
+
+      /**
+       * template for the focusable
+       * @type {string}
+       */
+      static get inputTemplate() {
+        return `
+          <template is="dom-if" if="[[withTimezone]]">
+            <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];">
+              <integer-input value="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="±00" min="-23" max="23" use-negative-zero></integer-input>
+              <span>[[timeSeparator]]</span>
+              <integer-input value="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
+            </div>
+          </template>
+          <button class="icon reset" invisible$="[[_resetButtonIsInvisible]]" hidden$="[[_computeOr(disabled,hideResetButton)]]" on-click="resetDate">
+            <svg viewBox="0 0 24 24"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg>
+          </button>
+          ${super.inputTemplate || ''}
+        `
+      }
+
+      static get properties() {
+        return {
+          /**
+           * if true, the reset button is hidden
+           */
+          hideResetButton: {
+            type: Boolean,
+            reflectToAttribute: true
+          },
+
+          /**
+           * if true, show timezone inputs
+           */
+          withTimezone: {
+            type: Boolean,
+            value: false
+          },
+
+          _resetButtonIsInvisible: {
+            type: Boolean,
+            computed: '_computeResetButtonIsInvisible(_valueIsSet, _defaultValue, valueAsNumber)'
+          }
+        }
+      }
+
+      _computeOr(a, b) {
+        return Boolean(a || b);
+      }
+
+      _computePartOrder(first) {
+        return first ? 0 : 1;
+      }
+
+      _computeResetButtonIsInvisible(valueIsSet, defaultValue, valueAsNumber) {
+        return !valueIsSet || (!isNaN(defaultValue) && defaultValue === valueAsNumber) || this._isSet(valueAsNumber) === false;
+      }
+
     }
   }
   window.DatetimeInputMixin = DatetimeInputMixin;
