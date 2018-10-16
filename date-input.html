@@ -113,6 +113,18 @@
           this.$.dateSeparator2.setAttribute('hidden', '');
         }
       }
+
+      _getDefaultForProp(prop) {
+        const d = (this._defaultValue && new Date(this._defaultValue)) || new Date();
+        switch (prop) {
+          case 'year':
+            return d.getFullYear();
+          case 'month':
+            return d.getMonth() + 1;
+          default:
+            return 0;
+        }
+      }
     }
   }
   window.DateInputPattern = DateInputPattern;
