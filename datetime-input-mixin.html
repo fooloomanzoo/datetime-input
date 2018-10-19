@@ -1,3 +1,4 @@
+<link rel="import" href="../polymer/lib/utils/mixin.html">
 <link rel="import" href="../input-picker-pattern/input-shared-style.html">
 <link rel="import" href="../input-picker-pattern/input-picker-shared-style.html">
 <link rel="import" href="../input-picker-pattern/form-element-mixin.html">
@@ -9,13 +10,15 @@
   /**
    * Mixin to extend an element for combining form-element-mixin and datetime-mixin
    *
+   * @mixinFunction
+   * @polymer
+   *
    * @appliesMixin FormElementMixin
    * @appliesMixin DatetimeMixin
-   * @appliesMixin IntlDatetimeFormatMixin
    */
-  const DatetimeFormMixin = superClass => { // eslint-disable-line no-unused-vars
+  const DatetimeFormMixin = function(superClass) { // eslint-disable-line no-unused-vars
 
-    return class extends FormElementMixin(DatetimeMixin(IntlDatetimeFormatMixin(superClass))) { // eslint-disable-line no-undef
+    return class extends FormElementMixin(DatetimeMixin(superClass)) { // eslint-disable-line no-undef
 
       static get properties() {
         return {
@@ -203,19 +206,20 @@
       }
     }
   }
-  window.DatetimeFormMixin = DatetimeFormMixin;
+  window.DatetimeFormMixin = Polymer.dedupingMixin(DatetimeFormMixin);
+
   /**
    * Mixin to extend an element for an datetime input element
-   *
-   * @appliesMixin DatetimeFormMixin
    *
    * @mixinFunction
    * @polymer
    *
+   * @appliesMixin DatetimeFormMixin
+   *
    * @param {Object} superClass class to extend
    * @return {Object} extended class
    */
-  const DatetimeInputMixin = superClass => { // eslint-disable-line no-unused-vars
+  const DatetimeInputMixin = function(superClass) { // eslint-disable-line no-unused-vars
 
     return class extends DatetimeFormMixin(superClass) { // eslint-disable-line no-undef
 
@@ -260,22 +264,30 @@
       }
 
       /**
-       * template for the focusable
-       * @type {string}
+       * template for the input parts
        */
       static get inputTemplate() {
         return `
-          <template is="dom-if" if="[[withTimezone]]">
-            <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];">
-              <integer-input value="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="±00" min="-23" max="23" use-negative-zero></integer-input>
-              <span>[[timeSeparator]]</span>
-              <integer-input value="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
-            </div>
-          </template>
+          <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];">
+            ${this.timezoneInputTemplate}
+          </div>
           <button class="icon reset" invisible$="[[_resetButtonIsInvisible]]" hidden$="[[_computeOr(disabled,hideResetButton)]]" on-click="resetDate">
             <svg viewBox="0 0 24 24"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg>
           </button>
           ${super.inputTemplate || ''}
+        `
+      }
+
+      /**
+       * template for the input parts
+       */
+      static get timezoneInputTemplate() {
+        return `
+          <template is="dom-if" if="[[withTimezone]]">+
+            <integer-input value="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="±00" min="-23" max="23" use-negative-zero></integer-input>
+            <span>[[timeSeparator]]</span>
+            <integer-input value="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
+          </template>
         `
       }
 
@@ -315,8 +327,7 @@
       _computeResetButtonIsInvisible(valueIsSet, defaultValue, valueAsNumber) {
         return !valueIsSet || (!isNaN(defaultValue) && defaultValue === valueAsNumber) || this._isSet(valueAsNumber) === false;
       }
-
     }
   }
-  window.DatetimeInputMixin = DatetimeInputMixin;
+  window.DatetimeInputMixin = Polymer.dedupingMixin(DatetimeInputMixin);
 </script>

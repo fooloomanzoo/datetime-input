@@ -1,3 +1,4 @@
+<link rel="import" href="../polymer/lib/utils/mixin.html">
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../number-input/integer-input.html">
 <link rel="import" href="datetime-input-mixin.html">
@@ -7,12 +8,17 @@
    *
    * Mixin to extend an element to a time input
    *
+   * @mixinFunction
+   * @polymer
+   *
+   * @appliesMixin DatetimeInputMixin
+   *
    * @demo demo/index.html
    * @demo demo/form.html Form
    **/
-  const TimeInputPattern = (superClass) => { // eslint-disable-line no-unused-vars
+  const TimeInputPattern = function(superClass) { // eslint-disable-line no-unused-vars
 
-    return class extends superClass { // eslint-disable-line no-undef
+    return class extends DatetimeInputMixin(superClass) { // eslint-disable-line no-undef
 
       static get inputTemplate() {
         return `
@@ -66,6 +72,14 @@
             type: String,
             value: '',
             notify: true
+          },
+
+          /**
+           * if true perspective starts at 0 (1970-01-01)
+           */
+          _timeOnly: {
+            type: Boolean,
+            value: true
           }
         }
       }
@@ -79,7 +93,7 @@
       }
     }
   }
-  window.TimeInputPattern = TimeInputPattern;
+  window.TimeInputPattern = Polymer.dedupingMixin(TimeInputPattern);
 </script>
 
 <dom-module id="time-input">
@@ -97,24 +111,14 @@
      *  @customElement
      *
      *  @appliesMixin TimeInputPattern
-     *  @appliesMixin DatetimeInputMixin
      *
      * @demo demo/index.html
      * @demo demo/form.html in a form
      **/
-    class TimeInput extends TimeInputPattern(DatetimeInputMixin(Polymer.Element)) { // eslint-disable-line no-undef
+    class TimeInput extends TimeInputPattern(Polymer.Element) { // eslint-disable-line no-undef
 
       static get is() {
         return 'time-input';
-      }
-
-      static get properties() {
-        return {
-          _timeOnly: {
-            type: Boolean,
-            value: true
-          }
-        }
       }
     }
     window.customElements.define(TimeInput.is, TimeInput);

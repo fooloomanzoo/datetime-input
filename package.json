@@ -9,7 +9,7 @@
     "gh-pages": "git checkout gh-pages && git pull && bower update -f && git add . && git commit -m \"update\" && git push && git checkout master",
     "build": "git pull && bower update && npm run analyze",
     "start": "npm run analyze && polymer serve -o",
-    "analyze": "polymer analyze -i datetime-input.html date-input.html time-input.html datetime-input-mixin.html > analysis.json",
+    "analyze": "polymer analyze > analysis.json",
     "test": "polymer test",
     "test:p": "polymer test -p --config-file=wct.p.conf.js"
   },
@@ -25,7 +25,7 @@
   "author": "fooloomanzoo",
   "license": "MIT",
   "dependencies": {
-    "@polymer/polymer": "^2",
+    "@polymer/polymer": "^2.6.1",
     "@fooloomanzoo/input-picker-pattern": "^2",
     "@fooloomanzoo/number-input": "^2",
     "@fooloomanzoo/property-mixins": "^2"

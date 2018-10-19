@@ -1,3 +1,4 @@
+<link rel="import" href="../polymer/lib/utils/mixin.html">
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../number-input/integer-input.html">
 <link rel="import" href="datetime-input-mixin.html">
@@ -10,12 +11,14 @@
    * @mixinFunction
    * @polymer
    *
+   * @appliesMixin DatetimeInputMixin
+   *
    * @demo demo/index.html
    * @demo demo/form.html Form
    **/
-  const DateInputPattern = superClass => { // eslint-disable-line no-unused-vars
+  const DateInputPattern = function(superClass) { // eslint-disable-line no-unused-vars
 
-    return class extends superClass { // eslint-disable-line no-undef
+    return class extends DatetimeInputMixin(superClass) { // eslint-disable-line no-undef
 
       static get inputTemplate() {
         return `
@@ -127,7 +130,7 @@
       }
     }
   }
-  window.DateInputPattern = DateInputPattern;
+  window.DateInputPattern = Polymer.dedupingMixin(DateInputPattern);
 </script>
 
 <dom-module id="date-input">
@@ -145,12 +148,11 @@
      *  @customElement
      *
      *  @appliesMixin DateInputPattern
-     *  @appliesMixin DatetimeInputMixin
      *
      * @demo demo/index.html
      * @demo demo/form.html in a form
      **/
-    class DateInput extends DateInputPattern(DatetimeInputMixin(Polymer.Element)) { // eslint-disable-line no-undef
+    class DateInput extends DateInputPattern(Polymer.Element) { // eslint-disable-line no-undef
 
       static get is() {
         return 'date-input';

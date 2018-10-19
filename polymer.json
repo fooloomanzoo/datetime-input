@@ -1,4 +1,10 @@
 {
+  "sources": [
+    "datetime-input-mixin.html",
+    "datetime-input.html",
+    "date-input.html",
+    "time-input.html"
+  ],
   "lint": {
     "rules": [
       "polymer-2"
