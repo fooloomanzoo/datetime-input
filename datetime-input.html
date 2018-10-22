@@ -1,45 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../polymer/lib/utils/mixin.html">
-<link rel="import" href="../number-input/integer-input.html">
-<link rel="import" href="datetime-input-mixin.html">
 <link rel="import" href="date-input.html">
 <link rel="import" href="time-input.html">
-<script>
-  /**
-   *
-   * Mixin to extend an element to a datetime input
-   *
-   * @mixinFunction
-   * @polymer
-   *
-   * @appliesMixin DateInputPattern
-   * @appliesMixin TimeInputPattern
-   * @appliesMixin DatetimeInputMixin
-   *
-   * @demo demo/index.html
-   * @demo demo/form.html Form
-   **/
-  const DatetimeInputPattern = function(superClass) { // eslint-disable-line no-unused-vars
-
-    return class extends DateInputPattern(TimeInputPattern(DatetimeInputMixin(Polymer.Element))) { // eslint-disable-line no-undef
-
-      static get properties() {
-        return {
-          /**
-           * Clamp datetime to a property
-           * possible values: 'month', 'day', 'hour', 'minute', 'second', 'millisecond' or ''
-           */
-          clamp: {
-            type: String,
-            value: 'millisecond',
-            notify: true
-          }
-        }
-      }
-    }
-  }
-  window.DatetimeInputPattern = Polymer.dedupingMixin(DatetimeInputPattern);
-</script>
 
 <dom-module id="datetime-input">
   <script>
@@ -55,15 +17,44 @@
    *  @polymer
    *  @customElement
    *
-   *  @appliesMixin DatetimeInputPattern
+   *  @appliesMixin DateInputPattern
+   *  @appliesMixin TimeInputPattern
+   *  @appliesMixin DatetimeInputMixin
+   *  @appliesMixin FormElementMixin
+   *  @appliesMixin DatetimeMixin
    *
    *  @demo demo/index.html
-   * @demo demo/form.html in a form
+   *  @demo demo/form.html in a form
    **/
-    class DatetimeInput extends DatetimeInputPattern(Polymer.Element) { // eslint-disable-line no-undef
+    class DatetimeInput extends DateInputPattern(TimeInputPattern(DatetimeInputMixin(FormElementMixin(DatetimeMixin(Polymer.Element))))) { // eslint-disable-line no-undef
 
       static get is() {
         return 'datetime-input';
+      }
+
+      static get template() {
+        return `
+          <style include="${this.styleToInclude}">
+            ${this.styleTemplate}
+          </style>
+          <div id="input">
+            ${this.inputTemplate}
+          </div>
+        `
+      }
+
+      static get properties() {
+        return {
+          /**
+           * Clamp timetime to a property
+           * possible values: 'month', 'day', 'hour', 'minute', 'second', 'millisecond' or ''
+           */
+          clamp: {
+            type: String,
+            value: 'millisecond',
+            notify: true
+          }
+        }
       }
     }
     window.customElements.define(DatetimeInput.is, DatetimeInput);

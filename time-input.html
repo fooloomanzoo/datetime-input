@@ -1,6 +1,9 @@
-<link rel="import" href="../polymer/lib/utils/mixin.html">
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/lib/utils/mixin.html">
 <link rel="import" href="../number-input/integer-input.html">
+<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
+<link rel="import" href="../input-picker-pattern/input-shared-style.html">
+<link rel="import" href="../property-mixins/datetime-mixin.html">
 <link rel="import" href="datetime-input-mixin.html">
 
 <script>
@@ -11,40 +14,33 @@
    * @mixinFunction
    * @polymer
    *
-   * @appliesMixin DatetimeInputMixin
-   *
    * @demo demo/index.html
    * @demo demo/form.html Form
    **/
   const TimeInputPattern = function(superClass) { // eslint-disable-line no-unused-vars
 
-    return class extends DatetimeInputMixin(superClass) { // eslint-disable-line no-undef
+    return class extends superClass { // eslint-disable-line no-undef
 
       static get inputTemplate() {
         return `
-          <template is="dom-if" if="[[!_ifClamped(clamp, 'hour')]]">
-            <div class="time part" style$="order:[[_computePartOrder(dateOrder.timeFirst)]];">
-              <integer-input id="hour" hidden$="[[hour12Format]]" pad-length="2" no-clamp value="{{hour}}" placeholder="00" disabled$="[[_partsDisabled.hour]]" step="[[_partsStep.hour]]"></integer-input>
-              <template is="dom-if" if="[[hour12Format]]">
-                <integer-input id="hour12" pad-length="2" no-clamp value="{{hour12}}" placeholder="00" disabled$="[[_partsDisabled.hour]]" step="[[_partsStep.hour]]"></integer-input>
-              </template>
-              <span hidden$="[[_computeMultipleClamp(clamp, 'hour', 'minute')]]">[[timeSeparator]]</span>
-              <integer-input id="minute" value="{{minute}}" hidden$="[[_ifClamped(clamp, 'minute')]]" pad-length="2" no-clamp step="[[_partsStep.minute]]" disabled="[[_partsDisabled.minute]]" placeholder="00"></integer-input>
-              <span hidden$="[[_computeMultipleClamp(clamp, 'second', 'minute')]]">[[timeSeparator]]</span>
-              <integer-input id="second" hidden$="[[_ifClamped(clamp, 'second')]]" pad-length="2" no-clamp step="[[_partsStep.second]]" disabled="[[_partsDisabled.second]]" value="{{second}}" placeholder="00"></integer-input>
-              <template is="dom-if" if="[[_ifClamped(clamp, 'second')]]">
-                <span hidden$="[[_ifClamped(clamp, 'millisecond']]">0</span>
-              </template>
+          <div class="time part" style$="order:[[_computePartOrder(dateOrder.timeFirst)]];" hidden$="[[_ifClamped(clamp, 'hour')]]">
+            <integer-input hidden$="[[hour12Format]]" pad-length="2" no-clamp value="{{hour}}" placeholder="00" disabled$="[[_partsDisabled.hour]]" step="[[_partsStep.hour]]"></integer-input>
+            <template is="dom-if" if="[[hour12Format]]">
+              <integer-input pad-length="2" no-clamp value="{{hour12}}" placeholder="00" disabled$="[[_partsDisabled.hour]]" step="[[_partsStep.hour]]"></integer-input>
+            </template>
+              <span hidden$="[[_ifClamped(clamp, 'minute')]]">[[timeSeparator]]</span>
+            <integer-input hidden$="[[_ifClamped(clamp, 'minute')]]" value="{{minute}}" pad-length="2" no-clamp step="[[_partsStep.minute]]" disabled="[[_partsDisabled.minute]]" placeholder="00"></integer-input>
+              <span hidden$="[[_ifClamped(clamp, 'second')]]">[[timeSeparator]]</span>
+            <integer-input hidden$="[[_ifClamped(clamp, 'second')]]" pad-length="2" no-clamp step="[[_partsStep.second]]" disabled="[[_partsDisabled.second]]" value="{{second}}" placeholder="00"></integer-input>
               <span hidden$="[[_ifClamped(clamp, 'millisecond')]]">[[decimalSeparator]]</span>
-              <integer-input id="millisecond" value="{{millisecond}}" hidden$="[[_ifClamped(clamp, 'millisecond')]]" pad-length="3" no-clamp step="[[_partsStep.millisecond]]" disabled="[[_partsDisabled.millisecond]]" placeholder="000"></integer-input>
-              <template is="dom-if" if="[[hour12Format]]">
-                <button class="hour12" on-click="_switchAm" hidden$="[[!_valueIsSet]]">
-                  <div hidden$="[[!isAm]]">[[amString]]</div>
-                  <div hidden$="[[isAm]]">[[pmString]]</div>
-                </button>
-              </template>
-            </div>
-          </template>
+            <integer-input hidden$="[[_ifClamped(clamp, 'millisecond')]]" value="{{millisecond}}" pad-length="3" no-clamp step="[[_partsStep.millisecond]]" disabled="[[_partsDisabled.millisecond]]" placeholder="000"></integer-input>
+            <template is="dom-if" if="[[hour12Format]]">
+              <button class="hour12" on-click="_switchAm" hidden$="[[!_valueIsSet]]">
+                <div hidden$="[[!isAm]]">[[amString]]</div>
+                <div hidden$="[[isAm]]">[[pmString]]</div>
+              </button>
+            </template>
+          </div>
           ${super.inputTemplate || ''}
         `;
       }
@@ -87,10 +83,6 @@
       _switchAm() {
         this.isAm = !this.isAm;
       }
-
-      _computeMultipleClamp(clamp, prop1, prop2) {
-        return this._ifClamped(clamp, prop1, this._ifClamped(clamp, prop2));
-      }
     }
   }
   window.TimeInputPattern = Polymer.dedupingMixin(TimeInputPattern);
@@ -111,14 +103,28 @@
      *  @customElement
      *
      *  @appliesMixin TimeInputPattern
+     *  @appliesMixin DatetimeInputMixin
+     *  @appliesMixin FormElementMixin
+     *  @appliesMixin DatetimeMixin
      *
      * @demo demo/index.html
      * @demo demo/form.html in a form
      **/
-    class TimeInput extends TimeInputPattern(Polymer.Element) { // eslint-disable-line no-undef
+    class TimeInput extends TimeInputPattern(DatetimeInputMixin(FormElementMixin(DatetimeMixin(Polymer.Element)))) { // eslint-disable-line no-undef
 
       static get is() {
         return 'time-input';
+      }
+
+      static get template() {
+        return `
+          <style include="${this.styleToInclude}">
+            ${this.styleTemplate}
+          </style>
+          <div id="input">
+            ${this.inputTemplate}
+          </div>
+        `
       }
     }
     window.customElements.define(TimeInput.is, TimeInput);

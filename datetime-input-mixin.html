@@ -1,10 +1,7 @@
 <link rel="import" href="../polymer/lib/utils/mixin.html">
 <link rel="import" href="../input-picker-pattern/input-shared-style.html">
-<link rel="import" href="../input-picker-pattern/input-picker-shared-style.html">
-<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
-<link rel="import" href="../property-mixins/datetime-mixin.html">
-<link rel="import" href="../property-mixins/intl-datetime-format-mixin.html">
 <link rel="import" href="../number-input/integer-input.html">
+<link rel="import" href="../property-mixins/datetime-mixin.html">
 
 <script>
   /**
@@ -13,12 +10,10 @@
    * @mixinFunction
    * @polymer
    *
-   * @appliesMixin FormElementMixin
-   * @appliesMixin DatetimeMixin
    */
   const DatetimeFormMixin = function(superClass) { // eslint-disable-line no-unused-vars
 
-    return class extends FormElementMixin(DatetimeMixin(superClass)) { // eslint-disable-line no-undef
+    return class extends superClass { // eslint-disable-line no-undef
 
       static get properties() {
         return {
@@ -214,40 +209,24 @@
    * @mixinFunction
    * @polymer
    *
-   * @appliesMixin DatetimeFormMixin
-   *
    * @param {Object} superClass class to extend
    * @return {Object} extended class
    */
   const DatetimeInputMixin = function(superClass) { // eslint-disable-line no-unused-vars
 
-    return class extends DatetimeFormMixin(superClass) { // eslint-disable-line no-undef
-
-      static get template() {
-        return `
-          <style include="${this.styleToInclude}">
-            ${this.styleTemplate}
-          </style>
-          <div id="input">
-            ${this.inputTemplate}
-          </div>
-        `
-      }
+    return class extends superClass { // eslint-disable-line no-undef
 
       static get styleToInclude() {
-        return `${super.styleToInclude || ''} input-shared-style`;
+        return `input-shared-style ${super.styleToInclude || ''}`;
       }
 
       static get styleTemplate() {
         return `
           ${super.styleTemplate || ''}
-          :host {
-            display: inline-flex;
-            outline: none;
-          }
           #input,
           #input > div {
             display: inline-flex;
+            flex-flow: row nowrap;
             align-items: baseline;
           }
           #input > div {
@@ -268,9 +247,7 @@
        */
       static get inputTemplate() {
         return `
-          <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];">
-            ${this.timezoneInputTemplate}
-          </div>
+          ${this.timezoneInputTemplate}
           <button class="icon reset" invisible$="[[_resetButtonIsInvisible]]" hidden$="[[_computeOr(disabled,hideResetButton)]]" on-click="resetDate">
             <svg viewBox="0 0 24 24"><g><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></g></svg>
           </button>
@@ -283,10 +260,12 @@
        */
       static get timezoneInputTemplate() {
         return `
-          <template is="dom-if" if="[[withTimezone]]">+
-            <integer-input value="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="±00" min="-23" max="23" use-negative-zero></integer-input>
-            <span>[[timeSeparator]]</span>
-            <integer-input value="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
+          <template is="dom-if" if="[[withTimezone]]">
+            <div style$="order:[[_computePartOrder(dateOrder.timeFirst)]];">
+              <integer-input value="{{_timeZoneHours}}" pad-length="2" always-sign step="1" placeholder="±00" min="-23" max="23" use-negative-zero></integer-input>
+              <span>[[timeSeparator]]</span>
+              <integer-input value="{{_timeZoneMinutes}}" pad-length="2" min="0" max="45" step="15" placeholder="00"></integer-input>
+            </div>
           </template>
         `
       }

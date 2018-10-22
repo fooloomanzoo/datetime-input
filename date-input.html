@@ -1,6 +1,9 @@
-<link rel="import" href="../polymer/lib/utils/mixin.html">
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/lib/utils/mixin.html">
 <link rel="import" href="../number-input/integer-input.html">
+<link rel="import" href="../input-picker-pattern/form-element-mixin.html">
+<link rel="import" href="../input-picker-pattern/input-shared-style.html">
+<link rel="import" href="../property-mixins/datetime-mixin.html">
 <link rel="import" href="datetime-input-mixin.html">
 
 <script>
@@ -11,14 +14,12 @@
    * @mixinFunction
    * @polymer
    *
-   * @appliesMixin DatetimeInputMixin
-   *
    * @demo demo/index.html
    * @demo demo/form.html Form
    **/
   const DateInputPattern = function(superClass) { // eslint-disable-line no-unused-vars
 
-    return class extends DatetimeInputMixin(superClass) { // eslint-disable-line no-undef
+    return class extends superClass { // eslint-disable-line no-undef
 
       static get inputTemplate() {
         return `
@@ -36,14 +37,15 @@
       static get properties() {
         return {
           /**
-           * Clamp datetime to a property
-           * possible values:'month', 'day', 'hour', 'minute', 'second', 'millisecond'
+           * Clamp timetime to a property
+           * possible values: 'month', 'day', 'hour', 'minute', 'second', 'millisecond' or ''
            */
           clamp: {
             type: String,
             value: 'hour',
             notify: true
           },
+
           /**
            * if true perspective starts at 0 (1970-01-01)
            */
@@ -148,16 +150,29 @@
      *  @customElement
      *
      *  @appliesMixin DateInputPattern
+     *  @appliesMixin DatetimeInputMixin
+     *  @appliesMixin FormElementMixin
+     *  @appliesMixin DatetimeMixin
      *
      * @demo demo/index.html
      * @demo demo/form.html in a form
      **/
-    class DateInput extends DateInputPattern(Polymer.Element) { // eslint-disable-line no-undef
+    class DateInput extends DateInputPattern(DatetimeInputMixin(FormElementMixin(DatetimeMixin(Polymer.Element)))) { // eslint-disable-line no-undef
 
       static get is() {
         return 'date-input';
       }
 
+      static get template() {
+        return `
+          <style include="${this.styleToInclude}">
+            ${this.styleTemplate}
+          </style>
+          <div id="input">
+            ${this.inputTemplate}
+          </div>
+        `
+      }
     }
     window.customElements.define(DateInput.is, DateInput);
   </script>
