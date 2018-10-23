@@ -106,9 +106,10 @@
           element.clamp = ''; // enshure that hours are always displayed
           element.hour12Format = true;
           setTimeout(() => {
+            let inputs = element.shadowRoot.querySelectorAll('.time.part integer-input');
             // wait a tick to let dom-if stamping finish
-            let hourInput = element.shadowRoot.querySelector('#hour');
-            let hour12Input = element.shadowRoot.querySelector('#hour12');
+            let hourInput = inputs[0];
+            let hour12Input = inputs[1];
 
             assert.equal(document.defaultView.getComputedStyle(hourInput).display, 'none', 'hour is hidden');
             assert.notEqual(document.defaultView.getComputedStyle(hour12Input).display, 'none', 'hour12 is not hidden');
@@ -164,23 +165,10 @@
         test('clamp hour', done => {
           let element = f.querySelector('#clamp-hour');
           setTimeout(() => {
-            let inputs = element.querySelectorAll('.time.part integer-input');
+            let timePart = element.shadowRoot.querySelector('.time.part');
             // wait a tick to let dom-if stamping finish
-            let hourInput = inputs[0];
-            let minuteInput = inputs[1];
-            let secondInput = inputs[2];
-            let millisecondInput = inputs[3];
-            if (hourInput) {
-              assert.equal(document.defaultView.getComputedStyle(hourInput).display, 'none', 'hour is hidden');
-            }
-            if (minuteInput) {
-              assert.equal(document.defaultView.getComputedStyle(minuteInput).display, 'none', 'minute is hidden');
-            }
-            if (secondInput) {
-              assert.equal(document.defaultView.getComputedStyle(secondInput).display, 'none', 'second is hidden');
-            }
-            if (millisecondInput) {
-              assert.equal(document.defaultView.getComputedStyle(millisecondInput).display, 'none', 'millisecond is hidden');
+            if (timePart) {
+              assert.equal(document.defaultView.getComputedStyle(timePart).display, 'none', 'timePart is hidden');
             }
             done();
           }, 0);
@@ -189,7 +177,7 @@
         test('clamp minute', done => {
           let element = f.querySelector('#clamp-minute');
           setTimeout(() => {
-            let inputs = element.querySelectorAll('.time.part integer-input');
+            let inputs = element.shadowRoot.querySelectorAll('.time.part integer-input');
             // wait a tick to let dom-if stamping finish
             let hourInput = inputs[0];
             let minuteInput = inputs[1];
@@ -214,7 +202,7 @@
         test('clamp second', done => {
           let element = f.querySelector('#clamp-second');
           setTimeout(() => {
-            let inputs = element.querySelectorAll('.time.part integer-input');
+            let inputs = element.shadowRoot.querySelectorAll('.time.part integer-input');
             // wait a tick to let dom-if stamping finish
             let hourInput = inputs[0];
             let minuteInput = inputs[1];
@@ -237,7 +225,7 @@
         test('clamp millisecond', done => {
           let element = f.querySelector('#clamp-millisecond');
           setTimeout(() => {
-            let inputs = element.querySelectorAll('.time.part integer-input');
+            let inputs = element.shadowRoot.querySelectorAll('.time.part integer-input');
             // wait a tick to let dom-if stamping finish
             let hourInput = inputs[0];
             let minuteInput = inputs[1];
@@ -258,7 +246,7 @@
         test('no clamp', done => {
           let element = f.querySelector('#clamp-none');
           setTimeout(() => {
-            let inputs = element.querySelectorAll('.time.part integer-input');
+            let inputs = element.shadowRoot.querySelectorAll('.time.part integer-input');
             // wait a tick to let dom-if stamping finish
             let hourInput = inputs[0];
             let minuteInput = inputs[1];
