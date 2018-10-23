@@ -110,7 +110,7 @@
      * @demo demo/index.html
      * @demo demo/form.html in a form
      **/
-    class TimeInput extends TimeInputPattern(DatetimeInputMixin(FormElementMixin(DatetimeMixin(Polymer.Element)))) { // eslint-disable-line no-undef
+    class TimeInput extends TimeInputPattern(DatetimeInputMixin(DatetimeFormMixin(FormElementMixin(DatetimeMixin(Polymer.Element))))) { // eslint-disable-line no-undef
 
       static get is() {
         return 'time-input';

@@ -1,7 +1,6 @@
 <link rel="import" href="../polymer/lib/utils/mixin.html">
 <link rel="import" href="../input-picker-pattern/input-shared-style.html">
 <link rel="import" href="../number-input/integer-input.html">
-<link rel="import" href="../property-mixins/datetime-mixin.html">
 
 <script>
   /**
@@ -116,7 +115,11 @@
         d.setMinutes(d.getMinutes() - this.offsetMinutes);
         if (this._partsDisabled) {
           // clamp date if one part is disabled (INFO: behaviour defined in datetime-input/datetime-input-mixin)
-          if (this._partsDisabled.hour) {
+          if (this._partsDisabled.month) {
+            d = this._clampUTC(d, 'month');
+          } else if (this._partsDisabled.day) {
+            d = this._clampUTC(d, 'day');
+          } else if (this._partsDisabled.hour) {
             d = this._clampUTC(d, 'hour');
           } else if (this._partsDisabled.minute) {
             d = this._clampUTC(d, 'minute');
