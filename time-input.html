@@ -35,7 +35,7 @@
               <span hidden$="[[_ifClamped(clamp, 'millisecond')]]">[[decimalSeparator]]</span>
             <integer-input hidden$="[[_ifClamped(clamp, 'millisecond')]]" value="{{millisecond}}" pad-length="3" no-clamp step="[[_partsStep.millisecond]]" disabled="[[_partsDisabled.millisecond]]" placeholder="000"></integer-input>
             <template is="dom-if" if="[[hour12Format]]">
-              <button class="hour12" on-click="_switchAm" hidden$="[[!_valueIsSet]]">
+              <button class="hour12" on-click="_switchAm" hidden$="[[!valueIsSet]]">
                 <div hidden$="[[!isAm]]">[[amString]]</div>
                 <div hidden$="[[isAm]]">[[pmString]]</div>
               </button>
