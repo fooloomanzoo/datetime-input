@@ -77,7 +77,7 @@
 
       _defaultChanged(def) {
         // overwrite form-element-mixin's behaviour in favour of datetime-mixins handling
-        if (this.isSet(def) === false) {
+        if (this._isSet(def) === false) {
           this.default = undefined;
         }
       }
