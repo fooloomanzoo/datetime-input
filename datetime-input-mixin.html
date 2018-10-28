@@ -92,13 +92,6 @@
         return !(typeof value === 'boolean' || value === undefined || value === null || value === '');
       }
 
-      _valueChanged(value) {
-        // test if value is set and if needed set value to default
-        if (this._isSet(value) === false) {
-          this.resetDate();
-        }
-      }
-
       /**
        *  Sets value to the actual date
        **/
@@ -244,6 +237,13 @@
         }
 
         this.notifyPath('_partsDisabled');
+      }
+
+      /**
+       * reset the value and date properties
+       */
+      reset(e) {
+        this.resetDate(e);
       }
     }
   }
