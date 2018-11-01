@@ -146,7 +146,6 @@
           this.set('_partsStep.second', 0);
           this.set('_partsStep.millisecond', 0);
           this.notifyPath('_partsStep');
-          this.set('clamp', '');
           return;
         } else if (step < 0.001) {
           this.set('step', 0.001);
@@ -156,7 +155,10 @@
           this.set('_partsStep.second', 1);
           this.set('_partsStep.millisecond', 1);
           this.notifyPath('_partsStep');
-          this.set('clamp', '');
+          if (this._ifClamped(this.clamp, 'millisecond')) {
+            // reset `clamp` to next inferior standing if clamped
+            this.set('clamp', '');
+          }
           return;
         }
         step = +step.toFixed(3);
@@ -274,7 +276,6 @@
           .timezone {
             display: inline-flex;
             flex-flow: row nowrap;
-            align-items: baseline;
           }
           #input > div {
             padding: var(--input-field-padding, 0 1px);
