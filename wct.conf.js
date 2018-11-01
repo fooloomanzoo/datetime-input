@@ -3,7 +3,7 @@ module.exports = {
   plugins: {
     local: {
       skipSeleniumInstall: false,
-      browsers: ["chrome", "firefox", "ie"],
+      browsers: ["chrome", "firefox"],
       browserOptions: {
         chrome: ["headless", "disable-gpu", "no-sandbox"],
         firefox: ["-headless"]

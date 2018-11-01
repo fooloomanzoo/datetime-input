@@ -271,11 +271,11 @@
       static get styleTemplate() {
         return `
           ${super.styleTemplate || ''}
-          #input,
           #input > .part,
           .timezone {
             display: inline-flex;
             flex-flow: row nowrap;
+            align-items: baseline;
           }
           #input > div {
             padding: var(--input-field-padding, 0 1px);
