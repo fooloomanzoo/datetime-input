@@ -31,10 +31,11 @@
     "@fooloomanzoo/property-mixins": "^2"
   },
   "devDependencies": {
-    "@polymer/iron-component-page": "*",
-    "@polymer/iron-demo-helpers": "*",
-    "@polymer/iron-flex-layout": "*",
-    "@polymer/iron-form": "*",
-    "@webcomponents/webcomponentsjs": "*"
+    "web-component-tester": "^6.5.0",
+    "@webcomponents/webcomponentsjs": "^1",
+    "@polymer/iron-component-page": "^3",
+    "@polymer/iron-flex-layout": "^2",
+    "@polymer/iron-demo-helpers": "^2",
+    "@polymer/iron-form": "^2"
   }
 }
