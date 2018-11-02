@@ -71,6 +71,14 @@
           propertyForValue: {
             type: String,
             value: 'valueAsNumber'
+          },
+
+          /**
+           * value of the default property
+           */
+          _defaultValue: {
+            type: Number,
+            computed: '_computeDefaultValue(default)'
           }
         }
       }
@@ -78,14 +86,28 @@
       static get observers() {
         return [
           '_computePartsStep(step)',
-          '_computePartsDisabled(_partsStep.*, disabled)'
+          '_computePartsDisabled(_partsStep.*, disabled)',
+          '_defaultValueChanged(_defaultValue)'
         ]
       }
 
+
+      _computeDefaultValue(def) {
+        return +this._fromDatetime(def).valueAsDate;
+      }
+      
       _defaultChanged(def) {
-        // overwrite form-element-mixin's behaviour in favour of datetime-mixins handling
         if (this._isSet(def) === false) {
           this.default = undefined;
+        }
+      }
+
+      _defaultValueChanged(def) {
+        if (isNaN(def)) {
+          return;
+        }
+        if (isNaN(this.valueAsDate) || isNaN(this.valueAsNumber)) {
+          this.reset();
         }
       }
 
