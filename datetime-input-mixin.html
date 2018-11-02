@@ -14,6 +14,13 @@
 
     return class extends superClass { // eslint-disable-line no-undef
 
+      constructor() {
+        super();
+        this._isSet = function(value) {
+          return !(typeof value === 'boolean') && this._defaultIsSet(value);
+        }.bind(this);
+      }
+
       static get properties() {
         return {
           /**
@@ -80,16 +87,6 @@
         if (this._isSet(def) === false) {
           this.default = undefined;
         }
-      }
-
-      /**
-       * @overwrite
-       * defines whether the value is set
-       * @param  {Object} value      value to test
-       * @return {Boolean}           true, if the value is set
-       */
-      _defaultIsSet(value) {
-        return !(typeof value === 'boolean' || value === undefined || value === null || value === '');
       }
 
       /**
@@ -237,7 +234,6 @@
             this.set('_partsDisabled.' + key, disabled || !change.value[key]);
           }
         }
-
         this.notifyPath('_partsDisabled');
       }
 
