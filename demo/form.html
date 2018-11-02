@@ -83,12 +83,11 @@
               <label>
                 <input type="checkbox" checked onchange="form1.allowRedirect = !this.checked;">Prevent automatic form redirection<br>
                 <input type="checkbox" checked="{{hour12Format::change}}">hour12 format<br>
-                property to submit: <select value="{{propertyForValue::change}}">
-                  <option value="valueAsNumber">value as number</option>
-                  <option value="valueAsDate">value as date</option>
-                  <option value="date">date-string</option>
-                  <option value="time">time-string</option>
-                  <option value="datetime">datetime-string</option>
+                property for value: <select value="{{propertyForValue::change}}">
+                  <option value="datetime">datetime</option>
+                  <option value="date">date</option>
+                  <option value="time">time</option>
+                  <option value="valueAsNumber" selected>valueAsNumber</option>
                   <option value="year">year</option>
                   <option value="month">month</option>
                   <option value="day">day</option>
