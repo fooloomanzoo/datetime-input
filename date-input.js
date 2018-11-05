@@ -4,8 +4,9 @@ import { dedupingMixin } from '@polymer/polymer/lib/utils/mixin.js';
 import { FormElementMixin } from '@fooloomanzoo/input-picker-pattern/form-element-mixin.js';
 import { DatetimeMixin, maxDayOfMonth } from '@fooloomanzoo/property-mixins/datetime-mixin.js';
 import { DatetimeInputMixin, DatetimeFormMixin } from './datetime-input-mixin.js';
-import 'number-input/integer-input.js';
+import '@fooloomanzoo/number-input/integer-input.js';
 import '@fooloomanzoo/input-picker-pattern/input-shared-style.js';
+
 /**
  *
  * Mixin to extend an element to a date input
@@ -16,7 +17,7 @@ import '@fooloomanzoo/input-picker-pattern/input-shared-style.js';
  * @demo demo/index.html
  * @demo demo/form.html Form
  **/
-const DateInputPattern = dedupingMixin( superClass => {
+export const DateInputPattern = dedupingMixin( superClass => {
 
   return class extends superClass {
 
@@ -175,4 +176,4 @@ class DateInput extends DateInputPattern(DatetimeInputMixin(DatetimeFormMixin(Fo
     `
   }
 }
-window.customElements.define(DateInput.is, DateInput);
+customElements.define(DateInput.is, DateInput);

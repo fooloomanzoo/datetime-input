@@ -19,4 +19,4 @@ class BasicDatetimeInputElement extends DatetimeInputMixin(DatetimeFormMixin(For
     `
   }
 }
-window.customElements.define(BasicDatetimeInputElement.is, BasicDatetimeInputElement);
+customElements.define(BasicDatetimeInputElement.is, BasicDatetimeInputElement);

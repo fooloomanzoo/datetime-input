@@ -58,4 +58,5 @@ class DatetimeInput extends DateInputPattern(TimeInputPattern(DatetimeInputMixin
     }
   }
 }
-window.customElements.define(DatetimeInput.is, DatetimeInput);
+
+customElements.define(DatetimeInput.is, DatetimeInput);

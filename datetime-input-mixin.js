@@ -1,7 +1,8 @@
 import { dedupingMixin } from '@polymer/polymer/lib/utils/mixin.js';
 import { html, htmlLiteral } from '@polymer/polymer/lib/utils/html-tag.js';
-import 'input-picker-pattern/input-shared-style.js';
-import 'number-input/integer-input.js';
+import { fromDatetime } from '@fooloomanzoo/property-mixins/datetime-mixin.js';
+import '@fooloomanzoo/input-picker-pattern/input-shared-style.js';
+import '@fooloomanzoo/number-input/integer-input.js';
 
 /**
  * Mixin to extend an element for combining form-element-mixin and datetime-mixin
@@ -92,7 +93,7 @@ export const DatetimeFormMixin = dedupingMixin( superClass => {
     }
 
     _computeDefaultValue(def) {
-      return +this._fromDatetime(def).valueAsDate;
+      return +fromDatetime(def).valueAsDate;
     }
 
     _defaultChanged(def) {
@@ -276,7 +277,7 @@ export const DatetimeFormMixin = dedupingMixin( superClass => {
  * @param {Object} superClass class to extend
  * @return {Object} extended class
  */
-const DatetimeInputMixin = dedupingMixin( superClass => {
+export const DatetimeInputMixin = dedupingMixin( superClass => {
 
   return class extends superClass {
 

@@ -105,19 +105,8 @@ Have a look at [input-picker-pattern#input-shared-style](https://github.com/fool
 
 ### Installation
 ```
-bower install --save fooloomanzoo/datetime-input
+npm i @fooloomanzoo/datetime-input
 ```
-or
-```
-npm install --save @fooloomanzoo/datetime-input
-```
-
-### Update
-to last version
-```
-bower update -f
-```
-
 
 ### License
 [MIT](https://github.com/fooloomanzoo/datetime-input/blob/master/LICENSE.txt)
