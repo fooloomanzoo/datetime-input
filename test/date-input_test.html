@@ -7,15 +7,13 @@
 
   <title>date-input test</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../../web-component-tester/browser.js"></script>
-  <script src="../../input-picker-pattern/utils/wct-mixin-test-helper.js"></script>
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script src="../../../wct-browser-legacy/browser.js"></script>
 
-  <link rel="import" href="../date-input.html">
+  <script type="module" src="../date-input.js"></script>
 </head>
 
 <body>
-
   <test-fixture id="Basic">
     <template>
       <date-input></date-input>
@@ -38,11 +36,19 @@
     </template>
   </test-fixture>
 
-  <script>
-    WCT.helpers.mixinSuite('date-input');
+  <script type="module">
+    import {
+      Base
+    } from '@polymer/polymer/polymer-legacy.js';
+    import {
+      getParams,
+      mixinSuite
+    } from '@fooloomanzoo/input-picker-pattern/utils/wct-mixin-test-helper.js';
+
+    const params = getParams();
+    mixinSuite('date-input');
 
     suite('basic', function() {
-
       let element;
 
       setup(function() {
@@ -141,7 +147,7 @@
         setTimeout(() => {
           // wait a tick to let dom-if stamping finish
           assert.equal(element.clamp, 'month', 'clamp is set');
-          
+
           let yearInput = element.shadowRoot.querySelector('#year');
           let monthInput = element.shadowRoot.querySelector('#month');
           let dayInput = element.shadowRoot.querySelector('#day');
@@ -192,7 +198,6 @@
       });
     });
   </script>
-
 </body>
 
 </html>

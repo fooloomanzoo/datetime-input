@@ -6,14 +6,13 @@
 
     <title>basic-datetime-input-element test</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../input-picker-pattern/utils/wct-mixin-test-helper.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../wct-browser-legacy/browser.js"></script>
 
-    <link rel="import" href="../demo/elements/basic-datetime-input-element.html">
+    <script type="module" src="../demo/elements/basic-datetime-input-element.js"></script>
   </head>
-  <body>
 
+  <body>
     <test-fixture id="Basic">
       <template>
         <basic-datetime-input-element></basic-datetime-input-element>
@@ -32,13 +31,21 @@
       </template>
     </test-fixture>
 
-    <script>
-      WCT.helpers.mixinSuite('basic-datetime-input-element');
+    <script type="module">
+      import {
+        Base
+      } from '@polymer/polymer/polymer-legacy.js';
+      import {
+        getParams,
+        mixinSuite
+      } from '@fooloomanzoo/input-picker-pattern/utils/wct-mixin-test-helper.js';
 
-      suite('basic', function() {
+      const params = getParams();
+      mixinSuite('basic-datetime-input-element');
+
+      suite('basic', () => {
         let element;
-
-        setup(function() {
+        setup(() => {
           element = fixture('Basic');
         });
 
@@ -97,10 +104,10 @@
         });
       });
 
-      suite('step and disabled', function() {
+      suite('step and disabled', () => {
         let element;
 
-        setup(function() {
+        setup(() => {
           element = fixture('Basic');
         });
 
@@ -161,10 +168,10 @@
         });
       });
 
-      suite('required', function() {
+      suite('required', () => {
         let element;
 
-        setup(function() {
+        setup(() => {
           element = fixture('Required');
         });
 
@@ -189,10 +196,10 @@
         });
       });
 
-      suite('property for value', function() {
+      suite('property for value', () => {
         let element;
 
-        setup(function() {
+        setup(() => {
           element = fixture('valueAsDate for value-property');
         });
 
@@ -200,7 +207,7 @@
           let d = new Date();
           // transforming date according to its clamp attribute
           d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-          d = element._clampUTC(d, element.clamp);
+          d = element._clampUTCComponents(d, element.clamp);
           d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
           // NOTE: milliseconds are often not serialized by browsers
           d.setMilliseconds(0);
@@ -213,6 +220,5 @@
         });
       });
     </script>
-
   </body>
 </html>

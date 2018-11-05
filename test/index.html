@@ -3,36 +3,33 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-
-    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
   </head>
   <body>
     <script>
-      // Load and run all tests (.html, .js):
       WCT.loadSuites([
         'datetime-form-mixin_test.html',
         'datetime-input-mixin_test.html',
         'date-input_test.html',
         'time-input_test.html',
         'datetime-input_test.html',
-        'datetime-form-mixin_test.html?specifier=date-input&url=datetime-input/date-input.html',
-        'datetime-form-mixin_test.html?specifier=time-input&url=datetime-input/time-input.html',
-        'datetime-form-mixin_test.html?specifier=datetime-input&url=datetime-input/datetime-input.html',
-        'datetime-input-mixin_test.html?specifier=date-input&url=datetime-input/date-input.html',
-        'datetime-input-mixin_test.html?specifier=time-input&url=datetime-input/time-input.html',
-        'datetime-input-mixin_test.html?specifier=datetime-input&url=datetime-input/datetime-input.html',
-        'date-input_test.html?specifier=datetime-input&url=datetime-input/datetime-input.html',
-        'time-input_test.html?specifier=datetime-input&url=datetime-input/datetime-input.html',
-        '/components/property-mixins/test/datetime-mixin-test.html?specifier=date-input&url=datetime-input/date-input.html&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
-        '/components/property-mixins/test/datetime-mixin-test.html?specifier=time-input&url=datetime-input/time-input.html&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
-        '/components/property-mixins/test/datetime-mixin-test.html?specifier=datetime-input&url=datetime-input/datetime-input.html&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
-        '/components/property-mixins/test/intl-datetime-format-mixin-test.html?specifier=date-input&url=datetime-input/date-input.html&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
-        '/components/property-mixins/test/intl-datetime-format-mixin-test.html?specifier=time-input&url=datetime-input/time-input.html&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
-        '/components/property-mixins/test/intl-datetime-format-mixin-test.html?specifier=datetime-input&url=datetime-input/datetime-input.html&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
-        '/components/input-picker-pattern/test/form-element-mixin_test.html?specifier=date-input&url=datetime-input/date-input.html&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
-        '/components/input-picker-pattern/test/form-element-mixin_test.html?specifier=time-input&url=datetime-input/time-input.html&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
-        '/components/input-picker-pattern/test/form-element-mixin_test.html?specifier=datetime-input&url=datetime-input/datetime-input.html&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D'
+        'datetime-form-mixin_test.html?specifier=date-input&url=@fooloomanzoo/datetime-input/date-input',
+        'datetime-form-mixin_test.html?specifier=time-input&url=@fooloomanzoo/datetime-input/time-input',
+        'datetime-form-mixin_test.html?specifier=datetime-input&url=@fooloomanzoo/datetime-input/datetime-input',
+        'datetime-input-mixin_test.html?specifier=date-input&url=@fooloomanzoo/datetime-input/date-input',
+        'datetime-input-mixin_test.html?specifier=time-input&url=@fooloomanzoo/datetime-input/time-input',
+        'datetime-input-mixin_test.html?specifier=datetime-input&url=@fooloomanzoo/datetime-input/datetime-input',
+        'date-input_test.html?specifier=datetime-input&url=@fooloomanzoo/datetime-input/datetime-input',
+        'time-input_test.html?specifier=datetime-input&url=@fooloomanzoo/datetime-input/datetime-input',
+        '/components/@fooloomanzoo/property-mixins/test/datetime-mixin-test.html?specifier=date-input&url=@fooloomanzoo/datetime-input/date-input&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
+        '/components/@fooloomanzoo/property-mixins/test/datetime-mixin-test.html?specifier=time-input&url=@fooloomanzoo/datetime-input/time-input&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
+        '/components/@fooloomanzoo/property-mixins/test/datetime-mixin-test.html?specifier=datetime-input&url=@fooloomanzoo/datetime-input/datetime-input&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
+        '/components/@fooloomanzoo/property-mixins/test/intl-datetime-format-mixin-test.html?specifier=date-input&url=@fooloomanzoo/datetime-input/date-input&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
+        '/components/@fooloomanzoo/property-mixins/test/intl-datetime-format-mixin-test.html?specifier=time-input&url=@fooloomanzoo/datetime-input/time-input&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
+        '/components/@fooloomanzoo/property-mixins/test/intl-datetime-format-mixin-test.html?specifier=datetime-input&url=@fooloomanzoo/datetime-input/datetime-input&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
+        '/components/@fooloomanzoo/input-picker-pattern/test/form-element-mixin_test.html?specifier=date-input&url=@fooloomanzoo/datetime-input/date-input&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
+        '/components/@fooloomanzoo/input-picker-pattern/test/form-element-mixin_test.html?specifier=time-input&url=@fooloomanzoo/datetime-input/time-input&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D',
+        '/components/@fooloomanzoo/input-picker-pattern/test/form-element-mixin_test.html?specifier=datetime-input&url=@fooloomanzoo/datetime-input/datetime-input&props=%7B%22clamp%22%3A%22%22%2C%22with-timezone%22%3A%20true%7D'
       ]);
     </script>
 

@@ -6,15 +6,16 @@
 
     <title>datetime-input in iron-Form</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-
-    <link rel="import" href="../../polymer/polymer.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../iron-form/iron-form.html">
-    <link rel="import" href="../../paper-styles/shadow.html">
-
-    <link rel="import" href="../datetime-input.html">
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+      import '@polymer/paper-styles/shadow.js';
+      import '@polymer/iron-form/iron-form.js';
+      import '../datetime-input.js';
+      import '../date-input.js';
+      import '../time-input.js';
+    </script>
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -72,8 +73,8 @@
       </style>
     </custom-style>
   </head>
-  <body>
 
+  <body>
     <div class="vertical-section-container centered">
       <h3>datetime-input in <code>iron-form</code></h3>
       <demo-snippet>
@@ -81,13 +82,13 @@
           <dom-bind>
             <template>
               <label>
-                <input type="checkbox" checked onchange="form1.allowRedirect = !this.checked;">Prevent automatic form redirection<br>
+                <input type="checkbox" checked="" onchange="form1.allowRedirect = !this.checked;">Prevent automatic form redirection<br>
                 <input type="checkbox" checked="{{hour12Format::change}}">hour12 format<br>
                 property for value: <select value="{{propertyForValue::change}}">
                   <option value="datetime">datetime</option>
                   <option value="date">date</option>
                   <option value="time">time</option>
-                  <option value="valueAsNumber" selected>valueAsNumber</option>
+                  <option value="valueAsNumber" selected="">valueAsNumber</option>
                   <option value="year">year</option>
                   <option value="month">month</option>
                   <option value="day">day</option>
@@ -101,12 +102,12 @@
 
               <iron-form id="form1">
                 <form action="/foo" method="get">
-                  name: <input name="name" required value="Batman"/><br>
-                  job: <input name="job" required value="Hero"/><br>
+                  name: <input name="name" required="" value="Batman"><br>
+                  job: <input name="job" required="" value="Hero"><br>
                   <p>
-                    first day (required): <date-input name="firstDay" required max="[[end]]" value-as-number="{{start}}" property-for-value="[[propertyForValue]]"></date-input><br>
+                    first day (required): <date-input name="firstDay" required="" max="[[end]]" value-as-number="{{start}}" property-for-value="[[propertyForValue]]"></date-input><br>
                     expected retirement: <date-input name="expectedRetirement" min="[[start]]" value-as-number="{{end}}" property-for-value="[[propertyForValue]]"></date-input><br>
-                    last job (required): <datetime-input name="lastJob" required min="[[start]]" max="[[end]]" value-as-number="{{lastjob}}"  hour12-format="[[hour12Format]]" property-for-value="[[propertyForValue]]" timezone="{{timezone}}"></datetime-input><br>
+                    last job (required): <datetime-input name="lastJob" required="" min="[[start]]" max="[[end]]" value-as-number="{{lastjob}}" hour12-format="[[hour12Format]]" property-for-value="[[propertyForValue]]" timezone="{{timezone}}"></datetime-input><br>
                     return: <time-input name="return" min="[[lastjob]]" default="[[lastjob]]" max="[[end]]" hour12-format="[[hour12Format]]" property-for-value="[[propertyForValue]]" timezone="[[timezone]]"></time-input>
                   </p>
                   <button onclick="form1.submit()">Submit</button>
@@ -124,6 +125,5 @@
         </template>
       </demo-snippet>
     </div>
-
   </body>
 </html>
