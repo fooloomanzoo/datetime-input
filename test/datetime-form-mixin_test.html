@@ -6,14 +6,13 @@
 
     <title>basic-datetime-input-element test</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../input-picker-pattern/utils/wct-mixin-test-helper.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../wct-browser-legacy/browser.js"></script>
 
-    <link rel="import" href="../demo/elements/basic-datetime-input-element.html">
+    <script type="module" src="../basic-datetime-input-element.js"></script>
   </head>
-  <body>
 
+  <body>
     <test-fixture id="Basic">
       <template>
         <basic-datetime-input-element></basic-datetime-input-element>
@@ -33,11 +32,19 @@
     </test-fixture>
 
     <script>
-      WCT.helpers.mixinSuite('basic-datetime-input-element');
+      import {
+        Base
+      } from '@polymer/polymer/polymer-legacy.js';
+      import {
+        getParams,
+        mixinSuite
+      } from '@fooloomanzoo/input-picker-pattern/utils/wct-mixin-test-helper.js';
+
+      const params = getParams();
+      mixinSuite('basic-datetime-input-element');
 
       suite('basic', function() {
         let element;
-
         setup(function() {
           element = fixture('Basic');
         });
@@ -213,6 +220,5 @@
         });
       });
     </script>
-
   </body>
 </html>

@@ -1,13 +1,15 @@
 {
+  "moduleResolution": "node",
+  "npm": true,
   "sources": [
-    "datetime-input-mixin.html",
-    "datetime-input.html",
-    "date-input.html",
-    "time-input.html"
+    "datetime-input-mixin.js",
+    "datetime-input.js",
+    "date-input.js",
+    "time-input.js"
   ],
   "lint": {
     "rules": [
-      "polymer-2"
+      "polymer-3"
     ]
   }
 }
