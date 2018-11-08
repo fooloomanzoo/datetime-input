@@ -1,6 +1,7 @@
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/fooloomanzoo/datetime-input)
-[![API](https://img.shields.io/badge/API-available-green.svg)](https://www.webcomponents.org/element/fooloomanzoo/datetime-input/elements/datetime-input)
-[![Demo](https://img.shields.io/badge/demo-available-red.svg)](https://www.webcomponents.org/element/fooloomanzoo/datetime-input/demo/demo/index.html)
+[![Published on NPM](https://img.shields.io/npm/v/@fooloomanzoo/datetime-input.svg)](https://www.npmjs.com/package/@fooloomanzoo/datetime-input)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@fooloomanzoo/datetime-input)
+[![API](https://img.shields.io/badge/API-available-green.svg)](https://www.webcomponents.org/element/@fooloomanzoo/datetime-input/elements/datetime-input)
+[![Demo](https://img.shields.io/badge/demo-available-red.svg)](https://www.webcomponents.org/element/@fooloomanzoo/datetime-input/demo/demo/index.html)
 
 _[API](https://fooloomanzoo.github.io/datetime-input/components/datetime-input/#/elements/datetime-input)_ and
 _[Demo](https://fooloomanzoo.github.io/datetime-input/components/datetime-input/#/elements/datetime-input/demos/demo/index.html)_
