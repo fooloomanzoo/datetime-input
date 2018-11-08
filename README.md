@@ -12,31 +12,6 @@ An input for date and time.
 If you are looking for a picker for date and time, please have a look at [datetime-picker](https://github.com/fooloomanzoo/datetime-picker).
 
 ### Example
-
-<!--
-```
-<custom-element-demo>
-  <template>
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="datetime-input.html">
-
-    <dom-bind>
-      <template is="dom-bind">
-        <custom-style>
-          <style is="custom-style">
-            html {
-              font-family: 'Roboto', 'Noto', 'Source Sans Pro', sans-serif;
-            }
-          </style>
-        </custom-style>
-
-        <next-code-block></next-code-block>
-      </template>
-    </dom-bind>
-  </template>
-</custom-element-demo>
-```
--->
 ```html
   <input type="checkbox" checked="{{withTimezone::change}}">with timezone<br><br>
   <datetime-input value="{{value}}" default="2022-06-02T11:12:13" datetime="{{datetime}}" date="{{date}}" time="{{time}}" with-timezone="{{withTimezone}}" timezone="{{timezone}}"></datetime-input><br><br>
@@ -52,29 +27,6 @@ If you are looking for a picker for date and time, please have a look at [dateti
 
 #### Use locale date formats
 The properties `date`, `time`, `datetime` are always in **iso8061** but the visualization will be localized. By default your locale date format from `window.navigator.language` will be used, but you can select another *locale*:
-
-<!--
-```
-<custom-element-demo height="300">
-  <template>
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="import" href="datetime-input.html">
-    <style>
-      html {
-        font-family: 'Roboto', sans-serif;
-      }
-    </style>
-    <dom-bind>
-      <template is="dom-bind">
-        <next-code-block></next-code-block>
-      </template>
-    </dom-bind>
-  </template>
-</custom-element-demo>
-```
--->
-
 ```html
 <p>
   locale:

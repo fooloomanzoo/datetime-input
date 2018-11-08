@@ -18,8 +18,8 @@
   "version": "3.0.0",
   "scripts": {
     "prepublishOnly": "npm run build && git add . && git commit -m \"publish new version\" && npm version patch && git push",
-    "gh-pages": "git checkout gh-pages && git pull && bower update -f && git add . && git commit -m \"update\" && git push && git checkout master",
-    "build": "git pull && bower update && npm run analyze",
+    "gh-pages": "git checkout gh-pages && git pull && npm update && git add . && git commit -m \"update\" && git push && git checkout master",
+    "build": "git pull && npm update && npm run analyze",
     "start": "npm run analyze && polymer serve -o",
     "analyze": "polymer analyze > analysis.json",
     "test": "polymer test",
@@ -28,10 +28,10 @@
   "author": "fooloomanzoo",
   "license": "MIT",
   "dependencies": {
-    "@polymer/polymer": "^3",
     "@fooloomanzoo/input-picker-pattern": "^3",
     "@fooloomanzoo/number-input": "^3",
-    "@fooloomanzoo/property-mixins": "^3"
+    "@fooloomanzoo/property-mixins": "^3",
+    "@polymer/polymer": "^3"
   },
   "devDependencies": {
     "@webcomponents/webcomponentsjs": "^2",

@@ -1,8 +1,8 @@
-import { dedupingMixin } from '@polymer/polymer/lib/utils/mixin.js';
-import { html, htmlLiteral } from '@polymer/polymer/lib/utils/html-tag.js';
-import { fromDatetime } from '@fooloomanzoo/property-mixins/datetime-mixin.js';
-import '@fooloomanzoo/input-picker-pattern/input-shared-style.js';
-import '@fooloomanzoo/number-input/integer-input.js';
+import { dedupingMixin } from '../../@polymer/polymer/lib/utils/mixin.js';
+import { html, htmlLiteral } from '../../@polymer/polymer/lib/utils/html-tag.js';
+import { fromDatetime } from '../property-mixins/datetime-mixin.js';
+import '../input-picker-pattern/input-shared-style.js';
+import '../number-input/integer-input.js';
 
 /**
  * Mixin to extend an element for combining form-element-mixin and datetime-mixin
