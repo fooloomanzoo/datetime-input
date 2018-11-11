@@ -1,11 +1,10 @@
-import { PolymerElement } from '../../@polymer/polymer/polymer-element.js';
-import { html, htmlLiteral } from '../../@polymer/polymer/lib/utils/html-tag.js';
-import { dedupingMixin } from '../../@polymer/polymer/lib/utils/mixin.js';
-import { FormElementMixin } from '../input-picker-pattern/form-element-mixin.js';
-import { DatetimeMixin } from '../property-mixins/datetime-mixin.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { dedupingMixin } from '@polymer/polymer/lib/utils/mixin.js';
+import { FormElementMixin } from '@fooloomanzoo/input-picker-pattern/form-element-mixin.js';
+import { DatetimeMixin } from '@fooloomanzoo/property-mixins/datetime-mixin.js';
 import { DatetimeInputMixin, DatetimeFormMixin } from './datetime-input-mixin.js';
-import '../number-input/integer-input.js';
-import '../input-picker-pattern/input-shared-style.js';
+import '@fooloomanzoo/number-input/integer-input.js';
 
 /**
  *
@@ -43,15 +42,17 @@ export const TimeInputPattern = dedupingMixin( superClass => {
     }
 
     static get styleTemplate() {
-      return htmlLiteral`
-        ${super.styleTemplate || htmlLiteral``}
-        #input .hour12 {
-          font-size: 0.85em;
-          margin: 0 0.15em;
-          padding: 0.1em;
-          align-self: stretch;
-          border-color: transparent;
-        }
+      return html`
+        ${super.styleTemplate || html``}
+        <style>
+          #input .hour12 {
+            font-size: 0.85em;
+            margin: 0 0.15em;
+            padding: 0.1em;
+            align-self: stretch;
+            border-color: transparent;
+          }
+        </style>
       `
     }
 
@@ -111,9 +112,7 @@ export class TimeInput extends TimeInputPattern(DatetimeInputMixin(DatetimeFormM
 
   static get template() {
     return html`
-      <style include="${this.styleToInclude}">
-        ${this.styleTemplate}
-      </style>
+      ${this.styleTemplate}
       <div id="input">
         ${this.inputTemplate}
       </div>

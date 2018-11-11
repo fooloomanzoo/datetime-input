@@ -1,8 +1,8 @@
-import { dedupingMixin } from '../../@polymer/polymer/lib/utils/mixin.js';
-import { html, htmlLiteral } from '../../@polymer/polymer/lib/utils/html-tag.js';
-import { fromDatetime } from '../property-mixins/datetime-mixin.js';
-import '../input-picker-pattern/input-shared-style.js';
-import '../number-input/integer-input.js';
+import { dedupingMixin } from '@polymer/polymer/lib/utils/mixin.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { fromDatetime } from '@fooloomanzoo/property-mixins/datetime-mixin.js';
+import { style as inputStyle } from '@fooloomanzoo/input-picker-pattern/input-shared-style.js';
+import '@fooloomanzoo/number-input/integer-input.js';
 
 /**
  * Mixin to extend an element for combining form-element-mixin and datetime-mixin
@@ -281,29 +281,28 @@ export const DatetimeInputMixin = dedupingMixin( superClass => {
 
   return class extends superClass {
 
-    static get styleToInclude() {
-      return htmlLiteral`input-shared-style ${super.styleToInclude || htmlLiteral``}`;
-    }
-
     static get styleTemplate() {
-      return htmlLiteral`
-        ${super.styleTemplate || htmlLiteral``}
-        #input > .part,
-        .timezone {
-          display: inline-flex;
-          flex-flow: row nowrap;
-          align-items: baseline;
-        }
-        #input > div {
-          padding: var(--input-field-padding, 0 1px);
-          border: var(--input-border-width, thin) solid transparent;
-        }
-        #input .reset {
-          order: 2;
-        }
-        #input integer-input[always-sign] {
-          --input-align: end;
-        }
+      return html`
+        ${super.styleTemplate || html``}
+        ${inputStyle}
+        <style>
+          #input > .part,
+          .timezone {
+            display: inline-flex;
+            flex-flow: row nowrap;
+            align-items: baseline;
+          }
+          #input > div {
+            padding: var(--input-field-padding, 0 1px);
+            border: var(--input-border-width, thin) solid transparent;
+          }
+          #input .reset {
+            order: 2;
+          }
+          #input integer-input[always-sign] {
+            --input-align: end;
+          }
+        </style>
       `;
     }
 

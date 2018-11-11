@@ -1,7 +1,7 @@
-import { PolymerElement } from '../../@polymer/polymer/polymer-element.js';
-import { html, htmlLiteral } from '../../@polymer/polymer/lib/utils/html-tag.js';
-import { FormElementMixin } from '../input-picker-pattern/form-element-mixin.js';
-import { DatetimeMixin } from '../property-mixins/datetime-mixin.js';
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { FormElementMixin } from '@fooloomanzoo/input-picker-pattern/form-element-mixin.js';
+import { DatetimeMixin } from '@fooloomanzoo/property-mixins/datetime-mixin.js';
 import { DatetimeInputMixin, DatetimeFormMixin } from './datetime-input-mixin.js';
 import { DateInputPattern } from './date-input.js';
 import { TimeInputPattern } from './time-input.js';
@@ -35,9 +35,7 @@ export class DatetimeInput extends DateInputPattern(TimeInputPattern(DatetimeInp
 
   static get template() {
     return html`
-      <style include="${this.styleToInclude}">
-        ${this.styleTemplate}
-      </style>
+      ${this.styleTemplate}
       <div id="input">
         ${this.inputTemplate}
       </div>
