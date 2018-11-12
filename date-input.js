@@ -170,4 +170,7 @@ export class DateInput extends DateInputPattern(DatetimeInputMixin(DatetimeFormM
     `
   }
 }
-customElements.define(DateInput.is, DateInput);
+
+if (!customElements.get(DateInput.is)) {
+  customElements.define(DateInput.is, DateInput);
+}

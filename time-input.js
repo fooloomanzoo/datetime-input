@@ -120,4 +120,6 @@ export class TimeInput extends TimeInputPattern(DatetimeInputMixin(DatetimeFormM
   }
 }
 
-customElements.define(TimeInput.is, TimeInput);
+if (!customElements.get(TimeInput.is)) {
+  customElements.define(TimeInput.is, TimeInput);
+}

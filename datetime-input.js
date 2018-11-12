@@ -57,4 +57,6 @@ export class DatetimeInput extends DateInputPattern(TimeInputPattern(DatetimeInp
   }
 }
 
-customElements.define(DatetimeInput.is, DatetimeInput);
+if (!customElements.get(DatetimeInput.is)) {
+  customElements.define(DatetimeInput.is, DatetimeInput);
+}
