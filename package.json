@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/fooloomanzoo/datetime-input/",
   "name": "@fooloomanzoo/datetime-input",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "scripts": {
     "prepublishOnly": "npm run build && git add . && git commit -m \"publish new version\" && npm version patch && git push",
     "build": "git pull && npm update -f && npm run analyze && webpack --env production",
