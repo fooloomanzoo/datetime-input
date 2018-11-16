@@ -23,7 +23,7 @@ export const DateInputPattern = dedupingMixin( superClass => {
           <integer-input id="year" value-as-number="{{year}}" pad-length="4" placeholder="−−−−" disabled="[[_partsDisabled.year]]" start-at="[[_getDefaultForProp('year')]]"></integer-input>
           <span id="dateSeparator1">[[dateSeparator]]</span>
           <integer-input id="month" value-as-number="{{month}}" min="0" max="13" pad-length="2" placeholder="−−" disabled="[[_partsDisabled.month]]" start-at="[[_getDefaultForProp('month')]]"></integer-input>
-          <span id="dateSeparator2"]]">[[dateSeparator]]</span>
+          <span id="dateSeparator2">[[dateSeparator]]</span>
           <integer-input id="day" max="[[_computeMaxForDayInput(year, month)]]" value-as-number="{{day}}" min="0" no-clamp pad-length="2" placeholder="−−" step="[[_partsStep.day]]" disabled="[[_partsDisabled.day]]" start-at="1"></integer-input>
         </div>
         ${super.inputTemplate || html``}
